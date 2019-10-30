@@ -74,7 +74,7 @@ public class Route implements Serializable {
             return this;
         }
 
-        public Route builder() {
+        public Route build() {
             return new Route(this);
         }
     }

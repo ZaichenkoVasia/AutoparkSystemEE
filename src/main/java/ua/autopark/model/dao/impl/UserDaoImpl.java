@@ -1,83 +1,90 @@
 package ua.autopark.model.dao.impl;
 
 import org.apache.log4j.Logger;
-import ua.autopark.model.dao.DBConnector;
-import ua.autopark.model.dao.DataBaseRuntimeException;
-import ua.autopark.model.dao.UserDao;
-import ua.autopark.model.entity.User;
+import ua.autopark.model.dao.AbstractGenericDAO;
+import ua.autopark.model.dao.UserDAO;
+import ua.autopark.model.dao.connection.ConnectionFactory;
+import ua.autopark.model.domain.User;
+import ua.autopark.model.exception.DAORuntimeException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
-public class UserDaoImpl extends AbstractCrudDaoImpl<User> implements UserDao {
-    private static final Logger LOGGER = Logger.getLogger(UserDaoImpl.class);
+public class UserDAOImpl extends AbstractGenericDAO<User> implements UserDAO {
+    private static final String FIND_BY_EMAIL = "SELECT * FROM user WHERE login = ?";
+    private static final String USER_INSERT = "INSERT INTO user (login, password, role) VALUES(?, ?, ?)";
+    private static final String FIND_USER_BY_ID = "SELECT * FROM user where iduser = ?";
+    private static final String UPDATE_USER = "UPDATE user SET login = ?, password = ?, role = ? WHERE iduser = ?";
+    private static final String DELETE_USER_BY_ID = "DELETE FROM user WHERE iduser = ?";
 
-    private static final String FIND_BY_EMAIL_QUERY = "SELECT * from users WHERE email = ?";
-    private static final String FIND_BY_ID_QUERY = "SELECT * from users WHERE id = ?";
+    private ConnectionFactory connectionFactory;
+    private static final Logger logger = Logger.getLogger(UserDAOImpl.class);
 
-    public UserDaoImpl(DBConnector connector) {
-        super(connector);
+    public UserDAOImpl(ConnectionFactory connectionFactory) {
+        super(connectionFactory);
+        this.connectionFactory = connectionFactory;
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
-        try (Connection connection = connector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_EMAIL_QUERY)) {
-            preparedStatement.setString(1, email);
-            final ResultSet resultSet = preparedStatement.executeQuery();
+    protected User parseToOneElement(ResultSet resultSet) throws SQLException {
+        return User.builder()
+                .withId(resultSet.getLong("user.id_user"))
+                .withLogin(resultSet.getString("user.login"))
+                .withPassword(resultSet.getString("user.password"))
+                .build();
+    }
 
-            return mapResultSetToEntity(resultSet);
+    @Override
+    protected void setInsertElementProperties(PreparedStatement statement, User element) throws SQLException {
+        statement.setString(1, element.getLogin());
+        statement.setString(2, element.getPassword());
+        statement.setString(2, element.getRole().toString());
+    }
+
+    @Override
+    protected void setUpdateElementProperties(PreparedStatement statement, User element) throws SQLException {
+        setInsertElementProperties(statement, element);
+        statement.setLong(4, element.getId());
+    }
+
+    @Override
+    public User findUserByLoginData(String email) {
+        logger.info("Searching user by login data");
+        ResultSet resultSet = null;
+        try (Connection connection = connectionFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_EMAIL)) {
+            statement.setString(1, email);
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                logger.info("Returning user from database");
+                return parseToOneElement(resultSet);
+            }
         } catch (SQLException e) {
-            LOGGER.error("");
-            throw new DataBaseRuntimeException(e);
+            logger.error(e);
+            throw new DAORuntimeException();
         }
-
-    }
-
-    @Override
-    public User save(User entity) {
         return null;
     }
 
     @Override
-    public Optional<User> findById(Long id) {
-        return findById(id, FIND_BY_ID_QUERY);
+    public Integer insertElement(User element) {
+        return super.insertElement(element, USER_INSERT);
     }
 
     @Override
-    public List<User> findAll() {
-        return null;
+    public User getElementById(int id) {
+        return super.getElementById(id, FIND_USER_BY_ID);
     }
 
     @Override
-    public void update(User entity) {
-
+    public void deleteElement(int id) {
+        super.deleteElement(id, DELETE_USER_BY_ID);
     }
 
     @Override
-    public void deleteById(Long id) {
-
-    }
-
-    @Override
-    public void deleteAllByIds(Set<Long> longs) {
-
-    }
-
-    protected Optional<User> mapResultSetToEntity(ResultSet resultSet) throws SQLException {
-        return resultSet.next() ?
-                Optional.ofNullable(User.builder()
-                        .withId(resultSet.getLong("id"))
-                        .withName(resultSet.getString("name"))
-                        .withSurname(resultSet.getString("surname"))
-                        .withEmail(resultSet.getString("email"))
-                        .withPassword(resultSet.getString("password"))
-                        .build())
-                : Optional.empty();
+    public void updateElement(User element) {
+        super.updateElement(element, UPDATE_USER);
     }
 }

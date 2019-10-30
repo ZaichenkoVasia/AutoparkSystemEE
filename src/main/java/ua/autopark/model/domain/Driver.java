@@ -6,15 +6,17 @@ import ua.autopark.model.domain.enums.Status;
 import java.util.Objects;
 
 public class Driver extends User {
+    private final Long idDriver;
     private final Integer salary;
     private final Status status;
     private final Bus bus;
 
-    public Driver(DriverBuilder builder) {
+    private Driver(DriverBuilder builder) {
         super(builder);
         this.salary = builder.salary;
         this.status = builder.status;
         this.bus = builder.bus;
+        this.idDriver = builder.idDriver;
     }
 
     public Integer getSalary() {
@@ -25,6 +27,10 @@ public class Driver extends User {
         return status;
     }
 
+    public Long getIdDriver() {
+        return idDriver;
+    }
+
     public Bus getBus() {
         return bus;
     }
@@ -33,7 +39,8 @@ public class Driver extends User {
         return new DriverBuilder();
     }
 
-    public static class DriverBuilder extends UserBuilder {
+    public static class DriverBuilder extends UserBuilder<DriverBuilder> {
+        private Long idDriver;
         private Integer salary;
         private Status status = Status.FREE;
         private Bus bus;
@@ -41,24 +48,34 @@ public class Driver extends User {
         private DriverBuilder() {
         }
 
+        @Override
+        public DriverBuilder self() {
+            return this;
+        }
+
         public DriverBuilder withSalary(Integer salary) {
             this.salary = salary;
-            return this;
+            return self();
+        }
+
+        public DriverBuilder withIdDriver(Long id) {
+            this.idDriver = id;
+            return self();
         }
 
         public DriverBuilder withStatus(Status status) {
             this.status = status;
-            return this;
+            return self();
         }
 
         public DriverBuilder withBus(Bus bus) {
             this.bus = bus;
-            return this;
+            return self();
         }
 
         public Driver build() {
             role = Role.DRIVER;
-            return new Driver(this);
+            return new Driver(self());
         }
     }
 
@@ -74,12 +91,13 @@ public class Driver extends User {
         return Objects.equals(salary, driver.salary) &&
                 status == driver.status &&
                 Objects.equals(bus, driver.bus) &&
+                Objects.equals(idDriver, driver.idDriver) &&
                 super.equals(driver);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(salary, status, bus) * super.hashCode();
+        return Objects.hash(salary, status, bus, idDriver) * super.hashCode();
     }
 
     @Override
@@ -89,6 +107,7 @@ public class Driver extends User {
                 ", status=" + status +
                 ", bus=" + bus +
                 ", id=" + id +
+                ", idDriver=" + idDriver +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +

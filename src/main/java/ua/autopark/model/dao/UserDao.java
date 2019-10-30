@@ -1,10 +1,8 @@
 package ua.autopark.model.dao;
 
-import ua.autopark.model.entity.User;
+import ua.autopark.model.domain.User;
 
-import java.util.Optional;
+public interface UserDAO extends GenericDAO<User>{
 
-public interface UserDao extends CrudDao<User, Long> {
-    Optional<User> findByEmail(String email);
-
+    User findUserByLoginData(String login);
 }

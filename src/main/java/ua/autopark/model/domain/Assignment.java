@@ -5,12 +5,14 @@ import ua.autopark.model.domain.enums.Status;
 import java.util.Objects;
 
 public class Assignment {
+    private final Long id;
     private final Bus bus;
     private final Driver driver;
     private final Route route;
     private final Status status;
 
     public Assignment(AssignmentBuilder builder) {
+        this.id = builder.id;
         this.bus = builder.bus;
         this.driver = builder.driver;
         this.route = builder.route;
@@ -33,17 +35,27 @@ public class Assignment {
         return status;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public static AssignmentBuilder builder() {
         return new AssignmentBuilder();
     }
 
     public static final class AssignmentBuilder {
+        private Long id;
         private Bus bus;
         private Driver driver;
         private Route route;
         private Status status = Status.FREE;
 
         private AssignmentBuilder() {
+        }
+
+        public AssignmentBuilder withId(Long id) {
+            this.id = id;
+            return this;
         }
 
         public AssignmentBuilder withBus(Bus bus) {

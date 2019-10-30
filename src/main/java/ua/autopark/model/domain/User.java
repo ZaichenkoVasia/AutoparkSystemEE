@@ -13,7 +13,7 @@ public class User {
     protected final String surname;
     protected final Date birth;
 
-    public User(UserBuilder builder) {
+    protected User(UserBuilder builder) {
         this.id = builder.id;
         this.login = builder.login;
         this.password = builder.password;
@@ -55,7 +55,7 @@ public class User {
         return new UserBuilder();
     }
 
-    public static class UserBuilder {
+    public static class UserBuilder <SELF extends UserBuilder<SELF>> {
         private Long id;
         private String login;
         private String password;
@@ -67,38 +67,42 @@ public class User {
         protected UserBuilder() {
         }
 
-        public UserBuilder withId(Long id) {
+        public SELF self() {
+            return (SELF) this;
+        }
+
+        public SELF withId(Long id) {
             this.id = id;
-            return this;
+            return self();
         }
 
-        public UserBuilder withLogin(String login) {
+        public SELF withLogin(String login) {
             this.login = login;
-            return this;
+            return self();
         }
 
-        public UserBuilder withPassword(String password) {
+        public SELF withPassword(String password) {
             this.password = password;
-            return this;
+            return self();
         }
 
-        public UserBuilder withName(String name) {
+        public SELF withName(String name) {
             this.name = name;
-            return this;
+            return self();
         }
 
-        public UserBuilder withSurname(String surname) {
+        public SELF withSurname(String surname) {
             this.surname = surname;
-            return this;
+            return self();
         }
 
-        public UserBuilder withBirth(Date birth) {
+        public SELF withBirth(Date birth) {
             this.birth = birth;
-            return this;
+            return self();
         }
 
         public User build() {
-            return new User(this);
+            return new User(self());
         }
     }
 }

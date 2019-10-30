@@ -1,5 +1,7 @@
 package ua.autopark.model.domain;
 
+import ua.autopark.model.domain.enums.Status;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -8,12 +10,14 @@ public class Bus implements Serializable {
     private final String model;
     private final Integer seats;
     private final Route route;
+    private final Status status;
 
-    public Bus(BusBuilder builder) {
+    private Bus(BusBuilder builder) {
         this.id = builder.id;
         this.model = builder.model;
         this.seats = builder.seats;
         this.route = builder.route;
+        this.status = builder.status;
     }
 
     public Long getId() {
@@ -32,6 +36,10 @@ public class Bus implements Serializable {
         return route;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
     public static BusBuilder builder() {
         return new BusBuilder();
     }
@@ -41,6 +49,7 @@ public class Bus implements Serializable {
         private String model;
         private Integer seats;
         private Route route;
+        private Status status;
 
         public BusBuilder withId(Long id) {
             this.id = id;
@@ -62,6 +71,11 @@ public class Bus implements Serializable {
             return this;
         }
 
+        public BusBuilder withStatus(Status status) {
+            this.status = status;
+            return this;
+        }
+
         public Bus build() {
             return new Bus(this);
         }
@@ -79,12 +93,13 @@ public class Bus implements Serializable {
         return Objects.equals(id, bus.id) &&
                 Objects.equals(model, bus.model) &&
                 Objects.equals(seats, bus.seats) &&
-                Objects.equals(route, bus.route);
+                Objects.equals(route, bus.route) &&
+                Objects.equals(status, bus.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, model, seats, route);
+        return Objects.hash(id, model, seats, route, status);
     }
 
     @Override
@@ -94,6 +109,7 @@ public class Bus implements Serializable {
                 ", model='" + model + '\'' +
                 ", seats=" + seats +
                 ", route=" + route +
+                ", status=" + status +
                 '}';
     }
 }
