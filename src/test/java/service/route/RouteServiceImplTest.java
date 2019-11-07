@@ -68,19 +68,19 @@ public class RouteServiceImplTest {
 
     @Test
     public void shouldShowAllRoutes() {
-        when(routeDao.findAll()).thenReturn(entities);
+        when(routeDao.findAll(1,2)).thenReturn(entities);
         when(mapper.mapRouteEntityToRoute(any(RouteEntity.class))).thenReturn(route);
 
-        List<Route> actual = service.findAllRoutes();
+        List<Route> actual = service.findAll(1,2);
 
         assertEquals(routes, actual);
     }
 
     @Test
     public void shouldReturnEmptyList() {
-        when(routeDao.findAll()).thenReturn(Collections.emptyList());
+        when(routeDao.findAll(1,2)).thenReturn(Collections.emptyList());
 
-        List<Route> actual = service.findAllRoutes();
+        List<Route> actual = service.findAll(1,2);
 
         assertEquals(Collections.emptyList(), actual);
     }

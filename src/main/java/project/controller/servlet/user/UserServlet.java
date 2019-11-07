@@ -1,7 +1,7 @@
 package project.controller.servlet.user;
 
 import project.controller.command.Command;
-import project.controller.command.user.RegisterCommand;
+import project.controller.context.ApplicationContextInjector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,37 +9,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
+//@WebServlet(name = "readUsers", urlPatterns = {"/readUsers"})
 public class UserServlet extends HttpServlet {
-    private static final Map<String, Command> nameToCommand = new HashMap<>();
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
+    private final Map<String, Command> commandNameToCommand;
+    private final Command defaultCommand;
+
+    public UserServlet() {
+        ApplicationContextInjector injector = ApplicationContextInjector.getInstance();
+        this.commandNameToCommand = injector.getUserCommands();
+        this.defaultCommand = request -> "problem.jsp";
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String page = null;
-        String action = req.getParameter("command");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-        if (action == null || action.isEmpty() ) {
-            throw new RuntimeException();
-        }
+        response.setContentType("text/html;charset=UTF-8");
 
-        Command currentCommand = nameToCommand.get(action);
+        final String command = request.getParameter("commandShow");
 
-        if ( currentCommand == null ) {
-            throw new RuntimeException();
-        }
+        final String page = commandNameToCommand.getOrDefault(command, defaultCommand).execute(request);
 
-        page = currentCommand.execute(req);
-
-        if ( page != null ) {
-            RequestDispatcher dispatcher = req.getRequestDispatcher(page);
-            dispatcher.forward(req, resp);
-        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+        dispatcher.forward(request, response);
     }
 }
