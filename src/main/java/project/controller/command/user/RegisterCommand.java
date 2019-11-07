@@ -17,18 +17,20 @@ public class RegisterCommand implements Command {
     public String execute(HttpServletRequest request) {
         //to session
         final String name = (String) request.getAttribute("name");
+        final String surname = (String) request.getAttribute("surname");
         final String email = (String) request.getAttribute("email");
 
-        final String password1 = (String) request.getAttribute("password1");
-        final String password2 = (String) request.getAttribute("password2");
-        if(!Objects.equals(password1, password2)){
+        final String password = (String) request.getAttribute("password");
+        final String passwordConfirm = (String) request.getAttribute("passwordConfirm");
+        if(!Objects.equals(password, passwordConfirm)){
             return "view/register.jsp";
         }
 
         User user = User.builder()
                 .withEmail(email)
                 .withName(name)
-                .withPassword(password1)
+                .withSurname(surname)
+                .withPassword(password)
                 .build();
         userService.register(user);
         return "view/login.jsp";

@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Администратор
-  Date: 07.11.2019
-  Time: 18:06
-  To change this template use File | Settings | File Templates.
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -77,8 +70,6 @@
 <a href=index.jsp>
     <button type="submit" class="btn btn-primary">Back</button>
 </a>
-
-
 
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
