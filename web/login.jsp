@@ -16,20 +16,21 @@
         <option value="ua" ${language == 'ua' ? 'selected' : ''}>Українська</option>
     </select>
 </form>
-<form method="post">
-    <label for="username"><fmt:message key="login.label.email" />:</label>
-    <input type="text" id="username" name="username">
+
+<form action="login" method="post">
+    <label for="email"><fmt:message key="login.label.email" />:</label>
+    <input type="text" id="email" name="email">
     <br>
     <label for="password"><fmt:message key="login.label.password" />:</label>
     <input type="password" id="password" name="password">
     <br>
-    <fmt:message key="login.button.submit" var="buttonValue" />
-    <input type="submit" name="submit" value="${buttonValue}">
+    <fmt:message key="login.button.submit" var="login" />
+    <input type="submit" name="commandSecurity" value="login">
 </form>
 
 <a href=register.jsp>
     <fmt:message key="login.button.register" var="registerValue" />
-    <input type="submit" value="${registerValue}" class="btn btn-primary"></input>
+    <input type="submit" value="${registerValue}" class="btn btn-primary"/>
 </a>
 
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
