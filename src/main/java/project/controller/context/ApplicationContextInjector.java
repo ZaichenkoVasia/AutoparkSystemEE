@@ -1,6 +1,10 @@
 package project.controller.context;
 
 import project.controller.command.Command;
+import project.controller.command.show.AssignmentShowCommand;
+import project.controller.command.show.BusShowCommand;
+import project.controller.command.show.RouteShowCommand;
+import project.controller.command.show.UserShowCommand;
 import project.controller.command.user.LoginCommand;
 import project.controller.command.user.LogoutCommand;
 import project.controller.command.user.RegisterCommand;
@@ -58,6 +62,12 @@ public final class ApplicationContextInjector {
     private static final Command LOGIN_COMMAND = new LoginCommand(USER_SERVICE);
     private static final Command LOGOUT_COMMAND = new LogoutCommand();
     private static final Command REGISTER_COMMAND = new RegisterCommand(USER_SERVICE);
+
+    private static final Command ASSIGNMENT_SHOW_COMMAND = new AssignmentShowCommand(ASSIGNMENT_SERVICE);
+    private static final Command BUS_SHOW_COMMAND = new BusShowCommand(BUS_SERVICE);
+    private static final Command ROUTE_SHOW_COMMAND = new RouteShowCommand(ROUTE_SERVICE);
+    private static final Command USER_SHOW_COMMAND = new UserShowCommand(USER_SERVICE);
+
     private static final Map<String, Command> USER_COMMANDS_NAME_TO_COMMAND = initUserCommand();
 
     private static Map<String, Command> initUserCommand() {
@@ -65,6 +75,10 @@ public final class ApplicationContextInjector {
         userCommandNameToCommand.put("login", LOGIN_COMMAND);
         userCommandNameToCommand.put("logout", LOGOUT_COMMAND);
         userCommandNameToCommand.put("register", REGISTER_COMMAND);
+        userCommandNameToCommand.put("showAssignments", ASSIGNMENT_SHOW_COMMAND);
+        userCommandNameToCommand.put("showBuses", BUS_SHOW_COMMAND);
+        userCommandNameToCommand.put("showRoutes", ROUTE_SHOW_COMMAND);
+        userCommandNameToCommand.put("showUsers", USER_SHOW_COMMAND);
         return userCommandNameToCommand;
     }
 
