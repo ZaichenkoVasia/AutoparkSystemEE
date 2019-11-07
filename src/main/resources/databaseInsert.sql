@@ -53,17 +53,17 @@ INSERT INTO project.routes (route_arrival, route_departure, route_distance)
 VALUES ('Heart', 'Mol', 8800);
 
 -- INSERT assignments:
-INSERT INTO project.assignments (bus_id, user_id, route_id)
-VALUES (2, 2, 2);
-INSERT INTO project.assignments (bus_id, user_id, route_id)
-VALUES (3, 3, 3);
-INSERT INTO project.assignments (bus_id, user_id, route_id)
-VALUES (5, 4, 4);
-INSERT INTO project.assignments (bus_id, user_id, route_id)
-VALUES (4, 5, 5);
-INSERT INTO project.assignments (bus_id, user_id, route_id)
-VALUES (6, 6, 6);
-INSERT INTO project.assignments (bus_id, user_id, route_id)
-VALUES (8, 7, 7);
-INSERT INTO project.assignments (bus_id, user_id, route_id)
-VALUES (7, 8, 8);
+INSERT INTO project.assignments (bus_id, user_id, route_id, assignment_status)
+VALUES (2, 2, 2, 'BUSY');
+INSERT INTO project.assignments (bus_id, user_id, route_id, assignment_status)
+VALUES (3, 3, 3, 'BUSY');
+INSERT INTO project.assignments (bus_id, user_id, route_id, assignment_status)
+VALUES (5, 4, 4, 'BUSY');
+INSERT INTO project.assignments (bus_id, user_id, route_id, assignment_status)
+VALUES (4, 5, 5, 'BUSY');
+INSERT INTO project.assignments (bus_id, user_id, route_id, assignment_status)
+VALUES (6, 6, 6, 'BUSY');
+INSERT INTO project.assignments (bus_id, user_id, route_id, assignment_status)
+VALUES (8, 7, 7, 'BUSY');
+INSERT INTO project.assignments (bus_id, user_id, route_id, assignment_status)
+VALUES (7, 8, 8, 'BUSY');
