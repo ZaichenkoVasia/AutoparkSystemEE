@@ -14,7 +14,8 @@ import java.util.Optional;
 public class RouteDaoImpl extends AbstractDao<RouteEntity> implements RouteDao {
     private static final String INSERT_route = "INSERT INTO project.routes(route_arrival, route_departure, route_distance) VALUES(?, ?, ?)";
     private static final String FIND_BY_ID = "SELECT * FROM project.routes WHERE route_id = ?";
-    private static final String FIND_ALL_ROUTES = "SELECT * FROM project.routes";
+    private static final String FIND_ALL_ROUTES = "SELECT * FROM project.routes LIMIT ?, ?";
+    private static final String COUNT = "SELECT * FROM project.routes";
     private static final String UPDATE_ROUTE = "UPDATE project.routes SET route_arrival = ?, route_departure = ?, route_distance = ? WHERE route_id = ?";
     private static final String DELETE_BY_ID = "DELETE FROM project.routes WHERE route_id = ?";
     private static final String FIND_BY_ARRIVAL = "SELECT * FROM project.routes WHERE arrival = ?";
@@ -35,10 +36,9 @@ public class RouteDaoImpl extends AbstractDao<RouteEntity> implements RouteDao {
     }
 
     @Override
-    public List<RouteEntity> findAll() {
-        return findAll(FIND_ALL_ROUTES);
+    public List<RouteEntity> findAll(int currentPage, int recordsPerPage) {
+        return findAll(FIND_ALL_ROUTES, currentPage, recordsPerPage);
     }
-
     @Override
     public List<RouteEntity> findByArrival(String arrival) {
         return findByStringParam(arrival, FIND_BY_ARRIVAL);
@@ -57,6 +57,11 @@ public class RouteDaoImpl extends AbstractDao<RouteEntity> implements RouteDao {
     @Override
     public boolean deleteById(Integer id) {
         return deleteById(id, DELETE_BY_ID);
+    }
+
+    @Override
+    public int getNumberOfRows() {
+        return getNumberOfRows(COUNT);
     }
 
     @Override

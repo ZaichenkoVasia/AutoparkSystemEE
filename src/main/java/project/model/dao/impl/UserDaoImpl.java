@@ -16,7 +16,8 @@ import java.util.Optional;
 public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
     private static final String INSERT_USER = "INSERT INTO project.users(user_name, user_surname, user_email, user_password, user_role, user_status) VALUES(?, ?, ?, ?, ?, ?)";
     private static final String FIND_BY_ID = "SELECT * FROM project.users WHERE user_id = ?";
-    private static final String FIND_ALL_USERS = "SELECT * FROM project.users";
+    private static final String FIND_ALL_USERS = "SELECT * FROM project.users LIMIT ?, ?";
+    private static final String COUNT = "SELECT * FROM project.users";
     private static final String FIND_BY_STATUS = "SELECT * FROM project.users WHERE status = ?";
     private static final String FIND_BY_EMAIL = "SELECT * FROM project.users WHERE user_email = ?";
     private static final String UPDATE_USER = "UPDATE project.users SET user_name = ?, user_surname = ?, user_email = ?, user_password = ?, user_role = ?, user_status = ? WHERE user_id = ?";
@@ -38,10 +39,9 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
     }
 
     @Override
-    public List<UserEntity> findAll() {
-        return findAll(FIND_ALL_USERS);
+    public List<UserEntity> findAll(int currentPage, int recordsPerPage) {
+        return findAll(FIND_ALL_USERS, currentPage, recordsPerPage);
     }
-
     @Override
     public Optional<UserEntity> findByEmail(String email) {
         return findOneByStringParam(email, FIND_BY_EMAIL);
@@ -65,6 +65,11 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
     @Override
     public boolean deleteById(Integer id) {
         return deleteById(id, DELETE_BY_ID);
+    }
+
+    @Override
+    public int getNumberOfRows() {
+        return getNumberOfRows(COUNT);
     }
 
     @Override

@@ -4,7 +4,7 @@ import project.model.entity.BusEntity;
 
 import java.util.List;
 
-public interface BusDao extends CrudRepository<Integer, BusEntity> {
+public interface BusDao extends CrudDao<Integer, BusEntity> {
 
     List<BusEntity> findByStatus(String status);
 

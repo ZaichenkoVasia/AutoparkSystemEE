@@ -1,8 +1,8 @@
 package project.model.dao;
 
 import org.apache.log4j.Logger;
-import project.model.exception.DatabaseRuntimeException;
 import project.model.dao.connector.ConnectionPool;
+import project.model.exception.DatabaseRuntimeException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -64,6 +64,27 @@ public abstract class AbstractDao<E> {
         }
     }
 
+    protected List<E> findAll(String query, int currentPage, int recordsPerPage) {
+        List<E> result = new ArrayList<>();
+        int start = currentPage * recordsPerPage - recordsPerPage;
+
+        try (Connection connection = connector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, start);
+            statement.setInt(2, recordsPerPage);
+            ResultSet entities = statement.executeQuery();
+
+            while(entities.next()) {
+                mapResultSetToEntity(entities).ifPresent(result::add);
+            }
+
+            return result;
+        } catch (SQLException e) {
+            LOGGER.error("Invalid entities search" + e.getMessage());
+            throw new DatabaseRuntimeException("Invalid entities search", e);
+        }
+    }
+
     protected Optional<E> findOneByStringParam(String data, String query) {
         try (Connection connection = connector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -110,24 +131,6 @@ public abstract class AbstractDao<E> {
         }
     }
 
-    protected List<E> findAll(String query) {
-        List<E> result = new ArrayList<>();
-
-        try (Connection connection = connector.getConnection();
-             Statement statement = connection.createStatement()) {
-            ResultSet entities = statement.executeQuery(query);
-
-            while (entities.next()) {
-                mapResultSetToEntity(entities).ifPresent(result::add);
-            }
-
-            return result;
-        } catch (SQLException e) {
-            LOGGER.error("Invalid entities search" + e.getMessage());
-            throw new DatabaseRuntimeException("Invalid entities search", e);
-        }
-    }
-
     protected void update(E entity, String query) {
         try (Connection connection = connector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -149,6 +152,18 @@ public abstract class AbstractDao<E> {
         } catch (SQLException e) {
             LOGGER.error("Invalid entity deleting" + e.getMessage());
             throw new DatabaseRuntimeException("Invalid entity deleting", e);
+        }
+    }
+
+    public int getNumberOfRows(String query) {
+        try (Connection connection = connector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            ResultSet entity = preparedStatement.executeQuery();
+            entity.last();
+            return entity.getInt(1);
+        } catch (SQLException e) {
+            LOGGER.error("Invalid entity search" + e.getMessage());
+            throw new DatabaseRuntimeException("Invalid entity search", e);
         }
     }
 

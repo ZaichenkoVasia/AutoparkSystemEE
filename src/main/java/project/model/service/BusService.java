@@ -7,5 +7,7 @@ import java.util.List;
 public interface BusService {
     boolean createBus(Bus bus);
 
-    List<Bus> findAllBuses();
+    List<Bus> findAll(int currentPage, int recordsPerPage);
+
+    int getNumberOfRows();
 }

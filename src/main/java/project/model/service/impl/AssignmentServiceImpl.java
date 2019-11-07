@@ -3,11 +3,13 @@ package project.model.service.impl;
 import org.apache.log4j.Logger;
 import project.model.dao.AssignmentDao;
 import project.model.domain.Assignment;
+import project.model.entity.AssignmentEntity;
 import project.model.entity.enums.Status;
 import project.model.exception.InvalidEntityCreation;
 import project.model.service.AssignmentService;
 import project.model.service.mapper.AssignmentMapper;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -56,5 +58,19 @@ public class AssignmentServiceImpl implements AssignmentService {
             LOGGER.warn("Parameter is not valid");
             throw new IllegalArgumentException("Parameter is not valid");
         }
+    }
+
+    @Override
+    public List<Assignment> findAll(int currentPage, int recordsPerPage) {
+        List<AssignmentEntity> result = assignmentDao.findAll(currentPage,recordsPerPage);
+        return result.isEmpty() ? Collections.emptyList()
+                : result.stream()
+                .map(mapper::mapAssignmentEntityToAssignment)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public int getNumberOfRows() {
+        return assignmentDao.getNumberOfRows();
     }
 }

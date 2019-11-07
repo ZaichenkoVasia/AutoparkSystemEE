@@ -35,12 +35,16 @@ public class BusServiceImpl implements BusService {
     }
 
     @Override
-    public List<Bus> findAllBuses() {
-        List<BusEntity> result = busDao.findAll();
-
+    public List<Bus> findAll(int currentPage, int recordsPerPage) {
+        List<BusEntity> result = busDao.findAll(currentPage,recordsPerPage);
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapBusEntityToBus)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public int getNumberOfRows() {
+        return busDao.getNumberOfRows();
     }
 }

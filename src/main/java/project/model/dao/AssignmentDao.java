@@ -4,7 +4,7 @@ import project.model.entity.AssignmentEntity;
 
 import java.util.List;
 
-public interface AssignmentDao extends CrudRepository<Integer, AssignmentEntity> {
+public interface AssignmentDao extends CrudDao<Integer, AssignmentEntity> {
 
     List<AssignmentEntity> findByBus(Integer id);
 

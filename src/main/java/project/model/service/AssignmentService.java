@@ -13,4 +13,8 @@ public interface AssignmentService {
     List<Assignment> findAssignmentsByStatus(Status status);
 
     List<Assignment> findAssignmentsByUser(Integer userId);
+
+    List<Assignment> findAll(int currentPage, int recordsPerPage);
+
+    int getNumberOfRows();
 }

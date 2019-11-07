@@ -34,12 +34,17 @@ public class RouteServiceImpl implements RouteService {
         return routeDao.save(mapper.mapRouteToRouteEntity(route));
     }
 
-    public List<Route> findAllRoutes() {
-        List<RouteEntity> result = routeDao.findAll();
-
+    @Override
+    public List<Route> findAll(int currentPage, int recordsPerPage) {
+        List<RouteEntity> result = routeDao.findAll(currentPage,recordsPerPage);
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapRouteEntityToRoute)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public int getNumberOfRows() {
+        return routeDao.getNumberOfRows();
     }
 }

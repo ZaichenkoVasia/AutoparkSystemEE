@@ -18,10 +18,11 @@ import java.util.Optional;
 public class AssignmentDaoImpl extends AbstractDao<AssignmentEntity> implements AssignmentDao {
     private static final String INSERT_ASSIGNMENT = "INSERT INTO project.assignments(bus_id, user_id, route_id, assignment_status) VALUES(?, ?, ?, ?)";
     private static final String FIND_BY_ID = "SELECT * FROM project.assignments WHERE assignment_id = ?";
-    private static final String FIND_ALL_ASSIGNMENTS = "SELECT * FROM project.assignments";
+    private static final String FIND_ALL_ASSIGNMENTS = "SELECT * FROM project.assignments LIMIT ?, ?";
     private static final String FIND_BY_BUS = "SELECT * FROM project.assignments WHERE bus_id = ?";
     private static final String FIND_BY_USER = "SELECT * FROM project.assignments WHERE user_id = ?";
     private static final String FIND_BY_ROUTE = "SELECT * FROM project.assignments WHERE route_id = ?";
+    private static final String COUNT = "SELECT * FROM project.assignments";
     private static final String FIND_BY_STATUS = "SELECT * FROM project.assignments WHERE assignment_status = ?";
     private static final String UPDATE_ASSIGNMENT = "UPDATE project.assignments SET bus_id = ?, user_id = ?, route_id = ?, assignment_status = ? WHERE assignment_id = ?";
     private static final String UPDATE_ASSIGNMENT_STATUS = "UPDATE project.assignments SET assignment_status = ? WHERE assignment_id = ?";
@@ -42,10 +43,9 @@ public class AssignmentDaoImpl extends AbstractDao<AssignmentEntity> implements 
     }
 
     @Override
-    public List<AssignmentEntity> findAll() {
-        return findAll(FIND_ALL_ASSIGNMENTS);
+    public List<AssignmentEntity> findAll(int currentPage, int recordsPerPage) {
+        return findAll(FIND_ALL_ASSIGNMENTS, currentPage, recordsPerPage);
     }
-
     @Override
     public List<AssignmentEntity> findByBus(Integer id) {
         return findEntitiesByForeignKey(id, FIND_BY_BUS);
@@ -79,6 +79,11 @@ public class AssignmentDaoImpl extends AbstractDao<AssignmentEntity> implements 
     @Override
     public boolean deleteById(Integer id) {
         return deleteById(id, DELETE_BY_ID);
+    }
+
+    @Override
+    public int getNumberOfRows() {
+        return getNumberOfRows(COUNT);
     }
 
     @Override

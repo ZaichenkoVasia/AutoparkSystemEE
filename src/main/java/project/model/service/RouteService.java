@@ -7,5 +7,7 @@ import java.util.List;
 public interface RouteService {
     boolean createRoute(Route route);
 
-    List<Route> findAllRoutes();
+    List<Route> findAll(int currentPage, int recordsPerPage);
+
+    int getNumberOfRows();
 }

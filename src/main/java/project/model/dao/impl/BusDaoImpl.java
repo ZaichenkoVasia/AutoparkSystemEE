@@ -15,7 +15,8 @@ import java.util.Optional;
 public class BusDaoImpl extends AbstractDao<BusEntity> implements BusDao {
     private static final String INSERT_BUS = "INSERT INTO project.buses(bus_model, bus_seats, bus_status) VALUES(?, ?, ?)";
     private static final String FIND_BY_ID = "SELECT * FROM project.buses WHERE bus_id = ?";
-    private static final String FIND_ALL_BUSES = "SELECT * FROM project.buses";
+    private static final String FIND_ALL_BUSES = "SELECT * FROM project.buses LIMIT ?, ?";
+    private static final String COUNT = "SELECT * FROM project.buses";
     private static final String FIND_BY_STATUS = "SELECT * FROM project.buses WHERE status = ?";
     private static final String UPDATE_BUS = "UPDATE project.buses SET bus_model = ?, bus_seats = ?, bus_status = ? WHERE bus_id = ?";
     private static final String UPDATE_BUS_STATUS = "UPDATE project.buses SET bus_status = ? WHERE bus_id = ?";
@@ -36,10 +37,9 @@ public class BusDaoImpl extends AbstractDao<BusEntity> implements BusDao {
     }
 
     @Override
-    public List<BusEntity> findAll() {
-        return findAll(FIND_ALL_BUSES);
+    public List<BusEntity> findAll(int currentPage, int recordsPerPage) {
+        return findAll(FIND_ALL_BUSES, currentPage, recordsPerPage);
     }
-
     @Override
     public List<BusEntity> findByStatus(String status) {
         return findByStringParam(status, FIND_BY_STATUS);
@@ -58,6 +58,11 @@ public class BusDaoImpl extends AbstractDao<BusEntity> implements BusDao {
     @Override
     public boolean deleteById(Integer id) {
         return deleteById(id, DELETE_BY_ID);
+    }
+
+    @Override
+    public int getNumberOfRows() {
+        return getNumberOfRows(COUNT);
     }
 
     @Override
