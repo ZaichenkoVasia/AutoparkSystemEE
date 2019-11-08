@@ -34,7 +34,7 @@ public class AssignmentShowCommand implements Command {
         request.setAttribute("noOfPages", nOfPages);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("recordsPerPage", recordsPerPage);
-        final String command = request.getParameter("commandShow");
+        final String command = request.getParameter("command");
         request.setAttribute("showAssignments", command);
 
         return "listAssignments.jsp";

@@ -19,7 +19,7 @@
 
     <label for="records">Select records per page:</label>
 
-    <select class="form-control" id="records" name="commandShow">
+    <select class="form-control" id="records" name="command">
       <option value="showAssignments">Assignments</option>
       <option value="showBuses">Buses</option>
       <option value="showRoutes">Routes</option>
@@ -30,6 +30,11 @@
 
   <button type="submit" class="btn btn-primary">Submit</button>
 
+</form>
+
+<form action = "user" method="post">
+  <fmt:message key="login.button.logout" var="logout" />
+  <input type="submit" name="command" value="logout">
 </form>
 
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" ></script>
