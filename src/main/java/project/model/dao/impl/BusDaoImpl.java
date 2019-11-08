@@ -1,10 +1,10 @@
 package project.model.dao.impl;
 
-import project.model.entity.BusEntity;
-import project.model.entity.enums.Status;
 import project.model.dao.AbstractDao;
 import project.model.dao.BusDao;
 import project.model.dao.connector.ConnectionPool;
+import project.model.entity.BusEntity;
+import project.model.entity.enums.Status;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,6 +40,7 @@ public class BusDaoImpl extends AbstractDao<BusEntity> implements BusDao {
     public List<BusEntity> findAll(int currentPage, int recordsPerPage) {
         return findAll(FIND_ALL_BUSES, currentPage, recordsPerPage);
     }
+
     @Override
     public List<BusEntity> findByStatus(String status) {
         return findByStringParam(status, FIND_BY_STATUS);

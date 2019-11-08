@@ -66,19 +66,19 @@ public class BusServiceImplTest {
 
     @Test
     public void shouldShowAllBuss() {
-        when(busDao.findAll(1,2)).thenReturn(entities);
+        when(busDao.findAll(1, 2)).thenReturn(entities);
         when(mapper.mapBusEntityToBus(any(BusEntity.class))).thenReturn(bus);
 
-        List<Bus> actual = service.findAll(1,2);
+        List<Bus> actual = service.findAll(1, 2);
 
         assertEquals(buses, actual);
     }
 
     @Test
     public void shouldReturnEmptyList() {
-        when(busDao.findAll(1,2)).thenReturn(Collections.emptyList());
+        when(busDao.findAll(1, 2)).thenReturn(Collections.emptyList());
 
-        List<Bus> actual = service.findAll(1,2);
+        List<Bus> actual = service.findAll(1, 2);
 
         assertEquals(Collections.emptyList(), actual);
     }

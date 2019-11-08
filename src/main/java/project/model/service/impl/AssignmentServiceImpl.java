@@ -62,7 +62,7 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     public List<Assignment> findAll(int currentPage, int recordsPerPage) {
-        List<AssignmentEntity> result = assignmentDao.findAll(currentPage,recordsPerPage);
+        List<AssignmentEntity> result = assignmentDao.findAll(currentPage, recordsPerPage);
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapAssignmentEntityToAssignment)

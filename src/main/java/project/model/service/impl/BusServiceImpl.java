@@ -26,7 +26,7 @@ public class BusServiceImpl implements BusService {
 
     @Override
     public boolean createBus(Bus bus) {
-        if (Objects.isNull(bus) ) {
+        if (Objects.isNull(bus)) {
             LOGGER.warn("bus is not valid");
             throw new InvalidCreationRuntimeException("bus is not valid");
         }
@@ -36,7 +36,7 @@ public class BusServiceImpl implements BusService {
 
     @Override
     public List<Bus> findAll(int currentPage, int recordsPerPage) {
-        List<BusEntity> result = busDao.findAll(currentPage,recordsPerPage);
+        List<BusEntity> result = busDao.findAll(currentPage, recordsPerPage);
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapBusEntityToBus)

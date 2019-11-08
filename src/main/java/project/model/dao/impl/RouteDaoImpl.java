@@ -39,6 +39,7 @@ public class RouteDaoImpl extends AbstractDao<RouteEntity> implements RouteDao {
     public List<RouteEntity> findAll(int currentPage, int recordsPerPage) {
         return findAll(FIND_ALL_ROUTES, currentPage, recordsPerPage);
     }
+
     @Override
     public List<RouteEntity> findByArrival(String arrival) {
         return findByStringParam(arrival, FIND_BY_ARRIVAL);

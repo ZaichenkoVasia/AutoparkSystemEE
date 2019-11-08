@@ -1,13 +1,13 @@
 package project.model.dao.impl;
 
+import project.model.dao.AbstractDao;
+import project.model.dao.AssignmentDao;
+import project.model.dao.connector.ConnectionPool;
 import project.model.entity.AssignmentEntity;
 import project.model.entity.BusEntity;
 import project.model.entity.RouteEntity;
 import project.model.entity.UserEntity;
 import project.model.entity.enums.Status;
-import project.model.dao.AbstractDao;
-import project.model.dao.AssignmentDao;
-import project.model.dao.connector.ConnectionPool;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,6 +46,7 @@ public class AssignmentDaoImpl extends AbstractDao<AssignmentEntity> implements 
     public List<AssignmentEntity> findAll(int currentPage, int recordsPerPage) {
         return findAll(FIND_ALL_ASSIGNMENTS, currentPage, recordsPerPage);
     }
+
     @Override
     public List<AssignmentEntity> findByBus(Integer id) {
         return findEntitiesByForeignKey(id, FIND_BY_BUS);

@@ -1,11 +1,11 @@
 package project.model.dao.impl;
 
-import project.model.entity.UserEntity;
-import project.model.entity.enums.Role;
-import project.model.entity.enums.Status;
 import project.model.dao.AbstractDao;
 import project.model.dao.UserDao;
 import project.model.dao.connector.ConnectionPool;
+import project.model.entity.UserEntity;
+import project.model.entity.enums.Role;
+import project.model.entity.enums.Status;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,6 +42,7 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
     public List<UserEntity> findAll(int currentPage, int recordsPerPage) {
         return findAll(FIND_ALL_USERS, currentPage, recordsPerPage);
     }
+
     @Override
     public Optional<UserEntity> findByEmail(String email) {
         return findOneByStringParam(email, FIND_BY_EMAIL);

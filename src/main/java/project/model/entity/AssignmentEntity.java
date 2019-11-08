@@ -88,7 +88,7 @@ public class AssignmentEntity {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof AssignmentEntity)){
+        if (!(o instanceof AssignmentEntity)) {
             return false;
         }
         AssignmentEntity that = (AssignmentEntity) o;

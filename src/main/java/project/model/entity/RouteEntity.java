@@ -71,10 +71,10 @@ public class RouteEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         }
-        if (!(o instanceof RouteEntity)){
+        if (!(o instanceof RouteEntity)) {
             return false;
         }
         RouteEntity that = (RouteEntity) o;

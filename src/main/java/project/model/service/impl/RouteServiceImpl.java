@@ -26,7 +26,7 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public boolean createRoute(Route route) {
-        if (Objects.isNull(route) ) {
+        if (Objects.isNull(route)) {
             LOGGER.warn("route is not valid");
             throw new InvalidCreationRuntimeException("route is not valid");
         }
@@ -36,7 +36,7 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public List<Route> findAll(int currentPage, int recordsPerPage) {
-        List<RouteEntity> result = routeDao.findAll(currentPage,recordsPerPage);
+        List<RouteEntity> result = routeDao.findAll(currentPage, recordsPerPage);
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapRouteEntityToRoute)

@@ -31,7 +31,7 @@ public class RouteServiceImplTest {
     private static final List<RouteEntity> entities = Arrays.asList(
             RouteEntity.builder().withId(1).build(),
             RouteEntity.builder().withId(2).build());
-    private static final List<Route> routes = Arrays.asList(route,route);
+    private static final List<Route> routes = Arrays.asList(route, route);
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -68,19 +68,19 @@ public class RouteServiceImplTest {
 
     @Test
     public void shouldShowAllRoutes() {
-        when(routeDao.findAll(1,2)).thenReturn(entities);
+        when(routeDao.findAll(1, 2)).thenReturn(entities);
         when(mapper.mapRouteEntityToRoute(any(RouteEntity.class))).thenReturn(route);
 
-        List<Route> actual = service.findAll(1,2);
+        List<Route> actual = service.findAll(1, 2);
 
         assertEquals(routes, actual);
     }
 
     @Test
     public void shouldReturnEmptyList() {
-        when(routeDao.findAll(1,2)).thenReturn(Collections.emptyList());
+        when(routeDao.findAll(1, 2)).thenReturn(Collections.emptyList());
 
-        List<Route> actual = service.findAll(1,2);
+        List<Route> actual = service.findAll(1, 2);
 
         assertEquals(Collections.emptyList(), actual);
     }

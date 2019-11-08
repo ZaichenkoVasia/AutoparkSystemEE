@@ -66,7 +66,6 @@ public class BusEntity {
             return this;
         }
 
-
         public BusEntity build() {
             return new BusEntity(this);
         }
@@ -74,7 +73,7 @@ public class BusEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         }
         if (!(o instanceof BusEntity)) {

@@ -30,8 +30,8 @@ public class PasswordEncoderTest {
 
     @Parameters
     public static Collection<Object[]> passwordEncodingTable() {
-        return Arrays.asList(new Object[][] {
-                { "Test123", "68EACB97D86FC4621FA2BE17CABD8C".toLowerCase() },
+        return Arrays.asList(new Object[][]{
+                {"Test123", "68EACB97D86FC4621FA2BE17CABD8C".toLowerCase()},
         });
     }
 

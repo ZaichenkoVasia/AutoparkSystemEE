@@ -11,8 +11,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import project.model.dao.UserDao;
 import project.model.domain.User;
 import project.model.entity.UserEntity;
-import project.model.exception.UserIsRegisteredRuntimeException;
 import project.model.exception.InvalidRegistrationRuntimeException;
+import project.model.exception.UserIsRegisteredRuntimeException;
 import project.model.exception.UserNotFoundRuntimeException;
 import project.model.service.encoder.PasswordEncoder;
 import project.model.service.impl.UserServiceImpl;
@@ -123,9 +123,9 @@ public class UserEntityServiceImplTest {
         List<User> expected = Collections.singletonList(user);
         List<UserEntity> entities = Collections.singletonList(entity);
 
-        when(repository.findAll(1,2)).thenReturn(entities);
+        when(repository.findAll(1, 2)).thenReturn(entities);
         when(mapper.mapUserEntityToUser(entity)).thenReturn(user);
-        List<User> actual = userService.findAll(1,2);
+        List<User> actual = userService.findAll(1, 2);
 
         assertEquals(expected, actual);
     }
@@ -134,8 +134,8 @@ public class UserEntityServiceImplTest {
     public void shouldReturnEmptyListWhenThereIsNoUsers() {
         List<User> expected = Collections.emptyList();
 
-        when(repository.findAll(1,2)).thenReturn(Collections.emptyList());
-        List<User> actual = userService.findAll(1,2);
+        when(repository.findAll(1, 2)).thenReturn(Collections.emptyList());
+        List<User> actual = userService.findAll(1, 2);
 
         assertEquals(expected, actual);
     }

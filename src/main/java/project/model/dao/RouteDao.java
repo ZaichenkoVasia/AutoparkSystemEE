@@ -9,5 +9,4 @@ public interface RouteDao extends CrudDao<Integer, RouteEntity> {
     List<RouteEntity> findByArrival(String arrival);
 
     List<RouteEntity> findByDeparture(String departure);
-
 }

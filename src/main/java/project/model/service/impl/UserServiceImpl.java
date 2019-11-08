@@ -4,8 +4,8 @@ import org.apache.log4j.Logger;
 import project.model.dao.UserDao;
 import project.model.domain.User;
 import project.model.entity.UserEntity;
-import project.model.exception.UserIsRegisteredRuntimeException;
 import project.model.exception.EncodingRuntimeException;
+import project.model.exception.UserIsRegisteredRuntimeException;
 import project.model.exception.UserNotFoundRuntimeException;
 import project.model.service.UserService;
 import project.model.service.encoder.PasswordEncoder;
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll(int currentPage, int recordsPerPage) {
-        List<UserEntity> result = userDao.findAll(currentPage,recordsPerPage);
+        List<UserEntity> result = userDao.findAll(currentPage, recordsPerPage);
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapUserEntityToUser)
