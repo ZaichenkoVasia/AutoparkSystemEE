@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import project.model.dao.BusDao;
 import project.model.domain.Bus;
 import project.model.entity.BusEntity;
-import project.model.exception.InvalidEntityCreation;
+import project.model.exception.InvalidCreationRuntimeException;
 import project.model.service.BusService;
 import project.model.service.mapper.BusMapper;
 
@@ -28,7 +28,7 @@ public class BusServiceImpl implements BusService {
     public boolean createBus(Bus bus) {
         if (Objects.isNull(bus) ) {
             LOGGER.warn("bus is not valid");
-            throw new InvalidEntityCreation("bus is not valid");
+            throw new InvalidCreationRuntimeException("bus is not valid");
         }
 
         return busDao.save(mapper.mapBusToBusEntity(bus));

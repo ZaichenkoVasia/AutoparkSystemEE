@@ -12,7 +12,7 @@ import project.model.dao.AssignmentDao;
 import project.model.domain.Assignment;
 import project.model.domain.User;
 import project.model.entity.AssignmentEntity;
-import project.model.exception.InvalidEntityCreation;
+import project.model.exception.InvalidCreationRuntimeException;
 import project.model.service.impl.AssignmentServiceImpl;
 import project.model.service.mapper.AssignmentMapper;
 
@@ -71,7 +71,7 @@ public class AssignmentServiceImplTest {
 
     @Test
     public void shouldThrowInvalidEntityCreationWithNullAssignment() {
-        exception.expect(InvalidEntityCreation.class);
+        exception.expect(InvalidCreationRuntimeException.class);
         exception.expectMessage("assignment is not valid");
 
         service.createAssignment(null);

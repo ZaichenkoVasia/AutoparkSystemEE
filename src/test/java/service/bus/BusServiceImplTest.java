@@ -11,7 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import project.model.dao.BusDao;
 import project.model.domain.Bus;
 import project.model.entity.BusEntity;
-import project.model.exception.InvalidEntityCreation;
+import project.model.exception.InvalidCreationRuntimeException;
 import project.model.service.impl.BusServiceImpl;
 import project.model.service.mapper.BusMapper;
 
@@ -58,7 +58,7 @@ public class BusServiceImplTest {
 
     @Test
     public void shouldThrowInvalidEntityCreationWithNullBus() {
-        exception.expect(InvalidEntityCreation.class);
+        exception.expect(InvalidCreationRuntimeException.class);
         exception.expectMessage("bus is not valid");
 
         service.createBus(null);

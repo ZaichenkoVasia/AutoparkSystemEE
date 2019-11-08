@@ -11,7 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import project.model.dao.RouteDao;
 import project.model.domain.Route;
 import project.model.entity.RouteEntity;
-import project.model.exception.InvalidEntityCreation;
+import project.model.exception.InvalidCreationRuntimeException;
 import project.model.service.impl.RouteServiceImpl;
 import project.model.service.mapper.RouteMapper;
 
@@ -60,7 +60,7 @@ public class RouteServiceImplTest {
 
     @Test
     public void shouldThrowInvalidEntityCreationWithNullRoute() {
-        exception.expect(InvalidEntityCreation.class);
+        exception.expect(InvalidCreationRuntimeException.class);
         exception.expectMessage("route is not valid");
 
         service.createRoute(null);

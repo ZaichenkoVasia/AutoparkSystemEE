@@ -5,7 +5,7 @@ import project.model.dao.AssignmentDao;
 import project.model.domain.Assignment;
 import project.model.entity.AssignmentEntity;
 import project.model.entity.enums.Status;
-import project.model.exception.InvalidEntityCreation;
+import project.model.exception.InvalidCreationRuntimeException;
 import project.model.service.AssignmentService;
 import project.model.service.mapper.AssignmentMapper;
 
@@ -29,7 +29,7 @@ public class AssignmentServiceImpl implements AssignmentService {
     public boolean createAssignment(Assignment assignment) {
         if (Objects.isNull(assignment)) {
             LOGGER.warn("assignment is not valid");
-            throw new InvalidEntityCreation("assignment is not valid");
+            throw new InvalidCreationRuntimeException("assignment is not valid");
         }
 
         return assignmentDao.save(mapper.mapAssignmentToAssignmentEntity(assignment));

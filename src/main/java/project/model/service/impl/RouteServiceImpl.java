@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import project.model.dao.RouteDao;
 import project.model.domain.Route;
 import project.model.entity.RouteEntity;
-import project.model.exception.InvalidEntityCreation;
+import project.model.exception.InvalidCreationRuntimeException;
 import project.model.service.RouteService;
 import project.model.service.mapper.RouteMapper;
 
@@ -28,7 +28,7 @@ public class RouteServiceImpl implements RouteService {
     public boolean createRoute(Route route) {
         if (Objects.isNull(route) ) {
             LOGGER.warn("route is not valid");
-            throw new InvalidEntityCreation("route is not valid");
+            throw new InvalidCreationRuntimeException("route is not valid");
         }
 
         return routeDao.save(mapper.mapRouteToRouteEntity(route));
