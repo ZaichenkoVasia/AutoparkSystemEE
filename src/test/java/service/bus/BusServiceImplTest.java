@@ -25,11 +25,11 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BusServiceImplTest {
-    private static final Bus bus = Bus.builder().withId(1).build();
-    private static final List<BusEntity> entities = Arrays.asList(
+    private final Bus bus = Bus.builder().withId(1).build();
+    private final List<BusEntity> entities = Arrays.asList(
             BusEntity.builder().withId(1).build(),
             BusEntity.builder().withId(2).build());
-    private static final List<Bus> buses = Arrays.asList(bus, bus);
+    private final List<Bus> buses = Arrays.asList(bus, bus);
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();

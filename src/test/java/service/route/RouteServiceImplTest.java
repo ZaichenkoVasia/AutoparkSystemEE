@@ -27,11 +27,11 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RouteServiceImplTest {
-    private static final Route route = Route.builder().withId(1).build();
-    private static final List<RouteEntity> entities = Arrays.asList(
+    private final Route route = Route.builder().withId(1).build();
+    private final List<RouteEntity> entities = Arrays.asList(
             RouteEntity.builder().withId(1).build(),
             RouteEntity.builder().withId(2).build());
-    private static final List<Route> routes = Arrays.asList(route, route);
+    private final List<Route> routes = Arrays.asList(route, route);
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();

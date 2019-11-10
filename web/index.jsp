@@ -6,36 +6,102 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
 </head>
 
-<body class="m-3">
+<body>
 
-<h1>Show info</h1>
-
-<form action="user">
-
-  <input type="hidden" name="currentPage" value="1">
-  <input type="hidden" name="recordsPerPage" value="5">
-
-  <div class="form-group col-md-4">
-
-    <label for="records">Select records per page:</label>
-
-    <select class="form-control" id="records" name="command">
-      <option value="showAssignments">Assignments</option>
-      <option value="showBuses">Buses</option>
-      <option value="showRoutes">Routes</option>
-      <option value="showUsers" selected>Users</option>
-    </select>
-
+<div class="banner">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg d-flex flex-row justify-content-between">
+      <a class="navbar-brand" href="#">Auto park</a>
+      <div>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <form action = "user" method="post">
+              <fmt:message key="user.button.logout" var="login" />
+              <input type="submit" class="btn btn-primary" name="command" value="logout">
+            </form>
+          </li>
+          <li class="nav-item">
+            <form>
+              <select id="language" name="language" onchange="submit()">
+                <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
+                <option value="ua" ${language == 'ua' ? 'selected' : ''}>Ukrainian</option>
+              </select>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </nav>
   </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
 
-</form>
+  <div class="container">
+    <div class="title-wrap">
+      <h2 class="title">Show Info</h2>
 
-<form action = "user" method="post">
-  <fmt:message key="login.button.logout" var="logout" />
-  <input type="submit" name="command" value="logout">
-</form>
+      <form action="user" class="col-md-4">
+        <input type="hidden" name="currentPage" value="1">
+        <input type="hidden" name="recordsPerPage" value="5">
+
+        <div class="form-group">
+          <label for="records" class="select-label">Select records per page:</label>
+          <select class="form-control" id="records" name="command">
+            <option value="showUsers">Users</option>
+            <option value="showOrders" selected>Orders</option>
+            <option value="showTaxis">Taxis</option>
+            <option value="showCoupons">Coupons</option>
+            <option value="showAddresses">Addresses</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary selector-submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+  .nav-item {
+    margin-left: 20px;
+  }
+  .navbar-brand {
+    text-decoration: none;
+    color: #fff;
+  }
+  .banner {
+    width: 100vw;
+    height: 100vh;
+    background: url("img/background.jpg") center center /cover;
+    background-repeat: no-repeat;
+  }
+  .btn-primary {
+    background-color: #e29400!important;
+    border-color: #e29400!important;
+  }
+  .navbar {
+    background-color: rgba(0,0,0,.4)!important;
+  }
+  .title {
+    text-align: center;
+    color: #fff;
+  }
+  .title-wrap {
+    margin-top: 30px;
+    padding: 20px 0;
+    background-color: rgba(0,0,0,.4);
+  }
+  .navbar-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .select-label {
+    color: #fff;
+  }
+  .selector-submit {
+    width: 100%;
+  }
+</style>
+
 
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" ></script>
