@@ -34,7 +34,7 @@
     <ul class="pagination">
         <c:if test="${currentPage != 1}">
             <li class="page-item"><a class="page-link"
-                                     href="user?recordsPerPage=${recordsPerPage}&currentPage=${currentPage-1}&command=${showAssignments}">Previous</a>
+                                     href="park?recordsPerPage=${recordsPerPage}&currentPage=${currentPage-1}&command=${showAssignments}">Previous</a>
             </li>
         </c:if>
 
@@ -47,7 +47,7 @@
                 </c:when>
                 <c:otherwise>
                     <li class="page-item"><a class="page-link"
-                                             href="user?recordsPerPage=${recordsPerPage}&currentPage=${i}&command=${showAssignments}">${i}</a>
+                                             href="park?recordsPerPage=${recordsPerPage}&currentPage=${i}&command=${showAssignments}">${i}</a>
                     </li>
                 </c:otherwise>
             </c:choose>
@@ -55,13 +55,13 @@
 
         <c:if test="${currentPage lt noOfPages}">
             <li class="page-item"><a class="page-link"
-                                     href="user?recordsPerPage=${recordsPerPage}&currentPage=${currentPage+1}&command=${showAssignments}">Next</a>
+                                     href="park?recordsPerPage=${recordsPerPage}&currentPage=${currentPage+1}&command=${showAssignments}">Next</a>
             </li>
         </c:if>
     </ul>
 </nav>
 
-<a href=index.jsp>
+<a href=admin.jsp>
     <button type="submit" class="btn btn-primary">Back</button>
 </a>
 

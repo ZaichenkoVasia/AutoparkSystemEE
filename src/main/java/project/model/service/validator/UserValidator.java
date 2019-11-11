@@ -23,8 +23,8 @@ public class UserValidator implements Validator<User> {
             throw new InvalidRegistrationRuntimeException("User is not valid");
         }
 
-        validateName(user.getName());
-        validateSurname(user.getSurname());
+//        validateName(user.getName());
+//        validateSurname(user.getSurname());
         validateEmail(user.getEmail());
         validatePassword(user.getPassword());
     }

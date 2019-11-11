@@ -12,15 +12,15 @@ import java.io.IOException;
 import java.util.Map;
 
 //@WebServlet(name = "readUsers", urlPatterns = {"/readUsers"})
-public class UserServlet extends HttpServlet {
+public class AutoParkServlet extends HttpServlet {
 
     private final Map<String, Command> commandNameToCommand;
     private final Command defaultCommand;
 
-    public UserServlet() {
+    public AutoParkServlet() {
         ApplicationContextInjector injector = ApplicationContextInjector.getInstance();
         this.commandNameToCommand = injector.getUserCommands();
-        this.defaultCommand = request -> "problem.jsp";
+        this.defaultCommand = request -> "/problem.jsp";
     }
 
     @Override
