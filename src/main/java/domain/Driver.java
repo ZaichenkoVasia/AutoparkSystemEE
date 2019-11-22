@@ -2,7 +2,12 @@ package domain;
 
 import java.sql.Date;
 
-public class Driver extends Person{
+public class Driver {
+    private Integer id;
+    private String name;
+    private String surname;
+    private Date birth;
+    private User user;
     private Date licenseTest;
     private Integer salary;
     private String status;
@@ -12,11 +17,55 @@ public class Driver extends Person{
     }
 
     public Driver(Integer id, String name, String surname, Date birth, User user, Date licenseTest, Integer salary, String status, Bus bus) {
-        super(id, name, surname, birth, user);
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.birth = birth;
+        this.user = user;
         this.licenseTest = licenseTest;
         this.salary = salary;
         this.status = status;
         this.bus = bus;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public Date getBirth() {
+        return birth;
+    }
+
+    public void setBirth(Date birth) {
+        this.birth = birth;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getLicenseTest() {

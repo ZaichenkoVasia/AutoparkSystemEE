@@ -2,7 +2,7 @@ package domain;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class User {
     private Integer id;
     private String login;
     private String password;

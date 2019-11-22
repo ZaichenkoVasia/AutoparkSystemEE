@@ -3,7 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Bus implements Serializable {
+public class Bus {
     private Integer id;
     private String plate;
     private String model;

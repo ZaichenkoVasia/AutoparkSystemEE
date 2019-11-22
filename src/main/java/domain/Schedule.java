@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 
-public class Schedule implements Serializable {
+public class Schedule {
     private Integer id;
     private String departure;
     private String arrival;
