@@ -1,10 +1,8 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.Messages;
 import controller.exception.ServiceLayerException;
 import controller.service.UserService;
-import controller.constants.PathJSP;
 import domain.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,10 +26,10 @@ public class LoginCommand implements Command {
         User existingUser = userService.findUserByLoginData(user);
         if (user.equals(existingUser)) {
             session.setAttribute("user", existingUser);
-            return PathJSP.INDEX_PAGE;
+            return "index.jsp";
         }
-        request.setAttribute("message", Messages.USER_NOT_REGISTERED);
+        request.setAttribute("message", "user.not.registered");
         request.setAttribute("user", user);
-        return PathJSP.LOGIN_PAGE;
+        return "WEB-INF/jsp/login.jsp";
     }
 }

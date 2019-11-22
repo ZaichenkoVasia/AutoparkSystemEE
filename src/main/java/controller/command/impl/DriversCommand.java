@@ -5,7 +5,6 @@ import controller.exception.ServiceLayerException;
 import controller.service.DriverService;
 import controller.service.pagination.Carriage;
 import controller.service.pagination.PaginationManager;
-import controller.constants.PathJSP;
 import domain.Driver;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +29,6 @@ public class DriversCommand implements Command {
         request.setAttribute("lastPage", carriage.getLastPage());
         request.setAttribute("currentPage", carriage.getCurrentPage());
         request.setAttribute("list", drivers);
-        return PathJSP.DRIVERS_PAGE;
+        return "WEB-INF/jsp/driver.jsp";
     }
 }

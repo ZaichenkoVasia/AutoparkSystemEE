@@ -1,8 +1,6 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.Messages;
-import controller.constants.PathJSP;
 import controller.exception.ServiceLayerException;
 import controller.service.BusService;
 import domain.Bus;
@@ -24,11 +22,11 @@ public class BusesInfoCommand implements Command {
         String idRoute = request.getParameter("idRoute");
         List<Bus> buses = busService.getBusesByIdRoute(Integer.valueOf(idRoute));
         if (buses.size() == 0){
-            request.setAttribute("message", Messages.ROUTE_IS_EMPTY);
-            return PathJSP.INDEX_PAGE;
+            request.setAttribute("message", "route.is.empty");
+            return "index.jsp";
         }
         request.setAttribute("list", buses);
         request.setAttribute("idRoute", idRoute);
-        return PathJSP.BUSES_ON_ROUTE;
+        return "WEB-INF/jsp/admin/buses_on_route.jsp";
     }
 }

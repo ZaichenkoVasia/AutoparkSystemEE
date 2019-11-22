@@ -3,7 +3,6 @@ package controller.command.impl;
 import controller.command.Command;
 import controller.exception.ServiceLayerException;
 import controller.service.BusService;
-import controller.constants.PathJSP;
 import domain.Bus;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +21,6 @@ public class EditBusCommand implements Command {
         String idBus = request.getParameter("idBus");
         Bus bus = busService.getElementById(Integer.parseInt(idBus));
         request.setAttribute("bus", bus);
-        return PathJSP.ADD_EDIT_BUS_PAGE;
+        return "WEB-INF/jsp/editing_pages/add_bus.jsp";
     }
 }

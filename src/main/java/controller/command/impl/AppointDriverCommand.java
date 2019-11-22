@@ -1,8 +1,6 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.Messages;
-import controller.constants.PathJSP;
 import controller.exception.ServiceLayerException;
 import controller.service.BusStationService;
 
@@ -22,10 +20,10 @@ public class AppointDriverCommand implements Command {
         Integer idDriver = Integer.valueOf(request.getParameter("idDriver"));
         Integer idBus = Integer.valueOf(request.getParameter("idBus"));
         if (busStationService.appointDriverToBus(idBus, idDriver)) {
-            request.setAttribute("message", Messages.DRIVER_ASSIGNED);
+            request.setAttribute("message", "driver.assigned");
         } else {
-            request.setAttribute("message", Messages.DRIVER_SWAPPED);
+            request.setAttribute("message", "drivers.swapped");
         }
-        return PathJSP.INDEX_PAGE;
+        return "index.jsp";
     }
 }

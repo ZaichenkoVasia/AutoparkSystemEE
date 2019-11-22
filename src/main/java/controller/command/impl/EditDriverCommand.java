@@ -3,7 +3,6 @@ package controller.command.impl;
 import controller.command.Command;
 import controller.exception.ServiceLayerException;
 import controller.service.DriverService;
-import controller.constants.PathJSP;
 import domain.Driver;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +21,6 @@ public class EditDriverCommand implements Command {
         Integer idDriver = Integer.valueOf(request.getParameter("idDriver"));
         Driver driver = driverService.getElementById(idDriver);
         request.setAttribute("driver", driver);
-        return PathJSP.ADD_EDIT_DRIVER_PAGE;
+        return "WEB-INF/jsp/editing_pages/add_driver.jsp";
     }
 }

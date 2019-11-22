@@ -1,8 +1,6 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.Messages;
-import controller.constants.PathJSP;
 import controller.exception.ServiceLayerException;
 import controller.service.DriverService;
 import domain.Driver;
@@ -24,11 +22,11 @@ public class FreeDriversCommand implements Command {
         String idBus = request.getParameter("idBus");
         List<Driver> drivers = driverService.getFreeDrivers();
         if (drivers.size() == 0) {
-            request.setAttribute("message", Messages.NO_DRIVERS_TO_APPOINT);
-            return PathJSP.INDEX_PAGE;
+            request.setAttribute("message", "no.drivers.to.appoint");
+            return "index.jsp";
         }
         request.setAttribute("list", drivers);
         request.setAttribute("idBus", idBus);
-        return PathJSP.FREE_DRIVERS_PAGE;
+        return "WEB-INF/jsp/admin/free_drivers.jsp";
     }
 }

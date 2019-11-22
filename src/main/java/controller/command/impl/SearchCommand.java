@@ -1,8 +1,6 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.Messages;
-import controller.constants.PathJSP;
 import controller.exception.ServiceLayerException;
 import controller.service.RouteService;
 import domain.Route;
@@ -26,14 +24,14 @@ public class SearchCommand implements Command {
         if (!departure.isEmpty() && !arrival.isEmpty()) {
             List<Route> routes = routeService.searchByCriteria(departure, arrival);
             if (routes.isEmpty()) {
-                request.setAttribute("message", Messages.NO_RESULTS_FOR_CRITERIA);
-                return PathJSP.INDEX_PAGE;
+                request.setAttribute("message", "no.results.for.criteria");
+                return "index.jsp";
             } else {
                 request.setAttribute("list", routes);
-                return PathJSP.ROUTES_PAGE;
+                return "WEB-INF/jsp/route.jsp";
             }
         }
-        request.setAttribute("message", Messages.INCORRECT_INPUT);
-        return PathJSP.INDEX_PAGE;
+        request.setAttribute("message", "incorrect.input");
+        return "index.jsp";
     }
 }

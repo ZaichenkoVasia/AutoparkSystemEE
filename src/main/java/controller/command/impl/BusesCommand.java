@@ -5,7 +5,6 @@ import controller.exception.ServiceLayerException;
 import controller.service.BusService;
 import controller.service.pagination.Carriage;
 import controller.service.pagination.PaginationManager;
-import controller.constants.PathJSP;
 import domain.Bus;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +29,6 @@ public class BusesCommand implements Command {
         request.setAttribute("lastPage", carriage.getLastPage());
         request.setAttribute("currentPage", carriage.getCurrentPage());
         request.setAttribute("list", buses);
-        return PathJSP.BUSES_PAGE;
+        return "WEB-INF/jsp/bus.jsp";
     }
 }

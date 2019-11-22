@@ -1,8 +1,6 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.Messages;
-import controller.constants.PathJSP;
 import controller.exception.ServiceLayerException;
 import controller.service.DriverService;
 
@@ -22,11 +20,11 @@ public class AcceptSchedule implements Command {
         String idDriver = request.getParameter("idDriver");
         String status = request.getParameter("status");
         if (!status.equals("new")){
-            request.setAttribute("message", Messages.SCHEDULE_ALREADY_CONFIRMED);
-            return PathJSP.INDEX_PAGE;
+            request.setAttribute("message", "schedule.already.confirmed");
+            return "index.jsp";
         }
         driverService.setStatusWork(Integer.parseInt(idDriver));
-        request.setAttribute("message", Messages.SCHEDULE_CONFIRMED);
-        return PathJSP.INDEX_PAGE;
+        request.setAttribute("message", "schedule.confirmed");
+        return "index.jsp";
     }
 }

@@ -1,7 +1,6 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.PathJSP;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +11,6 @@ public class LogOutCommand  implements Command{
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         session.invalidate();
-        return PathJSP.INDEX_PAGE;
+        return "index.jsp";
     }
 }

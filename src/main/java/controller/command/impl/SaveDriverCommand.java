@@ -1,8 +1,6 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.Messages;
-import controller.constants.PathJSP;
 import controller.exception.ServiceLayerException;
 import controller.exception.WrongInputDataException;
 import controller.service.BusStationService;
@@ -30,15 +28,15 @@ public class SaveDriverCommand implements Command {
         try {
             Driver driver = new DriverDataCollector().retrieveData(request);
             if (busStationService.saveDriver(driver, driver.getUser(), idDriver, idUser)) {
-                request.setAttribute("message", Messages.DRIVER_SAVED);
+                request.setAttribute("message", "driver.saved");
             } else {
-                request.setAttribute("message", Messages.DRIVER_UPDATED);
+                request.setAttribute("message", "driver.updated");
             }
         } catch (WrongInputDataException e) {
             logger.warn("Incorrect input data", e);
-            request.setAttribute("message", Messages.INPUT_ERROR);
-            return PathJSP.ADD_EDIT_DRIVER_PAGE;
+            request.setAttribute("message", "input.error");
+            return "WEB-INF/jsp/editing_pages/add_driver.jsp";
         }
-        return PathJSP.INDEX_PAGE;
+        return "index.jsp";
     }
 }

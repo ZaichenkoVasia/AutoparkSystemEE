@@ -1,8 +1,6 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.Messages;
-import controller.constants.PathJSP;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +19,7 @@ public class LanguageCommand implements Command {
         }else {
             session.setAttribute("lang", "ru_RU");
         }
-        request.setAttribute("message", Messages.LANGUAGE_HAS_BEEN_CHANGED);
-        return PathJSP.INDEX_PAGE;
+        request.setAttribute("message", "language.changed");
+        return "index.jsp";
     }
 }

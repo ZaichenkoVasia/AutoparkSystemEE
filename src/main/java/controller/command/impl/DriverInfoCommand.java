@@ -1,8 +1,6 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.Messages;
-import controller.constants.PathJSP;
 import controller.exception.ServiceLayerException;
 import controller.service.DriverService;
 import domain.Driver;
@@ -23,10 +21,10 @@ public class DriverInfoCommand implements Command {
         String idBus = request.getParameter("idBus");
         Driver driver = driverService.getDriverByBusId(Integer.parseInt(idBus));
         if (driver == null) {
-            request.setAttribute("message", Messages.DRIVER_NOT_ASSIGNED);
-            return PathJSP.INDEX_PAGE;
+            request.setAttribute("message","driver.not.assigned");
+            return "index.jsp";
         }
         request.setAttribute("driver", driver);
-        return PathJSP.ADD_EDIT_DRIVER_PAGE;
+        return "WEB-INF/jsp/editing_pages/add_driver.jsp";
     }
 }

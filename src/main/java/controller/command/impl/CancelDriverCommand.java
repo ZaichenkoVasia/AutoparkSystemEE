@@ -1,8 +1,6 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.Messages;
-import controller.constants.PathJSP;
 import controller.exception.ServiceLayerException;
 import controller.service.BusStationService;
 
@@ -21,10 +19,10 @@ public class CancelDriverCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException{
         Integer idBus = Integer.valueOf(request.getParameter("idBus"));
             if (busStationService.cancelDriver(idBus)){
-                request.setAttribute("message", Messages.DRIVER_CANCELED);
+                request.setAttribute("message", "driver.canceled");
             }else {
-                request.setAttribute("message", Messages.DRIVER_NOT_ASSIGNED);
+                request.setAttribute("message", "driver.not.assigned");
             }
-        return PathJSP.INDEX_PAGE;
+        return "index.jsp";
     }
 }

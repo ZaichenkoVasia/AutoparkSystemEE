@@ -3,7 +3,6 @@ package controller.command.impl;
 import controller.command.Command;
 import controller.exception.ServiceLayerException;
 import controller.service.RouteService;
-import controller.constants.PathJSP;
 import domain.Route;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +20,6 @@ public class EditRouteCommand implements Command {
         String idRoute = request.getParameter("idRoute");
         Route route = routeService.getElementById(Integer.parseInt(idRoute));
         request.setAttribute("route", route);
-        return PathJSP.ADD_EDIT_ROUTE_PAGE;
+        return "WEB-INF/jsp/editing_pages/add_route.jsp";
     }
 }

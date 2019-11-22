@@ -1,8 +1,6 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.Messages;
-import controller.constants.PathJSP;
 import controller.exception.ServiceLayerException;
 import controller.exception.WrongInputDataException;
 import controller.service.BusStationService;
@@ -30,15 +28,15 @@ public class SaveBusCommand implements Command {
         try {
             Bus bus = new BusDataCollector().retrieveData(request);
             if (busStationService.saveBus(bus, bus.getSchedule(), idBus, idSchedule)){
-                request.setAttribute("message", Messages.BUS_SAVED);
+                request.setAttribute("message", "bus.saved");
             }else {
-                request.setAttribute("message", Messages.BUS_UPDATED);
+                request.setAttribute("message", "bus.updated");
             }
         } catch (WrongInputDataException e) {
             logger.warn("Incorrect input data", e);
-            request.setAttribute("message", Messages.INPUT_ERROR);
-            return PathJSP.ADD_EDIT_BUS_PAGE;
+            request.setAttribute("message", "input.error");
+            return "WEB-INF/jsp/editing_pages/add_bus.jsp";
         }
-        return PathJSP.INDEX_PAGE;
+        return "index.jsp";
     }
 }

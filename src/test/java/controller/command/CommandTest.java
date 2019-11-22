@@ -36,8 +36,8 @@
 //
 //    @Test
 //    public void execute() throws ServiceLayerException, WrongInputDataException {
-//        when(command.execute(request, response)).thenReturn(PathJSP.INDEX_PAGE);
-//        assertEquals(PathJSP.INDEX_PAGE, command.execute(request, response));
+//        when(command.execute(request, response)).thenReturn("index.jsp");
+//        assertEquals("index.jsp", command.execute(request, response));
 //        assertNotNull(command.execute(request, response));
 //        verify(command, atLeast(1)).execute(request, response);
 //    }
