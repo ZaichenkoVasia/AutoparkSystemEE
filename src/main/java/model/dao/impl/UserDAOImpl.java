@@ -22,7 +22,7 @@ public class UserDAOImpl extends AbstractGenericDAO<User> implements UserDAO {
     }
 
     @Override
-    protected User parseToOneElement(ResultSet resultSet) throws SQLException {
+    protected User parseToOne(ResultSet resultSet) throws SQLException {
         return new User.UserBuilder()
                 .setId(resultSet.getInt("user.iduser"))
                 .setLogin(resultSet.getString("user.login"))
@@ -32,22 +32,22 @@ public class UserDAOImpl extends AbstractGenericDAO<User> implements UserDAO {
     }
 
     @Override
-    protected void setInsertElementProperties(PreparedStatement statement, User element) throws SQLException {
+    protected void setInsertProperties(PreparedStatement statement, User element) throws SQLException {
         statement.setString(1, element.getLogin());
         statement.setString(2, element.getPassword());
         statement.setString(3, "driver");
     }
 
     @Override
-    protected void setUpdateElementProperties(PreparedStatement statement, User element) throws SQLException {
-        setInsertElementProperties(statement, element);
+    protected void setUpdateProperties(PreparedStatement statement, User element) throws SQLException {
+        setInsertProperties(statement, element);
         statement.setInt(4, element.getId());
     }
 
     //TODO change methods
     @Override
     public User findUserByLoginData(User user) {
-        return super.getElementByStringParam(user.getLogin(), FIND_USER_BY_LOGIN);
+        return super.getByStringParam(user.getLogin(), FIND_USER_BY_LOGIN);
     }
 
 
@@ -58,17 +58,17 @@ public class UserDAOImpl extends AbstractGenericDAO<User> implements UserDAO {
 
     @Override
     public User getElementById(Integer id) {
-        return super.getElementByIntegerParam(id, FIND_BY_ID);
+        return super.getByIntegerParam(id, FIND_BY_ID);
     }
 
     @Override
     public void deleteElement(Integer id) {
-        super.deleteElement(id, DELETE_BY_ID);
+        super.delete(id, DELETE_BY_ID);
     }
 
     @Override
     public void updateElement(User element) {
-        super.updateElement(element, UPDATE_BY_ID);
+        super.update(element, UPDATE_BY_ID);
     }
 
     @Override

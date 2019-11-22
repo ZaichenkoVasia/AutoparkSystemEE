@@ -35,7 +35,7 @@ h2 {
 }
 
 .site-header{
-    background: #337b8f;
+    background: #ff5317;
     color: #8eabde;
     padding: 10px 30px;
     box-shadow: 0 2px 1px #32b2bc;
@@ -51,7 +51,7 @@ h2 {
 
 #main-menu{
     float: right;
-    background: #337b8f;
+    background: #ff5317;
 }
 
 #main-menu ul{
@@ -79,7 +79,7 @@ h2 {
 #footer-site {
     padding-bottom: 5px;
     padding-top: 5px;
-    background-color: #337b8f;
+    background-color: #ff5317;
     color: #ffffff;
     text-align: center;
 }

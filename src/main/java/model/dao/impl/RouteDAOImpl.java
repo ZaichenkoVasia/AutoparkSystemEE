@@ -5,7 +5,6 @@ import model.dao.AbstractGenericDAO;
 import model.dao.RouteDAO;
 import model.dao.connection.PoolConection;
 import model.dao.constants.Constants;
-import model.dao.constants.ExceptionMessages;
 import model.exception.DAOException;
 
 import java.sql.Connection;
@@ -30,7 +29,7 @@ public class RouteDAOImpl extends AbstractGenericDAO<Route> implements RouteDAO 
     }
 
     @Override
-    protected Route parseToOneElement(ResultSet resultSet) throws SQLException {
+    protected Route parseToOne(ResultSet resultSet) throws SQLException {
         return new Route.RouteBuilder()
                 .setId(resultSet.getInt("idroute"))
                 .setNumber(resultSet.getString("route_number"))
@@ -43,7 +42,7 @@ public class RouteDAOImpl extends AbstractGenericDAO<Route> implements RouteDAO 
     }
 
     @Override
-    protected void setInsertElementProperties(PreparedStatement statement, Route element) throws SQLException {
+    protected void setInsertProperties(PreparedStatement statement, Route element) throws SQLException {
         statement.setString(1, element.getNumber());
         statement.setString(2, element.getTitle());
         statement.setInt(3, element.getDistance());
@@ -52,24 +51,54 @@ public class RouteDAOImpl extends AbstractGenericDAO<Route> implements RouteDAO 
     }
 
     @Override
-    protected void setUpdateElementProperties(PreparedStatement statement, Route element) throws SQLException {
-        setInsertElementProperties(statement, element);
+    protected void setUpdateProperties(PreparedStatement statement, Route element) throws SQLException {
+        setInsertProperties(statement, element);
         statement.setInt(6, element.getId());
     }
 
     @Override
     public void setStatusEmpty(Integer idRoute) throws DAOException {
-        super.updateElementFieldByIntegerParam(idRoute, Constants.STATUS_EMPTY, UPDATE_BY_STATUS);
+        super.updateFieldByIntegerParam(idRoute, Constants.STATUS_EMPTY, UPDATE_BY_STATUS);
     }
 
     @Override
     public void setStatusWork(Integer idRoute) throws DAOException {
-        super.updateElementFieldByIntegerParam(idRoute, Constants.STATUS_WORK, UPDATE_BY_STATUS);
+        super.updateFieldByIntegerParam(idRoute, Constants.STATUS_WORK, UPDATE_BY_STATUS);
     }
 
     @Override
     public void cancelAll(Integer idRoute) throws DAOException {
-        updateElementByIntegerParam(idRoute, CANSEL_ALL);
+        updateByIntegerParam(idRoute, CANSEL_ALL);
+    }
+
+    @Override
+    public Integer insertElement(Route element) {
+        return super.insert(element, INSERT);
+    }
+
+    @Override
+    public Route getElementById(Integer id) {
+        return super.getByIntegerParam(id, FIND_BY_ID);
+    }
+
+    @Override
+    public void deleteElement(Integer id) {
+        super.delete(id, DELETE);
+    }
+
+    @Override
+    public void updateElement(Route element) {
+        super.update(element, UPDATE);
+    }
+
+    @Override
+    public Integer getElementsCount() {
+        return getCount(COUNT);
+    }
+
+    @Override
+    public List<Route> getPaginatedList(int startIdx, int amountElements) {
+        return getPaginatedList(startIdx, amountElements, FIND_ALL);
     }
 
     @Override
@@ -82,42 +111,12 @@ public class RouteDAOImpl extends AbstractGenericDAO<Route> implements RouteDAO 
             statement.setString(1, departure + Constants.LIKE);
             statement.setString(2, arrival + Constants.LIKE);
             resultSet = statement.executeQuery();
-            list = parseAllElements(resultSet);
+            list = parseAll(resultSet);
         } catch (SQLException e) {
-            LOGGER.error(ExceptionMessages.CAN_NOT_FOUND_ROUTES_BY_CRITERIA, e);
-            throw new DAOException(ExceptionMessages.CAN_NOT_FOUND_ROUTES_BY_CRITERIA, e);
+            LOGGER.error("Can't execute method searchByCriteria", e);
+            throw new DAOException("Can't execute method searchByCriteria", e);
         }
         LOGGER.info("Returning list of routes according to criteria");
         return list;
-    }
-
-    @Override
-    public Integer insertElement(Route element) {
-        return super.insert(element, INSERT);
-    }
-
-    @Override
-    public Route getElementById(Integer id) {
-        return super.getElementByIntegerParam(id, FIND_BY_ID);
-    }
-
-    @Override
-    public void deleteElement(Integer id) {
-        super.deleteElement(id, DELETE);
-    }
-
-    @Override
-    public void updateElement(Route element) {
-        super.updateElement(element, UPDATE);
-    }
-
-    @Override
-    public Integer getElementsCount() {
-        return getElementCount(COUNT);
-    }
-
-    @Override
-    public List<Route> getPaginatedList(int startIdx, int amountElements) {
-        return getPaginatedList(startIdx, amountElements, FIND_ALL);
     }
 }

@@ -22,7 +22,7 @@ public class AdminDAOImpl extends AbstractGenericDAO<Admin> implements AdminDAO 
     }
 
     @Override
-    protected Admin parseToOneElement(ResultSet resultSet) throws SQLException {
+    protected Admin parseToOne(ResultSet resultSet) throws SQLException {
         return new Admin.AdminBuilder()
                 .setId(resultSet.getInt("admin.idadmin"))
                 .setName(resultSet.getString("admin.name"))
@@ -39,7 +39,7 @@ public class AdminDAOImpl extends AbstractGenericDAO<Admin> implements AdminDAO 
     }
 
     @Override
-    protected void setInsertElementProperties(PreparedStatement statement, Admin element) throws SQLException {
+    protected void setInsertProperties(PreparedStatement statement, Admin element) throws SQLException {
         statement.setString(1, element.getName());
         statement.setString(2, element.getSurname());
         statement.setDate(3, element.getBirth());
@@ -49,14 +49,14 @@ public class AdminDAOImpl extends AbstractGenericDAO<Admin> implements AdminDAO 
     }
 
     @Override
-    protected void setUpdateElementProperties(PreparedStatement statement, Admin element) throws SQLException {
-        setInsertElementProperties(statement, element);
+    protected void setUpdateProperties(PreparedStatement statement, Admin element) throws SQLException {
+        setInsertProperties(statement, element);
         statement.setInt(7, element.getId());
     }
 
     @Override
     public Admin getAdminByUserId(Integer idUser) {
-        return super.getElementByIntegerParam(idUser, FIND_ADMIN_BY_ID);
+        return super.getByIntegerParam(idUser, FIND_ADMIN_BY_ID);
     }
 
 
@@ -67,7 +67,7 @@ public class AdminDAOImpl extends AbstractGenericDAO<Admin> implements AdminDAO 
 
     @Override
     public Admin getElementById(Integer id) {
-        return super.getElementByIntegerParam(id, FIND_ADMIN_BY_ID);
+        return super.getByIntegerParam(id, FIND_ADMIN_BY_ID);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class AdminDAOImpl extends AbstractGenericDAO<Admin> implements AdminDAO 
 
     @Override
     public void updateElement(Admin element) {
-        super.updateElement(element, UPDATE_ADMIN_BY_ID);
+        super.update(element, UPDATE_ADMIN_BY_ID);
     }
 
     @Override

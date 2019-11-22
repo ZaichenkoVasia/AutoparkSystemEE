@@ -21,7 +21,7 @@ public class ScheduleDAOImpl extends AbstractGenericDAO<Schedule> implements Sch
     }
 
     @Override
-    protected Schedule parseToOneElement(ResultSet resultSet) throws SQLException {
+    protected Schedule parseToOne(ResultSet resultSet) throws SQLException {
         return new Schedule.ScheduleBuilder()
                 .setId(resultSet.getInt("schedule.idschedule"))
                 .setDeparture(resultSet.getString("schedule.departure"))
@@ -30,14 +30,14 @@ public class ScheduleDAOImpl extends AbstractGenericDAO<Schedule> implements Sch
     }
 
     @Override
-    protected void setInsertElementProperties(PreparedStatement statement, Schedule element) throws SQLException {
+    protected void setInsertProperties(PreparedStatement statement, Schedule element) throws SQLException {
         statement.setString(1, element.getDeparture());
         statement.setString(2, element.getArrival());
     }
 
     @Override
-    protected void setUpdateElementProperties(PreparedStatement statement, Schedule element) throws SQLException {
-        setInsertElementProperties(statement, element);
+    protected void setUpdateProperties(PreparedStatement statement, Schedule element) throws SQLException {
+        setInsertProperties(statement, element);
         statement.setInt(3, element.getId());
     }
 
@@ -49,7 +49,7 @@ public class ScheduleDAOImpl extends AbstractGenericDAO<Schedule> implements Sch
 
     @Override
     public Schedule getElementById(Integer id) throws DAOException {
-        return getElementByIntegerParam(id, FIND_BY_ID);
+        return getByIntegerParam(id, FIND_BY_ID);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ScheduleDAOImpl extends AbstractGenericDAO<Schedule> implements Sch
 
     @Override
     public void updateElement(Schedule element) throws DAOException {
-        super.updateElement(element, UPDATE_BY_ID);
+        super.update(element, UPDATE_BY_ID);
     }
 
     @Override

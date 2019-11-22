@@ -9,6 +9,14 @@
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" type="text/css" href="../../../style/main.css">
+    <style>
+        .banner {
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url("../../../img/background.jpg");
+        }
+    </style>
 </head>
 <body>
 <header class="site-header clearfix">

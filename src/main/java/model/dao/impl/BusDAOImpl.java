@@ -7,7 +7,6 @@ import model.dao.AbstractGenericDAO;
 import model.dao.BusDAO;
 import model.dao.connection.PoolConection;
 import model.dao.constants.Constants;
-import model.dao.constants.ExceptionMessages;
 import model.exception.DAOException;
 
 import java.sql.Connection;
@@ -35,7 +34,7 @@ public class BusDAOImpl extends AbstractGenericDAO<Bus> implements BusDAO {
     }
 
     @Override
-    protected Bus parseToOneElement(ResultSet resultSet) throws SQLException {
+    protected Bus parseToOne(ResultSet resultSet) throws SQLException {
         return new Bus.BusBuilder()
                 .setId(resultSet.getInt("bus.idbus"))
                 .setPlate(resultSet.getString("bus.plate"))
@@ -58,7 +57,7 @@ public class BusDAOImpl extends AbstractGenericDAO<Bus> implements BusDAO {
     }
 
     @Override
-    protected void setInsertElementProperties(PreparedStatement statement, Bus element) throws SQLException {
+    protected void setInsertProperties(PreparedStatement statement, Bus element) throws SQLException {
         statement.setString(1, element.getPlate());
         statement.setString(2, element.getModel());
         statement.setInt(3, element.getMileage());
@@ -70,14 +69,14 @@ public class BusDAOImpl extends AbstractGenericDAO<Bus> implements BusDAO {
     }
 
     @Override
-    protected void setUpdateElementProperties(PreparedStatement statement, Bus element) throws SQLException {
-        setInsertElementProperties(statement, element);
+    protected void setUpdateProperties(PreparedStatement statement, Bus element) throws SQLException {
+        setInsertProperties(statement, element);
         statement.setInt(9, element.getId());
     }
 
     @Override
     public Integer countBusesOnRouteById(Integer idRoute)  {
-        return getElementCountByIntegerParam(idRoute, COUNT_BY_ROUTE);
+        return getCountByIntegerParam(idRoute, COUNT_BY_ROUTE);
     }
 
     @Override
@@ -97,22 +96,22 @@ public class BusDAOImpl extends AbstractGenericDAO<Bus> implements BusDAO {
 
     @Override
     public Bus getElementById(Integer id) {
-        return getElementByIntegerParam(id, FIND_BY_ID);
+        return getByIntegerParam(id, FIND_BY_ID);
     }
 
     @Override
     public void deleteElement(Integer id) {
-        super.deleteElement(id, DELETE);
+        super.delete(id, DELETE);
     }
 
     @Override
     public void updateElement(Bus element) {
-        super.updateElement(element, UPDATE);
+        super.update(element, UPDATE);
     }
 
     @Override
     public Integer getElementsCount() {
-        return super.getElementCount(COUNT_ALL);
+        return super.getCount(COUNT_ALL);
     }
 
     @Override
@@ -130,8 +129,8 @@ public class BusDAOImpl extends AbstractGenericDAO<Bus> implements BusDAO {
             statement.setInt(3, idBus);
             statement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error(ExceptionMessages.CAN_NOT_CANCEL_BUS_FROM_ROUTE, e);
-            throw new DAOException(ExceptionMessages.CAN_NOT_CANCEL_BUS_FROM_ROUTE, e);
+            LOGGER.error("Can't execute method cancelBusFromRoute", e);
+            throw new DAOException("Can't execute method cancelBusFromRoute", e);
         }
         LOGGER.info("Bus canceled");
     }
@@ -147,8 +146,8 @@ public class BusDAOImpl extends AbstractGenericDAO<Bus> implements BusDAO {
             statement.setInt(4, idBus);
             statement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error(ExceptionMessages.CAN_NOT_APPOINT_BUS_TO_ROUTE, e);
-            throw new DAOException(ExceptionMessages.CAN_NOT_APPOINT_BUS_TO_ROUTE, e);
+            LOGGER.error("Can't execute method appointBusToRoute", e);
+            throw new DAOException("Can't execute method appointBusToRoute", e);
         }
         LOGGER.info("Bus assigned to route");
     }

@@ -7,7 +7,6 @@ import model.dao.AbstractGenericDAO;
 import model.dao.DriverDAO;
 import model.dao.connection.PoolConection;
 import model.dao.constants.Constants;
-import model.dao.constants.ExceptionMessages;
 import model.exception.DAOException;
 
 import java.sql.Connection;
@@ -36,7 +35,7 @@ public class DriverDAOImpl extends AbstractGenericDAO<Driver> implements DriverD
     }
 
     @Override
-    protected Driver parseToOneElement(ResultSet resultSet) throws SQLException {
+    protected Driver parseToOne(ResultSet resultSet) throws SQLException {
         return new Driver.DriverBuilder()
                 .setId(resultSet.getInt("driver.iddriver"))
                 .setName(resultSet.getString("driver.name"))
@@ -57,7 +56,7 @@ public class DriverDAOImpl extends AbstractGenericDAO<Driver> implements DriverD
     }
 
     @Override
-    protected void setInsertElementProperties(PreparedStatement statement, Driver element) throws SQLException {
+    protected void setInsertProperties(PreparedStatement statement, Driver element) throws SQLException {
         statement.setString(1, element.getName());
         statement.setString(2, element.getSurname());
         statement.setDate(3, element.getBirth());
@@ -67,34 +66,34 @@ public class DriverDAOImpl extends AbstractGenericDAO<Driver> implements DriverD
     }
 
     @Override
-    protected void setUpdateElementProperties(PreparedStatement statement, Driver element) throws SQLException {
-        setInsertElementProperties(statement, element);
+    protected void setUpdateProperties(PreparedStatement statement, Driver element) throws SQLException {
+        setInsertProperties(statement, element);
         statement.setInt(7, element.getId());
     }
 
     @Override
     public Driver getDriverByUserId(Integer idUser) {
-        return super.getElementByIntegerParam(idUser, FIND_BY_USER_ID);
+        return super.getByIntegerParam(idUser, FIND_BY_USER_ID);
     }
 
     @Override
     public Driver getDriverByBusId(Integer idBus) {
-        return super.getElementByIntegerParam(idBus, FIND_BY_BUS_ID);
+        return super.getByIntegerParam(idBus, FIND_BY_BUS_ID);
     }
 
     @Override
     public void setStatusNew(Integer idDriver) {
-        updateElementFieldByIntegerParam(idDriver, Constants.STATUS_NEW, UPDATE_STATUS_BY_ID);
+        updateFieldByIntegerParam(idDriver, Constants.STATUS_NEW, UPDATE_STATUS_BY_ID);
     }
 
     @Override
     public void setStatusWork(Integer idDriver) {
-        updateElementFieldByIntegerParam(idDriver, Constants.STATUS_WORK, UPDATE_STATUS_BY_ID);
+        updateFieldByIntegerParam(idDriver, Constants.STATUS_WORK, UPDATE_STATUS_BY_ID);
     }
 
     @Override
     public void cancelDriverFromBus(Integer idBus) {
-        updateElementFieldByIntegerParam(idBus, Constants.STATUS_WORK, CANSEL_DRIVER);
+        updateFieldByIntegerParam(idBus, Constants.STATUS_NEW, CANSEL_DRIVER);
     }
 
     @Override
@@ -110,22 +109,22 @@ public class DriverDAOImpl extends AbstractGenericDAO<Driver> implements DriverD
 
     @Override
     public Driver getElementById(Integer id) {
-        return super.getElementByIntegerParam(id, FIND_BY_ID);
+        return super.getByIntegerParam(id, FIND_BY_ID);
     }
 
     @Override
     public void deleteElement(Integer id) {
-        super.deleteElement(id, DELETE);
+        super.delete(id, DELETE);
     }
 
     @Override
     public void updateElement(Driver element) {
-        super.updateElement(element, UPDATE);
+        super.update(element, UPDATE);
     }
 
     @Override
     public Integer getElementsCount() {
-        return super.getElementCount(COUNT);
+        return super.getCount(COUNT);
     }
 
     @Override
@@ -142,8 +141,8 @@ public class DriverDAOImpl extends AbstractGenericDAO<Driver> implements DriverD
             statement.setInt(2, idDriver);
             statement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error(ExceptionMessages.CAN_NOT_UPDATE_BUS_INFO_FOR_DRIVER, e);
-            throw new DAOException(ExceptionMessages.CAN_NOT_UPDATE_BUS_INFO_FOR_DRIVER, e);
+            LOGGER.error("Can't execute method updateBusInfoForDriver", e);
+            throw new DAOException("Can't execute method updateBusInfoForDriver", e);
         }
         LOGGER.info("New bus assigned");
     }

@@ -14,12 +14,5 @@
     </div>
 </footer>
 </body>
-<style>
-    .banner {
-        background: url("../../../img/background.jpg") center center /cover;
-        background-size: 100%;
-        background-repeat: no-repeat;
-    }
-</style>
 </html>
 

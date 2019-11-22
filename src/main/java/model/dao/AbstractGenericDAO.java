@@ -24,7 +24,7 @@ public abstract class AbstractGenericDAO<E> {
         LOGGER.info("Inserting element");
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-            setInsertElementProperties(statement, element);
+            setInsertProperties(statement, element);
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -38,28 +38,13 @@ public abstract class AbstractGenericDAO<E> {
         return null;
     }
 
-    protected E getElementByIntegerParam(Integer id, String query) {
+    protected E getByIntegerParam(Integer data, String query) {
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, id);
+            statement.setInt(1, data);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return parseToOneElement(resultSet);
-            }
-        } catch (SQLException e) {
-            LOGGER.error("Can not get element", e);
-            throw new DAOException("Can not get element", e);
-        }
-        return null;
-    }
- //TODO change to generic
-    protected E getElementByStringParam(String data, String query) {
-        try (Connection connection = connector.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, data);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return parseToOneElement(resultSet);
+                return parseToOne(resultSet);
             }
         } catch (SQLException e) {
             LOGGER.error("Can not get element", e);
@@ -68,12 +53,26 @@ public abstract class AbstractGenericDAO<E> {
         return null;
     }
 
-    //Change name method
-    protected void updateElementFieldByIntegerParam(Integer id, String data, String query) {
+    protected E getByStringParam(String data, String query) {
+        try (Connection connection = connector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, data);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return parseToOne(resultSet);
+            }
+        } catch (SQLException e) {
+            LOGGER.error("Can not get element", e);
+            throw new DAOException("Can not get element", e);
+        }
+        return null;
+    }
+
+    protected void updateFieldByIntegerParam(Integer dataInt, String data, String query) {
         try (Connection connection = connector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, data);
-            preparedStatement.setInt(2, id);
+            preparedStatement.setInt(2, dataInt);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Can not update element", e);
@@ -81,10 +80,10 @@ public abstract class AbstractGenericDAO<E> {
         }
     }
 
-    protected void updateElementByIntegerParam(Integer id, String query) {
+    protected void updateByIntegerParam(Integer dataInt, String query) {
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, id);
+            statement.setInt(1, dataInt);
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Can not update element", e);
@@ -92,10 +91,10 @@ public abstract class AbstractGenericDAO<E> {
         }
     }
 
-    protected void updateElement(E entity, String query) {
+    protected void update(E entity, String query) {
         try (Connection connection = connector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            setUpdateElementProperties(preparedStatement, entity);
+            setUpdateProperties(preparedStatement, entity);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Can not update element", e);
@@ -103,10 +102,10 @@ public abstract class AbstractGenericDAO<E> {
         }
     }
 
-    protected void deleteElement(int id, String query) {
+    protected void delete(int dataInt, String query) {
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, id);
+            statement.setInt(1, dataInt);
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Can not delete element", e);
@@ -115,7 +114,7 @@ public abstract class AbstractGenericDAO<E> {
         LOGGER.info("Element was deleted from database");
     }
 
-    protected Integer getElementCount(String query) {
+    protected Integer getCount(String query) {
         LOGGER.info("Getting amount of element");
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
@@ -131,13 +130,13 @@ public abstract class AbstractGenericDAO<E> {
         return null;
     }
 
-    protected Integer getElementCountByIntegerParam(Integer id, String query) {
+    protected Integer getCountByIntegerParam(Integer dataInt, String query) {
         LOGGER.info("Counting");
         ResultSet resultSet = null;
         Integer res = null;
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, id);
+            statement.setInt(1, dataInt);
             resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 res = resultSet.getInt(Constants.ELEMENTS_COUNT);
@@ -157,7 +156,7 @@ public abstract class AbstractGenericDAO<E> {
             statement.setInt(1, startIdx);
             statement.setInt(2, amountElements);
             resultSet = statement.executeQuery();
-            list = parseAllElements(resultSet);
+            list = parseAll(resultSet);
         } catch (SQLException e) {
             LOGGER.error("Can not get paganation list", e);
             throw new DAOException("Can not get paganation list", e);
@@ -165,15 +164,15 @@ public abstract class AbstractGenericDAO<E> {
         return list;
     }
 
-    protected List<E> getListByIntegerParam(Integer id, String query) {
+    protected List<E> getListByIntegerParam(Integer dataInt, String query) {
         LOGGER.info("Getting");
         ResultSet resultSet = null;
         List<E> list;
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, id);
+            statement.setInt(1, dataInt);
             resultSet = statement.executeQuery();
-            list = parseAllElements(resultSet);
+            list = parseAll(resultSet);
         } catch (SQLException e) {
             LOGGER.error("Can not get list element", e);
             throw new DAOException("Can not get list element", e);
@@ -189,7 +188,7 @@ public abstract class AbstractGenericDAO<E> {
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, data);
             resultSet = statement.executeQuery();
-            list = parseAllElements(resultSet);
+            list = parseAll(resultSet);
         } catch (SQLException e) {
             LOGGER.error("Can not get list element", e);
             throw new DAOException("Can not get list element", e);
@@ -198,11 +197,11 @@ public abstract class AbstractGenericDAO<E> {
         return list;
     }
 
-    protected List<E> parseAllElements(ResultSet resultSet) {
+    protected List<E> parseAll(ResultSet resultSet) {
         List<E> elements = new ArrayList<>();
         try {
             while (resultSet.next()) {
-                elements.add(parseToOneElement(resultSet));
+                elements.add(parseToOne(resultSet));
             }
         } catch (SQLException e) {
             LOGGER.error("Can not parse elements", e);
@@ -211,9 +210,9 @@ public abstract class AbstractGenericDAO<E> {
         return elements;
     }
 
-    protected abstract void setInsertElementProperties(PreparedStatement statement, E element) throws SQLException;
+    protected abstract void setInsertProperties(PreparedStatement statement, E element) throws SQLException;
 
-    protected abstract void setUpdateElementProperties(PreparedStatement statement, E element) throws SQLException;
+    protected abstract void setUpdateProperties(PreparedStatement statement, E element) throws SQLException;
 
-    protected abstract E parseToOneElement(ResultSet resultSet) throws SQLException;
+    protected abstract E parseToOne(ResultSet resultSet) throws SQLException;
 }

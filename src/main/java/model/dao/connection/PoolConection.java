@@ -1,6 +1,5 @@
 package model.dao.connection;
 
-import model.dao.constants.ExceptionMessages;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
 
@@ -31,7 +30,7 @@ public class PoolConection {
                 basicDataSource.setMaxOpenPreparedStatements(Integer.parseInt(dbConfig.getString("maxOpenPreparedStatements")));
                 dataSource = basicDataSource;
             } catch (Exception e) {
-                logger.warn(ExceptionMessages.CAN_NOT_INSTANTIATE_CONNECTION_POOL, e);
+                logger.warn("Can't create connection pool instance", e);
             }
         }
     }
@@ -41,7 +40,7 @@ public class PoolConection {
         try {
             return dataSource.getConnection();
         } catch (SQLException e) {
-            logger.error(ExceptionMessages.CAN_NOT_ESTABLISH_CONNECTION, e);
+            logger.error("Can't execute method getConnection", e);
             throw e;
         }
     }
