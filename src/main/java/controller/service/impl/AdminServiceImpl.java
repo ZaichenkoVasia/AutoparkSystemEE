@@ -1,6 +1,5 @@
 package controller.service.impl;
 
-import controller.constants.LogMessages;
 import controller.service.AbstractGenericService;
 import controller.service.AdminService;
 import domain.Admin;
@@ -17,7 +16,7 @@ public class AdminServiceImpl extends AbstractGenericService<Admin> implements A
 
     @Override
     public Admin getAdminByUserId(Integer idUser) {
-        LOGGER.info(LogMessages.GETTING_ADMIN_BY_USER_ID);
+        LOGGER.info("Try to get admin info by user id");
         return adminDAO.getAdminByUserId(idUser);
     }
 }

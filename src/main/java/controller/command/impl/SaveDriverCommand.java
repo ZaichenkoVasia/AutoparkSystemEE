@@ -1,10 +1,8 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.FrontConstants;
 import controller.constants.Messages;
 import controller.constants.PathJSP;
-import controller.context.ApplicationContextInjector;
 import controller.exception.ServiceLayerException;
 import controller.exception.WrongInputDataException;
 import controller.service.BusStationService;
@@ -27,18 +25,18 @@ public class SaveDriverCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
         logger.info("Executing SaveDriverCommand");
-        String idDriver = request.getParameter(FrontConstants.DRIVER_ID);
-        String idUser = request.getParameter(FrontConstants.USER_ID);
+        String idDriver = request.getParameter("idDriver");
+        String idUser = request.getParameter("idUser");
         try {
             Driver driver = new DriverDataCollector().retrieveData(request);
             if (busStationService.saveDriver(driver, driver.getUser(), idDriver, idUser)) {
-                request.setAttribute(FrontConstants.MESSAGE, Messages.DRIVER_SAVED);
+                request.setAttribute("message", Messages.DRIVER_SAVED);
             } else {
-                request.setAttribute(FrontConstants.MESSAGE, Messages.DRIVER_UPDATED);
+                request.setAttribute("message", Messages.DRIVER_UPDATED);
             }
         } catch (WrongInputDataException e) {
             logger.warn("Incorrect input data", e);
-            request.setAttribute(FrontConstants.MESSAGE, Messages.INPUT_ERROR);
+            request.setAttribute("message", Messages.INPUT_ERROR);
             return PathJSP.ADD_EDIT_DRIVER_PAGE;
         }
         return PathJSP.INDEX_PAGE;

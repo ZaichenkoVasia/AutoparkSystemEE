@@ -1,6 +1,5 @@
 package controller.util.collectors.impl;
 
-import controller.constants.FrontConstants;
 import controller.exception.WrongInputDataException;
 import controller.util.collectors.DataCollector;
 import domain.Bus;
@@ -18,13 +17,13 @@ public class BusDataCollector extends DataCollector<Bus> {
     public Bus retrieveData(HttpServletRequest request) throws WrongInputDataException {
         logger.info("Retrieving bus data from request");
         int counter = 7;
-        String plate = request.getParameter(FrontConstants.PLATE);
-        String model = request.getParameter(FrontConstants.MODEL);
-        String mileage = request.getParameter(FrontConstants.MILEAGE);
-        String inspection = request.getParameter(FrontConstants.INSPECTION);
-        String consumption = request.getParameter(FrontConstants.CONSUMPTION);
-        String release = request.getParameter(FrontConstants.RELEASE);
-        String seats = request.getParameter(FrontConstants.SEATS);
+        String plate = request.getParameter("plate");
+        String model = request.getParameter("model");
+        String mileage = request.getParameter("mileage");
+        String inspection = request.getParameter("inspection");
+        String consumption = request.getParameter("consumption");
+        String release = request.getParameter("release");
+        String seats = request.getParameter("seats");
         Bus bus = new Bus();
         if (plate != null) {
             bus.setPlate(plate);
@@ -58,13 +57,13 @@ public class BusDataCollector extends DataCollector<Bus> {
             Schedule schedule = new ScheduleDataCollector().retrieveData(request);
             bus.setSchedule(schedule);
         } catch (WrongInputDataException e) {
-            bus.setSchedule((Schedule) request.getAttribute(FrontConstants.SCHEDULE));
-            request.setAttribute(FrontConstants.BUS, bus);
+            bus.setSchedule((Schedule) request.getAttribute("schedule"));
+            request.setAttribute("bus", bus);
             throw new WrongInputDataException(e);
         }
         if (counter != 0) {
             logger.warn("Not all input forms filled correctly");
-            request.setAttribute(FrontConstants.BUS, bus);
+            request.setAttribute("bus", bus);
             throw new WrongInputDataException("Not all input form filled correctly");
         }
         return bus;

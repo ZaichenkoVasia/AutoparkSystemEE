@@ -1,13 +1,10 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.FrontConstants;
 import controller.constants.Messages;
 import controller.constants.PathJSP;
-import controller.context.ApplicationContextInjector;
 import controller.exception.ServiceLayerException;
 import controller.service.BusStationService;
-import controller.service.impl.BusStationServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,9 +19,9 @@ public class DeleteRouteCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
-        Integer idRoute = Integer.valueOf(request.getParameter(FrontConstants.ROUTE_ID));
+        Integer idRoute = Integer.valueOf(request.getParameter("idRoute"));
         busStationService.deleteRoute(idRoute);
-        request.setAttribute(FrontConstants.MESSAGE, Messages.ROUTE_HAS_BEEN_DELETED);
+        request.setAttribute("message", Messages.ROUTE_HAS_BEEN_DELETED);
         return PathJSP.INDEX_PAGE;
     }
 }

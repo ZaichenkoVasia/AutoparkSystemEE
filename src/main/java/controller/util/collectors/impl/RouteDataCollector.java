@@ -1,6 +1,5 @@
 package controller.util.collectors.impl;
 
-import controller.constants.FrontConstants;
 import controller.exception.WrongInputDataException;
 import controller.util.collectors.DataCollector;
 import domain.Route;
@@ -16,11 +15,11 @@ public class RouteDataCollector extends DataCollector<Route> {
     public Route retrieveData(HttpServletRequest request) throws WrongInputDataException {
         logger.info("Retrieving route data from request");
         int counter = 5;
-        String number = request.getParameter(FrontConstants.NUMBER);
-        String title = request.getParameter(FrontConstants.TITLE);
-        String distance = request.getParameter(FrontConstants.DISTANCE);
-        String departure = request.getParameter(FrontConstants.DEPARTURE_CITY);
-        String arrival = request.getParameter(FrontConstants.ARRIVAL_CITY);
+        String number = request.getParameter("number");
+        String title = request.getParameter("title");
+        String distance = request.getParameter("distance");
+        String departure = request.getParameter("departure");
+        String arrival = request.getParameter("arrival");
         Route route = new Route();
         if (number != null){
             route.setNumber(number);
@@ -44,7 +43,7 @@ public class RouteDataCollector extends DataCollector<Route> {
         }
         if (counter != 0){
             logger.warn("Not all input forms filled correctly");
-            request.setAttribute(FrontConstants.ROUTE, route);
+            request.setAttribute("route", route);
             throw new WrongInputDataException("Not all input form filled correctly");
         }
         return route;

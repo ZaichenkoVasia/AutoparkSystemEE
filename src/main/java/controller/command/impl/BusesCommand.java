@@ -1,11 +1,8 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.FrontConstants;
-import controller.context.ApplicationContextInjector;
 import controller.exception.ServiceLayerException;
 import controller.service.BusService;
-import controller.service.ServiceFactory;
 import controller.service.pagination.Carriage;
 import controller.service.pagination.PaginationManager;
 import controller.constants.PathJSP;
@@ -25,14 +22,14 @@ public class BusesCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
-        String page = request.getParameter(FrontConstants.PAGE);
-        String lastPage = request.getParameter(FrontConstants.LAST_PAGE);
+        String page = request.getParameter("page");
+        String lastPage = request.getParameter("lastPage");
         PaginationManager<Bus> paginationManager = new PaginationManager<>();
-        Carriage carriage = paginationManager.getCarriage(page, lastPage, FrontConstants.AMOUNT_PER_PAGE, busService);
+        Carriage carriage = paginationManager.getCarriage(page, lastPage, "5", busService);
         List<Bus> buses = busService.getPaginatedList(carriage.getStartIdx(), carriage.getEntityAmount());
-        request.setAttribute(FrontConstants.LAST_PAGE, carriage.getLastPage());
-        request.setAttribute(FrontConstants.CURRENT_PAGE, carriage.getCurrentPage());
-        request.setAttribute(FrontConstants.LIST, buses);
+        request.setAttribute("lastPage", carriage.getLastPage());
+        request.setAttribute("currentPage", carriage.getCurrentPage());
+        request.setAttribute("list", buses);
         return PathJSP.BUSES_PAGE;
     }
 }

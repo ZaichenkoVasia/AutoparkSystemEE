@@ -1,11 +1,8 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.FrontConstants;
-import controller.context.ApplicationContextInjector;
 import controller.exception.ServiceLayerException;
 import controller.service.BusService;
-import controller.service.ServiceFactory;
 import controller.constants.PathJSP;
 import domain.Bus;
 
@@ -22,9 +19,9 @@ public class EditBusCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
-        String idBus = request.getParameter(FrontConstants.BUS_ID);
+        String idBus = request.getParameter("idBus");
         Bus bus = busService.getElementById(Integer.parseInt(idBus));
-        request.setAttribute(FrontConstants.BUS, bus);
+        request.setAttribute("bus", bus);
         return PathJSP.ADD_EDIT_BUS_PAGE;
     }
 }

@@ -1,11 +1,8 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.FrontConstants;
-import controller.context.ApplicationContextInjector;
 import controller.exception.ServiceLayerException;
 import controller.service.DriverService;
-import controller.service.ServiceFactory;
 import controller.constants.PathJSP;
 import domain.Driver;
 
@@ -22,9 +19,9 @@ public class EditDriverCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
-        Integer idDriver = Integer.valueOf(request.getParameter(FrontConstants.DRIVER_ID));
+        Integer idDriver = Integer.valueOf(request.getParameter("idDriver"));
         Driver driver = driverService.getElementById(idDriver);
-        request.setAttribute(FrontConstants.DRIVER, driver);
+        request.setAttribute("driver", driver);
         return PathJSP.ADD_EDIT_DRIVER_PAGE;
     }
 }

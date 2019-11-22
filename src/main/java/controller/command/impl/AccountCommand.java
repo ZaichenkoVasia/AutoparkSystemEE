@@ -1,11 +1,8 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.FrontConstants;
-import controller.context.ApplicationContextInjector;
 import controller.exception.ServiceLayerException;
 import controller.service.*;
-import controller.service.impl.BusStationServiceImpl;
 import controller.constants.PathJSP;
 import domain.*;
 import javax.servlet.http.HttpServletRequest;
@@ -25,17 +22,17 @@ public class AccountCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException{
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute(FrontConstants.USER);
+        User user = (User) session.getAttribute("user");
         if (user == null){
             return PathJSP.LOGIN_PAGE;
         }
-        if (user.getRole().equals(FrontConstants.ADMIN)){
+        if (user.getRole().equals("admin")){
             Admin admin = adminService.getAdminByUserId(user.getId());
-            request.setAttribute(FrontConstants.ADMIN, admin);
+            request.setAttribute("admin", admin);
             return PathJSP.ADMIN_ACCOUNT_PAGE;
         }else {
             Driver driver = busStationService.getDriverAccountDataByUserId(user.getId());
-            request.setAttribute(FrontConstants.DRIVER, driver);
+            request.setAttribute("driver", driver);
             return PathJSP.DRIVER_ACCOUNT_PAGE;
         }
     }

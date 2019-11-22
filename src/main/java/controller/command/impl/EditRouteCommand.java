@@ -1,11 +1,8 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.FrontConstants;
-import controller.context.ApplicationContextInjector;
 import controller.exception.ServiceLayerException;
 import controller.service.RouteService;
-import controller.service.ServiceFactory;
 import controller.constants.PathJSP;
 import domain.Route;
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +18,9 @@ public class EditRouteCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
-        String idRoute = request.getParameter(FrontConstants.ROUTE_ID);
+        String idRoute = request.getParameter("idRoute");
         Route route = routeService.getElementById(Integer.parseInt(idRoute));
-        request.setAttribute(FrontConstants.ROUTE, route);
+        request.setAttribute("route", route);
         return PathJSP.ADD_EDIT_ROUTE_PAGE;
     }
 }

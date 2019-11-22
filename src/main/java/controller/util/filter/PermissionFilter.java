@@ -1,6 +1,5 @@
 package controller.util.filter;
 
-import controller.constants.FrontConstants;
 import controller.util.filter.permission_list.DriverPermissions;
 import controller.util.filter.permission_list.UserPermissions;
 import domain.User;
@@ -25,7 +24,7 @@ public class PermissionFilter implements Filter {
             try {
                 if (user == null) {
                     UserPermissions.valueOf(command.toUpperCase());
-                } else if (user.getRole().equals(FrontConstants.DRIVER)) {
+                } else if (user.getRole().equals("driver")) {
                     DriverPermissions.valueOf(command.toUpperCase());
                 }
             } catch (IllegalArgumentException exc) {

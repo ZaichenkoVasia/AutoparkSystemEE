@@ -1,11 +1,8 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.FrontConstants;
 import controller.constants.Messages;
-import controller.context.ApplicationContextInjector;
 import controller.exception.ServiceLayerException;
-import controller.service.ServiceFactory;
 import controller.service.UserService;
 import controller.constants.PathJSP;
 import domain.User;
@@ -25,16 +22,16 @@ public class LoginCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
         HttpSession session = request.getSession();
         User user = new User.UserBuilder()
-                .setLogin(request.getParameter(FrontConstants.USER_LOGIN))
-                .setPassword(request.getParameter(FrontConstants.USER_PASSWORD))
+                .setLogin(request.getParameter("login"))
+                .setPassword(request.getParameter("password"))
                 .createUser();
         User existingUser = userService.findUserByLoginData(user);
         if (user.equals(existingUser)) {
-            session.setAttribute(FrontConstants.USER, existingUser);
+            session.setAttribute("user", existingUser);
             return PathJSP.INDEX_PAGE;
         }
-        request.setAttribute(FrontConstants.MESSAGE, Messages.USER_NOT_REGISTERED);
-        request.setAttribute(FrontConstants.USER, user);
+        request.setAttribute("message", Messages.USER_NOT_REGISTERED);
+        request.setAttribute("user", user);
         return PathJSP.LOGIN_PAGE;
     }
 }

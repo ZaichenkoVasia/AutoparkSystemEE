@@ -1,6 +1,5 @@
 package controller.service.impl;
 
-import controller.constants.LogMessages;
 import controller.service.AbstractGenericService;
 import controller.service.BusService;
 import domain.Bus;
@@ -19,7 +18,7 @@ public class BusServiceImpl extends AbstractGenericService<Bus> implements BusSe
 
     @Override
     public List<Bus> getFreeBuses() {
-        LOGGER.info(LogMessages.GET_FREE_BUSES);
+        LOGGER.info("Getting free buses");
         return busDAO.getFreeBuses();
     }
 

@@ -1,6 +1,5 @@
 package controller.util.collectors.impl;
 
-import controller.constants.FrontConstants;
 import controller.exception.WrongInputDataException;
 import controller.util.collectors.DataCollector;
 import domain.Schedule;
@@ -16,8 +15,8 @@ public class ScheduleDataCollector extends DataCollector<Schedule> {
     public Schedule retrieveData(HttpServletRequest request) throws WrongInputDataException {
         logger.info("Retrieving schedule data from request");
         int counter = 2;
-        String departure = request.getParameter(FrontConstants.DEPARTURE_TIME);
-        String arrival = request.getParameter(FrontConstants.ARRIVAL_TIME);
+        String departure = request.getParameter("departure");
+        String arrival = request.getParameter("arrival");
         Schedule schedule = new Schedule();
         if (departure != null) {
             schedule.setDeparture(departure);
@@ -29,7 +28,7 @@ public class ScheduleDataCollector extends DataCollector<Schedule> {
         }
         if (counter != 0) {
             logger.warn("Not all input forms filled correctly");
-            request.setAttribute(FrontConstants.SCHEDULE, schedule);
+            request.setAttribute("schedule", schedule);
             throw new WrongInputDataException("Not all input form filled correctly");
         }
         return schedule;

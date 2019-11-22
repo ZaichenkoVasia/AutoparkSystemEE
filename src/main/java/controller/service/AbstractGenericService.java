@@ -1,6 +1,5 @@
 package controller.service;
 
-import controller.constants.LogMessages;
 import controller.exception.ServiceLayerException;
 import model.dao.GenericDAO;
 import org.apache.log4j.Logger;
@@ -18,37 +17,37 @@ public abstract class AbstractGenericService<E> implements GenericService<E, Int
 
     @Override
     public Integer insertElement(E element) {
-        LOGGER.info(LogMessages.INSERTING_ELEMENT);
+        LOGGER.info("Inserting element");
         return genericDAO.insertElement(element);
     }
 
     @Override
     public void updateElement(E element) {
-        LOGGER.info(LogMessages.UPDATING_ELEMENT);
+        LOGGER.info("Updating element");
         genericDAO.updateElement(element);
     }
 
     @Override
     public E getElementById(Integer id) {
-        LOGGER.info(LogMessages.GETTING_ELEMENT_BY_ID);
+        LOGGER.info("Try to get element by id");
         return genericDAO.getElementById(id);
     }
 
     @Override
     public void deleteElement(Integer id) {
-        LOGGER.info(LogMessages.DELETING_ELEMENT);
+        LOGGER.info("Deleting element");
         genericDAO.deleteElement(id);
     }
 
     @Override
     public Integer getElementsAmount() throws ServiceLayerException {
-        LOGGER.info(LogMessages.GETTING_ELEMENTS_AMOUNT);
+        LOGGER.info("Getting elements amount");
         return genericDAO.getElementsCount();
     }
 
     @Override
     public List<E> getPaginatedList(int startIdx, int endIdx) throws ServiceLayerException {
-        LOGGER.info(LogMessages.GETTING_PAGINATED_LIST);
+        LOGGER.info("Getting paginated list");
         return genericDAO.getPaginatedList(startIdx, endIdx);
     }
 }

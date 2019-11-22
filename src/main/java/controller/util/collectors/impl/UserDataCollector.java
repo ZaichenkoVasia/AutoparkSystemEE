@@ -1,6 +1,5 @@
 package controller.util.collectors.impl;
 
-import controller.constants.FrontConstants;
 import controller.exception.WrongInputDataException;
 import controller.util.collectors.DataCollector;
 import domain.User;
@@ -16,8 +15,8 @@ public class UserDataCollector extends DataCollector<User> {
     public User retrieveData(HttpServletRequest request) throws WrongInputDataException {
         logger.info("Retrieving user data from request");
         int counter = 2;
-        String login = request.getParameter(FrontConstants.USER_LOGIN);
-        String password = request.getParameter(FrontConstants.USER_PASSWORD);
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
         User user = new User();
         if (login != null) {
             user.setLogin(login);
@@ -26,10 +25,10 @@ public class UserDataCollector extends DataCollector<User> {
         if (password != null) {
             user.setPassword(password);
             counter--;
-        }
+    }
         if (counter != 0) {
             logger.warn("Not all input forms filled correctly");
-            request.setAttribute(FrontConstants.USER, user);
+            request.setAttribute("user", user);
             throw new WrongInputDataException("Not all input form filled correctly");
         }
         return user;

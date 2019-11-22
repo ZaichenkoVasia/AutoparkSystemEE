@@ -1,14 +1,11 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.FrontConstants;
 import controller.constants.Messages;
 import controller.constants.PathJSP;
-import controller.context.ApplicationContextInjector;
 import controller.exception.ServiceLayerException;
 import controller.exception.WrongInputDataException;
 import controller.service.RouteService;
-import controller.service.ServiceFactory;
 import controller.util.collectors.impl.RouteDataCollector;
 import domain.Route;
 import org.apache.log4j.Logger;
@@ -28,20 +25,20 @@ public class SaveRouteCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
         logger.info("Executing SaveRouteCommand");
-        String idRoute = request.getParameter(FrontConstants.ROUTE_ID);
+        String idRoute = request.getParameter("idRoute");
         try {
             Route route = new RouteDataCollector().retrieveData(request);
             if (idRoute == null || idRoute.isEmpty()){
                 routeService.insertElement(route);
-                request.setAttribute(FrontConstants.MESSAGE, Messages.ROUTE_SAVED);
+                request.setAttribute("message", Messages.ROUTE_SAVED);
             }else {
                 route.setId(Integer.valueOf(idRoute));
                 routeService.updateElement(route);
-                request.setAttribute(FrontConstants.MESSAGE, Messages.ROUTE_UPDATED);
+                request.setAttribute("message", Messages.ROUTE_UPDATED);
             }
         } catch (WrongInputDataException e) {
             logger.warn("Incorrect input data.", e);
-            request.setAttribute(FrontConstants.MESSAGE, Messages.INPUT_ERROR);
+            request.setAttribute("message", Messages.INPUT_ERROR);
             return PathJSP.ADD_EDIT_ROUTE_PAGE;
         }
         return PathJSP.INDEX_PAGE;

@@ -1,13 +1,10 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.constants.FrontConstants;
 import controller.constants.Messages;
-import controller.context.ApplicationContextInjector;
 import controller.exception.ServiceLayerException;
 import controller.constants.PathJSP;
 import controller.service.BusService;
-import controller.service.ServiceFactory;
 import domain.Bus;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,14 +21,14 @@ public class BusesToAppointCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
-        String idRoute = request.getParameter(FrontConstants.ROUTE_ID);
+        String idRoute = request.getParameter("idRoute");
         List<Bus> buses = busService.getFreeBuses();
         if (buses.size() == 0){
-            request.setAttribute(FrontConstants.MESSAGE,Messages.NO_BUSES_TO_APPOINT);
+            request.setAttribute("message",Messages.NO_BUSES_TO_APPOINT);
             return PathJSP.INDEX_PAGE;
         }
-        request.setAttribute(FrontConstants.LIST, buses);
-        request.setAttribute(FrontConstants.ROUTE_ID, idRoute);
+        request.setAttribute("list", buses);
+        request.setAttribute("idRoute", idRoute);
         return PathJSP.FREE_BUSES_PAGE;
     }
 }
