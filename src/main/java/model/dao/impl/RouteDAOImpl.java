@@ -30,15 +30,15 @@ public class RouteDAOImpl extends AbstractGenericDAO<Route> implements RouteDAO 
 
     @Override
     protected Route parseToOne(ResultSet resultSet) throws SQLException {
-        return new Route.RouteBuilder()
-                .setId(resultSet.getInt("idroute"))
-                .setNumber(resultSet.getString("route_number"))
-                .setTitle(resultSet.getString("title"))
-                .setDistance(resultSet.getInt("distance"))
-                .setStatus(resultSet.getString("status"))
-                .setDeparture(resultSet.getString("departure"))
-                .setArrival(resultSet.getString("arrival"))
-                .createRoute();
+        return Route.builder()
+                .withId(resultSet.getInt("idroute"))
+                .withNumber(resultSet.getString("route_number"))
+                .withTitle(resultSet.getString("title"))
+                .withDistance(resultSet.getInt("distance"))
+                .withStatus(resultSet.getString("status"))
+                .withDeparture(resultSet.getString("departure"))
+                .withArrival(resultSet.getString("arrival"))
+                .build();
     }
 
     @Override

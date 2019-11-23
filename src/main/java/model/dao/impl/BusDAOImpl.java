@@ -35,25 +35,25 @@ public class BusDAOImpl extends AbstractGenericDAO<Bus> implements BusDAO {
 
     @Override
     protected Bus parseToOne(ResultSet resultSet) throws SQLException {
-        return new Bus.BusBuilder()
-                .setId(resultSet.getInt("bus.idbus"))
-                .setPlate(resultSet.getString("bus.plate"))
-                .setModel(resultSet.getString("bus.model"))
-                .setMileage(resultSet.getInt("bus.mileage"))
-                .setInspection(resultSet.getDate("bus.inspection"))
-                .setConsumption(resultSet.getInt("bus.consumption"))
-                .setRelease(resultSet.getDate("bus.release_date"))
-                .setSeats(resultSet.getInt("bus.seats"))
-                .setStatus(resultSet.getString("bus.status"))
-                .setRoute(new Route.RouteBuilder()
-                        .setId(resultSet.getInt("idroute"))
-                        .createRoute())
-                .setSchedule(new Schedule.ScheduleBuilder()
-                        .setId(resultSet.getInt("schedule.idschedule"))
-                        .setDeparture(resultSet.getString("schedule.departure"))
-                        .setArrival(resultSet.getString("schedule.arrival"))
-                        .createSchedule())
-                .createBus();
+        return Bus.builder()
+                .withId(resultSet.getInt("bus.idbus"))
+                .withPlate(resultSet.getString("bus.plate"))
+                .withModel(resultSet.getString("bus.model"))
+                .withMileage(resultSet.getInt("bus.mileage"))
+                .withInspection(resultSet.getDate("bus.inspection"))
+                .withConsumption(resultSet.getInt("bus.consumption"))
+                .withRelease(resultSet.getDate("bus.release_date"))
+                .withSeats(resultSet.getInt("bus.seats"))
+                .withStatus(resultSet.getString("bus.status"))
+                .withRoute(Route.builder()
+                        .withId(resultSet.getInt("idroute"))
+                        .build())
+                .withSchedule(Schedule.builder()
+                        .withId(resultSet.getInt("schedule.idschedule"))
+                        .withDeparture(resultSet.getString("schedule.departure"))
+                        .withArrival(resultSet.getString("schedule.arrival"))
+                        .build())
+                .build();
     }
 
     @Override

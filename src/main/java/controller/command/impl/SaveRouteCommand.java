@@ -13,11 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 
 public class SaveRouteCommand implements Command {
 
-    private RouteService routeService;
     private static final Logger logger = Logger.getLogger(SaveRouteCommand.class);
+    private RouteService routeService;
+    private RouteDataCollector routeDataCollector;
 
-    public SaveRouteCommand(RouteService routeService) {
+    public SaveRouteCommand(RouteService routeService, RouteDataCollector routeDataCollector) {
         this.routeService = routeService;
+        this.routeDataCollector = routeDataCollector;
     }
 
     @Override
@@ -25,12 +27,12 @@ public class SaveRouteCommand implements Command {
         logger.info("Executing SaveRouteCommand");
         String idRoute = request.getParameter("idRoute");
         try {
-            Route route = new RouteDataCollector().retrieveData(request);
+            Route route = routeDataCollector.retrieveData(request);
             if (idRoute == null || idRoute.isEmpty()){
                 routeService.insertElement(route);
                 request.setAttribute("message", "route.saved");
             }else {
-                route.setId(Integer.valueOf(idRoute));
+                route = new Route(route,Integer.valueOf(idRoute));
                 routeService.updateElement(route);
                 request.setAttribute("message", "route.updated");
             }

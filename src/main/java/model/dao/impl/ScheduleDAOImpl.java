@@ -22,11 +22,11 @@ public class ScheduleDAOImpl extends AbstractGenericDAO<Schedule> implements Sch
 
     @Override
     protected Schedule parseToOne(ResultSet resultSet) throws SQLException {
-        return new Schedule.ScheduleBuilder()
-                .setId(resultSet.getInt("schedule.idschedule"))
-                .setDeparture(resultSet.getString("schedule.departure"))
-                .setArrival(resultSet.getString("schedule.arrival"))
-                .createSchedule();
+        return Schedule.builder()
+                .withId(resultSet.getInt("schedule.idschedule"))
+                .withDeparture(resultSet.getString("schedule.departure"))
+                .withArrival(resultSet.getString("schedule.arrival"))
+                .build();
     }
 
     @Override

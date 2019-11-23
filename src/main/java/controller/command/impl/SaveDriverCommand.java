@@ -15,9 +15,11 @@ public class SaveDriverCommand implements Command {
 
     private static final Logger logger = Logger.getLogger(SaveDriverCommand.class);
     private BusStationService busStationService;
+    private DriverDataCollector driverDataCollector;
 
-    public SaveDriverCommand(BusStationService busStationService) {
+    public SaveDriverCommand(BusStationService busStationService, DriverDataCollector driverDataCollector) {
         this.busStationService = busStationService;
+        this.driverDataCollector = driverDataCollector;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class SaveDriverCommand implements Command {
         String idDriver = request.getParameter("idDriver");
         String idUser = request.getParameter("idUser");
         try {
-            Driver driver = new DriverDataCollector().retrieveData(request);
+            Driver driver = driverDataCollector.retrieveData(request);
             if (busStationService.saveDriver(driver, driver.getUser(), idDriver, idUser)) {
                 request.setAttribute("message", "driver.saved");
             } else {

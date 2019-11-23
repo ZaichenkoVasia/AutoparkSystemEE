@@ -13,11 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 
 public class SaveBusCommand implements Command {
 
-    private BusStationService busStationService;
     private static final Logger logger = Logger.getLogger(SaveBusCommand.class);
+    private BusStationService busStationService;
+    private BusDataCollector busDataCollector;
 
-    public SaveBusCommand(BusStationService busStationService) {
+    public SaveBusCommand(BusStationService busStationService, BusDataCollector busDataCollector) {
         this.busStationService = busStationService;
+        this.busDataCollector = busDataCollector;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class SaveBusCommand implements Command {
         String idBus = request.getParameter("idBus");
         String idSchedule = request.getParameter("idSchedule");
         try {
-            Bus bus = new BusDataCollector().retrieveData(request);
+            Bus bus = busDataCollector.retrieveData(request);
             if (busStationService.saveBus(bus, bus.getSchedule(), idBus, idSchedule)){
                 request.setAttribute("message", "bus.saved");
             }else {

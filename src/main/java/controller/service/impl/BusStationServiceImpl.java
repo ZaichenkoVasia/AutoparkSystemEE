@@ -32,10 +32,10 @@ public class BusStationServiceImpl implements BusStationService {
         Driver driver = driverService.getDriverByUserId(idUser);
         if (driver.getBus().getId() != 0) {
             Bus bus = busService.getElementById(driver.getBus().getId());
-            driver.setBus(bus);
+            driver = new Driver(driver, bus);
             if (bus.getStatus().equals("work")) {
                 Route route = routeService.getElementById(bus.getRoute().getId());
-                bus.setRoute(route);
+                bus = new Bus(bus, route);
             }
         }
         return driver;
@@ -121,12 +121,12 @@ public class BusStationServiceImpl implements BusStationService {
     public Boolean saveAdmin(Admin admin, User user, String idAdmin, String idUser) throws ServiceLayerException {
         LOGGER.info("Saving admin");
         if (idUser == null || idUser.isEmpty()) {
-            user.setId(userService.insertElement(user));
+            user = new User(user, userService.insertElement(user));
             adminService.insertElement(admin);
             return true;
         } else {
-            user.setId(Integer.valueOf(idUser));
-            admin.setId(Integer.valueOf(idAdmin));
+            user = new User(user, Integer.valueOf(idUser));
+            admin = new Admin(admin, Integer.valueOf(idAdmin));
             userService.updateElement(user);
             adminService.updateElement(admin);
             return false;
@@ -137,13 +137,15 @@ public class BusStationServiceImpl implements BusStationService {
     public Boolean saveDriver(Driver driver, User user, String idDriver, String idUser) throws ServiceLayerException {
         LOGGER.info("Saving driver");
         if (idUser == null || idUser.isEmpty()) {
-            user.setId(userService.insertElement(user));
+            user = new User(user, userService.insertElement(user));
+            driver = new Driver(driver, user);
             driverService.insertElement(driver);
             return true;
         } else {
-            user.setId(Integer.valueOf(idUser));
+            user = new User(user, Integer.valueOf(idUser));
             userService.updateElement(user);
-            driver.setId(Integer.valueOf(idDriver));
+            driver = new Driver(driver, user);
+            driver = new Driver(driver,Integer.valueOf(idDriver));
             driverService.updateElement(driver);
             return false;
         }
@@ -153,13 +155,15 @@ public class BusStationServiceImpl implements BusStationService {
     public Boolean saveBus(Bus bus, Schedule schedule, String idBus, String idSchedule) throws ServiceLayerException {
         LOGGER.info("Saving bus");
         if (idBus == null || idBus.isEmpty()) {
-            schedule.setId(scheduleService.insertElement(schedule));
+            schedule = new Schedule(schedule, scheduleService.insertElement(schedule));
+            bus = new Bus(bus, schedule);
             busService.insertElement(bus);
             return true;
         } else {
-            bus.setId(Integer.valueOf(idBus));
+            bus=new Bus(bus,Integer.valueOf(idBus));
+            schedule = new Schedule(schedule,Integer.valueOf(idSchedule));
+            bus = new Bus(bus, schedule);
             busService.updateElement(bus);
-            schedule.setId(Integer.valueOf(idSchedule));
             scheduleService.updateElement(schedule);
             return false;
         }

@@ -23,12 +23,12 @@ public class UserDAOImpl extends AbstractGenericDAO<User> implements UserDAO {
 
     @Override
     protected User parseToOne(ResultSet resultSet) throws SQLException {
-        return new User.UserBuilder()
-                .setId(resultSet.getInt("user.iduser"))
-                .setLogin(resultSet.getString("user.login"))
-                .setPassword(resultSet.getString("user.password"))
-                .setRole(resultSet.getString("user.role"))
-                .createUser();
+        return User.builder()
+                .withId(resultSet.getInt("user.iduser"))
+                .withLogin(resultSet.getString("user.login"))
+                .withPassword(resultSet.getString("user.password"))
+                .withRole(resultSet.getString("user.role"))
+                .build();
     }
 
     @Override
@@ -46,7 +46,7 @@ public class UserDAOImpl extends AbstractGenericDAO<User> implements UserDAO {
 
     //TODO change methods
     @Override
-    public User findUserByLoginData(User user) {
+    public User findByLogin(User user) {
         return super.getByStringParam(user.getLogin(), FIND_USER_BY_LOGIN);
     }
 

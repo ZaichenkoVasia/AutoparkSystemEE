@@ -4,6 +4,7 @@ import controller.command.Command;
 import controller.command.impl.*;
 import controller.service.*;
 import controller.service.impl.*;
+import controller.util.collectors.impl.*;
 import model.dao.*;
 import model.dao.connection.PoolConection;
 import model.dao.impl.*;
@@ -30,12 +31,19 @@ public class ApplicationContextInjector {
     private static final BusStationService BUS_STATION_SERVICE = new BusStationServiceImpl(
             ADMIN_SERVICE, BUS_SERVICE, DRIVER_SERVICE, ROUTE_SERVICE, SCHEDULE_SERVICE, USER_SERVICE);
 
+    private static final AdminDataCollector ADMIN_DATA_COLLECTOR = new AdminDataCollector();
+    private static final BusDataCollector BUS_DATA_COLLECTOR = new BusDataCollector();
+    private static final DriverDataCollector DRIVER_DATA_COLLECTOR = new DriverDataCollector();
+    private static final RouteDataCollector ROUTE_DATA_COLLECTOR = new RouteDataCollector();
+    private static final ScheduleDataCollector SCHEDULE_DATA_COLLECTOR = new ScheduleDataCollector();
+    private static final UserDataCollector USER_DATA_COLLECTOR = new UserDataCollector();
+
     private static final Map<String, Command> NAME_COMMAND_TO_COMMANDS = initCommand();
 
     private static Map<String, Command> initCommand() {
         Map<String, Command> commandNameToCommand = new HashMap<>();
         commandNameToCommand.put("EMPTY", new EmptyCommand());
-        commandNameToCommand.put("LOGIN", new LoginCommand(USER_SERVICE));
+        commandNameToCommand.put("LOGIN", new LoginCommand(USER_SERVICE, USER_DATA_COLLECTOR));
         commandNameToCommand.put("LOGIN_PAGE", new LoginPageCommand());
         commandNameToCommand.put("LOGOUT_PAGE", new LogOutCommand());
         commandNameToCommand.put("LANGUAGE", new LanguageCommand());
@@ -72,10 +80,10 @@ public class ApplicationContextInjector {
         commandNameToCommand.put("ADD_BUS", new AddBusCommand());
         commandNameToCommand.put("ADD_ROUTE", new AddRouteCommand());
         commandNameToCommand.put("ADD_DRIVER", new AddDriverCommand());
-        commandNameToCommand.put("SAVE_ADMIN", new SaveAdminCommand(BUS_STATION_SERVICE));
-        commandNameToCommand.put("SAVE_BUS", new SaveBusCommand(BUS_STATION_SERVICE));
-        commandNameToCommand.put("SAVE_DRIVER", new SaveDriverCommand(BUS_STATION_SERVICE));
-        commandNameToCommand.put("SAVE_ROUTE", new SaveRouteCommand(ROUTE_SERVICE));
+        commandNameToCommand.put("SAVE_ADMIN", new SaveAdminCommand(BUS_STATION_SERVICE, ADMIN_DATA_COLLECTOR));
+        commandNameToCommand.put("SAVE_BUS", new SaveBusCommand(BUS_STATION_SERVICE, BUS_DATA_COLLECTOR));
+        commandNameToCommand.put("SAVE_DRIVER", new SaveDriverCommand(BUS_STATION_SERVICE, DRIVER_DATA_COLLECTOR));
+        commandNameToCommand.put("SAVE_ROUTE", new SaveRouteCommand(ROUTE_SERVICE, ROUTE_DATA_COLLECTOR));
         commandNameToCommand.put("CANCEL_BUS", new CancelBusCommand(BUS_STATION_SERVICE));
         commandNameToCommand.put("CANCEL_DRIVER", new CancelDriverCommand(BUS_STATION_SERVICE));
         commandNameToCommand.put("ACCEPT_SCHEDULE", new AcceptSchedule(DRIVER_SERVICE));

@@ -3,45 +3,32 @@ package domain;
 import java.sql.Date;
 
 public class Admin{
-    private Integer id;
-    private String name;
-    private String surname;
-    private Date birth;
-    private User user;
-    private String degree;
-    private Date graduation;
+    private final Integer id;
+    private final String name;
+    private final String surname;
+    private final Date birth;
+    private final User user;
+    private final String degree;
+    private final Date graduation;
 
-    public Admin() {
+    public Admin(AdminBuilder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.surname = builder.surname;
+        this.birth = builder.birth;
+        this.user = builder.user;
+        this.degree = builder.degree;
+        this.graduation = builder.graduation;
     }
 
-    public Admin(Integer id, String name, String surname, Date birth, User user, String degree, Date graduation) {
+    public Admin(Admin admin, Integer id) {
         this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.birth = birth;
-        this.user = user;
-        this.degree = degree;
-        this.graduation = graduation;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+        this.name = admin.name;
+        this.surname = admin.surname;
+        this.birth = admin.birth;
+        this.user = admin.user;
+        this.degree = admin.degree;
+        this.graduation = admin.graduation;
     }
 
     public Integer getId() {
@@ -68,19 +55,15 @@ public class Admin{
         return degree;
     }
 
-    public void setDegree(String degree) {
-        this.degree = degree;
-    }
-
     public Date getGraduation() {
         return graduation;
     }
 
-    public void setGraduation(Date graduation) {
-        this.graduation = graduation;
+    public static AdminBuilder builder() {
+        return new AdminBuilder();
     }
 
-    public static class AdminBuilder {
+    public static final class AdminBuilder{
         private Integer id;
         private String name;
         private String surname;
@@ -89,43 +72,43 @@ public class Admin{
         private String degree;
         private Date graduation;
 
-        public AdminBuilder setId(Integer id) {
+        public AdminBuilder withId(Integer id) {
             this.id = id;
             return this;
         }
 
-        public AdminBuilder setName(String name) {
+        public AdminBuilder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public AdminBuilder setSurname(String surname) {
+        public AdminBuilder withSurname(String surname) {
             this.surname = surname;
             return this;
         }
 
-        public AdminBuilder setBirth(Date birth) {
+        public AdminBuilder withBirth(Date birth) {
             this.birth = birth;
             return this;
         }
 
-        public AdminBuilder setUser(User user) {
+        public AdminBuilder withUser(User user) {
             this.user = user;
             return this;
         }
 
-        public AdminBuilder setDegree(String degree) {
+        public AdminBuilder withDegree(String degree) {
             this.degree = degree;
             return this;
         }
 
-        public AdminBuilder setGraduation(Date graduation) {
+        public AdminBuilder withGraduation(Date graduation) {
             this.graduation = graduation;
             return this;
         }
 
-        public Admin createAdmin() {
-            return new Admin(id, name, surname, birth, user, degree, graduation);
+        public Admin build() {
+            return new Admin(this);
         }
     }
 }

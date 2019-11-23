@@ -9,28 +9,23 @@ import javax.servlet.http.HttpServletRequest;
 
 public class UserDataCollector extends DataCollector<User> {
 
-    private static final Logger logger = Logger.getLogger(UserDataCollector.class);
+    private static final Logger LOGGER = Logger.getLogger(UserDataCollector.class);
 
     @Override
     public User retrieveData(HttpServletRequest request) throws WrongInputDataException {
-        logger.info("Retrieving user data from request");
-        int counter = 2;
+        LOGGER.info("Retrieving user data from request");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        User user = new User();
-        if (login != null) {
-            user.setLogin(login);
-            counter--;
-        }
-        if (password != null) {
-            user.setPassword(password);
-            counter--;
-    }
-        if (counter != 0) {
-            logger.warn("Not all input forms filled correctly");
-            request.setAttribute("user", user);
-            throw new WrongInputDataException("Not all input form filled correctly");
-        }
+        User user;
+        user = User.builder()
+                .withLogin(login)
+                .withPassword(password)
+                .build();
+//        if (counter != 0) {
+//            LOGGER.warn("Not all input forms filled correctly");
+//            request.setAttribute("user", user);
+//            throw new WrongInputDataException("Not all input form filled correctly");
+//        }
         return user;
     }
 }

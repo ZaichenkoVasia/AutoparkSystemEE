@@ -13,11 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 
 public class SaveAdminCommand implements Command {
 
-    private BusStationService busStationService;
     private static final Logger logger = Logger.getLogger(SaveAdminCommand.class);
+    private BusStationService busStationService;
+    private AdminDataCollector adminDataCollector;
 
-    public SaveAdminCommand(BusStationService busStationService) {
+    public SaveAdminCommand(BusStationService busStationService, AdminDataCollector adminDataCollector) {
         this.busStationService = busStationService;
+        this.adminDataCollector = adminDataCollector;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class SaveAdminCommand implements Command {
         String idAdmin = request.getParameter("idAdmin");
         String idUser = request.getParameter("idUser");
         try {
-            Admin admin = new AdminDataCollector().retrieveData(request);
+            Admin admin = adminDataCollector.retrieveData(request);
             if (busStationService.saveAdmin(admin, admin.getUser(), idAdmin, idUser)){
                 request.setAttribute("message", "admin.saved");
             }else {

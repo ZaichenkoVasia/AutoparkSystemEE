@@ -5,8 +5,6 @@ import controller.service.AbstractGenericService;
 import controller.service.UserService;
 import domain.User;
 import model.dao.UserDAO;
-import model.exception.DAOException;
-import org.apache.log4j.Logger;
 
 public class UserServiceImpl extends AbstractGenericService<User> implements UserService {
 
@@ -20,6 +18,6 @@ public class UserServiceImpl extends AbstractGenericService<User> implements Use
     @Override
     public User findUserByLoginData(User user) throws ServiceLayerException {
         LOGGER.info("Try to find user by login data");
-            return userDAO.findUserByLoginData(user);
+            return userDAO.findByLogin(user);
     }
 }

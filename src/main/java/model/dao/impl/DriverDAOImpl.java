@@ -36,23 +36,23 @@ public class DriverDAOImpl extends AbstractGenericDAO<Driver> implements DriverD
 
     @Override
     protected Driver parseToOne(ResultSet resultSet) throws SQLException {
-        return new Driver.DriverBuilder()
-                .setId(resultSet.getInt("driver.iddriver"))
-                .setName(resultSet.getString("driver.name"))
-                .setSurname(resultSet.getString("driver.surname"))
-                .setBirth(resultSet.getDate("driver.birth"))
-                .setLicenseTest(resultSet.getDate("driver.license_test"))
-                .setSalary(resultSet.getInt("driver.salary"))
-                .setStatus(resultSet.getString("driver.status"))
-                .setBus(new Bus.BusBuilder()
-                        .setId(resultSet.getInt("driver.idbus"))
-                        .createBus())
-                .setUser(new User.UserBuilder()
-                        .setId(resultSet.getInt("user.iduser"))
-                        .setLogin(resultSet.getString("user.login"))
-                        .setPassword(resultSet.getString("user.password"))
-                        .createUser())
-                .createDriver();
+        return Driver.builder()
+                .withId(resultSet.getInt("driver.iddriver"))
+                .withName(resultSet.getString("driver.name"))
+                .withSurname(resultSet.getString("driver.surname"))
+                .withBirth(resultSet.getDate("driver.birth"))
+                .withLicenseTest(resultSet.getDate("driver.license_test"))
+                .withSalary(resultSet.getInt("driver.salary"))
+                .withStatus(resultSet.getString("driver.status"))
+                .withBus(Bus.builder()
+                        .withId(resultSet.getInt("driver.idbus"))
+                        .build())
+                .withUser(User.builder()
+                        .withId(resultSet.getInt("user.iduser"))
+                        .withLogin(resultSet.getString("user.login"))
+                        .withPassword(resultSet.getString("user.password"))
+                        .build())
+                .build();
     }
 
     @Override

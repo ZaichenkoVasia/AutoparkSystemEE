@@ -23,19 +23,19 @@ public class AdminDAOImpl extends AbstractGenericDAO<Admin> implements AdminDAO 
 
     @Override
     protected Admin parseToOne(ResultSet resultSet) throws SQLException {
-        return new Admin.AdminBuilder()
-                .setId(resultSet.getInt("admin.idadmin"))
-                .setName(resultSet.getString("admin.name"))
-                .setSurname(resultSet.getString("admin.surname"))
-                .setBirth(resultSet.getDate("admin.birth"))
-                .setDegree(resultSet.getString("admin.degree"))
-                .setGraduation(resultSet.getDate("admin.graduation"))
-                .setUser(new User.UserBuilder()
-                        .setId(resultSet.getInt("user.iduser"))
-                        .setLogin(resultSet.getString("user.login"))
-                        .setPassword(resultSet.getString("user.password"))
-                        .createUser())
-                .createAdmin();
+        return Admin.builder()
+                .withId(resultSet.getInt("admin.idadmin"))
+                .withName(resultSet.getString("admin.name"))
+                .withSurname(resultSet.getString("admin.surname"))
+                .withBirth(resultSet.getDate("admin.birth"))
+                .withDegree(resultSet.getString("admin.degree"))
+                .withGraduation(resultSet.getDate("admin.graduation"))
+                .withUser(User.builder()
+                        .withId(resultSet.getInt("user.iduser"))
+                        .withLogin(resultSet.getString("user.login"))
+                        .withPassword(resultSet.getString("user.password"))
+                        .build())
+                .build();
     }
 
     @Override

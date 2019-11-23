@@ -11,52 +11,33 @@ import java.sql.Date;
 
 public class DriverDataCollector extends DataCollector<Driver> {
 
-    private static final Logger logger = Logger.getLogger(DriverDataCollector.class);
+    private static final Logger LOGGER = Logger.getLogger(DriverDataCollector.class);
 
     @Override
     public Driver retrieveData(HttpServletRequest request) throws WrongInputDataException {
-        logger.info("Retrieving driver data from request");
-        int counter = 5;
+        LOGGER.info("Retrieving driver data from request");
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
         String birth = request.getParameter("birth");
         String licenseTest = request.getParameter("test");
         String salary = request.getParameter("salary");
-        Driver driver = new Driver();
-        if (name != null) {
-            driver.setName(name);
-            counter--;
-        }
-        if (surname != null) {
-            driver.setSurname(surname);
-            counter--;
-        }
-        if (birth != null) {
-            driver.setBirth(Date.valueOf(birth));
-            counter--;
-        }
-        if (licenseTest != null) {
-            driver.setLicenseTest(Date.valueOf(licenseTest));
-            counter--;
-        }
-        if (salary != null) {
-            driver.setSalary(Integer.valueOf(salary));
-            counter--;
-        }
-        try {
-            User user = new UserDataCollector().retrieveData(request);
-            driver.setUser(user);
-        } catch (WrongInputDataException e) {
-            driver.setUser((User) request.getAttribute("user"));
-            request.setAttribute("driver", driver);
-            throw new WrongInputDataException(e);
-        }
-        if (counter != 0) {
-            logger.warn("Not all input forms filled correctly");
-            request.setAttribute("driver", driver);
-            throw new WrongInputDataException("Not all input form filled correctly");
-        }
-        driver.getUser().setRole("driver");
+        User user = new UserDataCollector().retrieveData(request);
+        Driver driver;
+        //if (name != null) {
+        driver = Driver.builder()
+                .withName(name)
+                .withSurname(surname)
+                .withBirth(Date.valueOf(birth))
+                .withLicenseTest(Date.valueOf(licenseTest))
+                .withSalary(Integer.valueOf(salary))
+                .withStatus("free")
+                .withUser(user)
+                .build();
+//        if (counter != 0) {
+//            LOGGER.warn("Not all input forms filled correctly");
+//            request.setAttribute("driver", driver);
+//            throw new WrongInputDataException("Not all input form filled correctly");
+//        }
         return driver;
     }
 }

@@ -1,91 +1,96 @@
 package domain;
 
-import java.io.Serializable;
+import java.util.Objects;
 
 public class User {
-    private Integer id;
-    private String login;
-    private String password;
-    private String role;
+    private final Integer id;
+    private final String login;
+    private final String password;
+    private final String role;
 
-    public User() {
+    public User(UserBuilder builder) {
+        this.id = builder.id;
+        this.login = builder.login;
+        this.password = builder.password;
+        this.role = builder.role;
     }
 
-    public User(Integer id, String login, String password, String role) {
+    public User(User user, Integer id) {
         this.id = id;
-        this.login = login;
-        this.password = password;
-        this.role = role;
+        this.login = user.login;
+        this.password = user.password;
+        this.role = user.role;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getLogin() {
         return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getRole() {
         return role;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public static UserBuilder builder() {
+        return new UserBuilder();
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        User user = (User)obj;
-        return user.login.equals(this.login) && this.password.equals(user.password);
-    }
-
-    public static class UserBuilder {
+    public static final class UserBuilder {
         private Integer id;
         private String login;
         private String password;
         private String role;
 
-        public UserBuilder setId(int id) {
+        private UserBuilder() {
+        }
+
+        public UserBuilder withId(Integer id) {
             this.id = id;
             return this;
         }
 
-        public UserBuilder setLogin(String login) {
+        public UserBuilder withLogin(String login) {
             this.login = login;
             return this;
         }
 
-        public UserBuilder setPassword(String password) {
+        public UserBuilder withPassword(String password) {
             this.password = password;
             return this;
         }
 
-        public UserBuilder setRole(String role) {
+        public UserBuilder withRole(String role) {
             this.role = role;
             return this;
         }
 
-        public User createUser() {
-            return new User(id, login, password, role);
+        public User build() {
+            return new User(this);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof User)) {
+            return false;
+        }
+        User user = (User) o;
+        return Objects.equals(login, user.login) &&
+                Objects.equals(password, user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, login, password, role);
     }
 }

@@ -3,104 +3,105 @@ package domain;
 import java.sql.Date;
 
 public class Driver {
-    private Integer id;
-    private String name;
-    private String surname;
-    private Date birth;
-    private User user;
-    private Date licenseTest;
-    private Integer salary;
-    private String status;
-    private Bus bus;
+    private final Integer id;
+    private final String name;
+    private final String surname;
+    private final Date birth;
+    private final User user;
+    private final Date licenseTest;
+    private final Integer salary;
+    private final String status;
+    private final Bus bus;
 
-    public Driver() {
+    public Driver(DriverBuilder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.surname = builder.surname;
+        this.birth = builder.birth;
+        this.user = builder.user;
+        this.licenseTest = builder.licenseTest;
+        this.salary = builder.salary;
+        this.status = builder.status;
+        this.bus = builder.bus;
     }
 
-    public Driver(Integer id, String name, String surname, Date birth, User user, Date licenseTest, Integer salary, String status, Bus bus) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.birth = birth;
-        this.user = user;
-        this.licenseTest = licenseTest;
-        this.salary = salary;
-        this.status = status;
+    public Driver(Driver driver, Bus bus) {
+        this.id = driver.id;
+        this.name = driver.name;
+        this.surname = driver.surname;
+        this.birth = driver.birth;
+        this.user = driver.user;
+        this.licenseTest = driver.licenseTest;
+        this.salary = driver.salary;
+        this.status = driver.status;
         this.bus = bus;
+    }
+
+    public Driver(Driver driver, User user) {
+        this.id = driver.id;
+        this.name = driver.name;
+        this.surname = driver.surname;
+        this.birth = driver.birth;
+        this.user = user;
+        this.licenseTest = driver.licenseTest;
+        this.salary = driver.salary;
+        this.status = driver.status;
+        this.bus = driver.bus;
+    }
+
+    public Driver(Driver driver, Integer id) {
+        this.id = id;
+        this.name = driver.name;
+        this.surname = driver.surname;
+        this.birth = driver.birth;
+        this.user = driver.user;
+        this.licenseTest = driver.licenseTest;
+        this.salary = driver.salary;
+        this.status = driver.status;
+        this.bus = driver.bus;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getSurname() {
         return surname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     public Date getBirth() {
         return birth;
-    }
-
-    public void setBirth(Date birth) {
-        this.birth = birth;
     }
 
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Date getLicenseTest() {
         return licenseTest;
-    }
-
-    public void setLicenseTest(Date licenseTest) {
-        this.licenseTest = licenseTest;
     }
 
     public Integer getSalary() {
         return salary;
     }
 
-    public void setSalary(Integer salary) {
-        this.salary = salary;
-    }
-
     public String getStatus() {
         return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public Bus getBus() {
         return bus;
     }
 
-    public void setBus(Bus bus) {
-        this.bus = bus;
+    public static DriverBuilder builder() {
+        return new DriverBuilder();
     }
 
-    public static class DriverBuilder {
+    public static final class DriverBuilder {
         private Integer id;
         private String name;
         private String surname;
@@ -111,53 +112,56 @@ public class Driver {
         private String status;
         private Bus bus;
 
-        public DriverBuilder setId(Integer id) {
+        private DriverBuilder() {
+        }
+
+        public DriverBuilder withId(Integer id) {
             this.id = id;
             return this;
         }
 
-        public DriverBuilder setName(String name) {
+        public DriverBuilder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public DriverBuilder setSurname(String surname) {
+        public DriverBuilder withSurname(String surname) {
             this.surname = surname;
             return this;
         }
 
-        public DriverBuilder setBirth(Date birth) {
+        public DriverBuilder withBirth(Date birth) {
             this.birth = birth;
             return this;
         }
 
-        public DriverBuilder setUser(User user) {
+        public DriverBuilder withUser(User user) {
             this.user = user;
             return this;
         }
 
-        public DriverBuilder setLicenseTest(Date licenseTest) {
+        public DriverBuilder withLicenseTest(Date licenseTest) {
             this.licenseTest = licenseTest;
             return this;
         }
 
-        public DriverBuilder setSalary(Integer salary) {
+        public DriverBuilder withSalary(Integer salary) {
             this.salary = salary;
             return this;
         }
 
-        public DriverBuilder setStatus(String status) {
+        public DriverBuilder withStatus(String status) {
             this.status = status;
             return this;
         }
 
-        public DriverBuilder setBus(Bus bus) {
+        public DriverBuilder withBus(Bus bus) {
             this.bus = bus;
             return this;
         }
 
-        public Driver createDriver() {
-            return new Driver(id, name, surname, birth, user, licenseTest, salary, status, bus);
+        public Driver build() {
+            return new Driver(this);
         }
     }
 }

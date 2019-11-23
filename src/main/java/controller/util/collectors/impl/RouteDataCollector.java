@@ -9,43 +9,32 @@ import javax.servlet.http.HttpServletRequest;
 
 public class RouteDataCollector extends DataCollector<Route> {
 
-    private static final Logger logger = Logger.getLogger(RouteDataCollector.class);
+    private static final Logger LOGGER = Logger.getLogger(RouteDataCollector.class);
 
     @Override
     public Route retrieveData(HttpServletRequest request) throws WrongInputDataException {
-        logger.info("Retrieving route data from request");
+        LOGGER.info("Retrieving route data from request");
         int counter = 5;
         String number = request.getParameter("number");
         String title = request.getParameter("title");
         String distance = request.getParameter("distance");
         String departure = request.getParameter("departure");
         String arrival = request.getParameter("arrival");
-        Route route = new Route();
-        if (number != null){
-            route.setNumber(number);
-            counter--;
-        }
-        if (title != null){
-            route.setTitle(title);
-            counter--;
-        }
-        if (distance != null ){
-            route.setDistance(Integer.valueOf(distance));
-            counter--;
-        }
-        if (departure != null){
-            route.setDeparture(departure);
-            counter--;
-        }
-        if (arrival != null){
-            route.setArrival(arrival);
-            counter--;
-        }
-        if (counter != 0){
-            logger.warn("Not all input forms filled correctly");
-            request.setAttribute("route", route);
-            throw new WrongInputDataException("Not all input form filled correctly");
-        }
+        Route route;
+        // if (number != null){
+        route = Route.builder()
+                .withNumber(number)
+                .withTitle(title)
+                .withDistance(Integer.valueOf(distance))
+                .withStatus("free")
+                .withDeparture(departure)
+                .withArrival(arrival)
+                .build();
+//        if (counter != 0){
+//            LOGGER.warn("Not all input forms filled correctly");
+//            request.setAttribute("route", route);
+//            throw new WrongInputDataException("Not all input form filled correctly");
+        //    }
         return route;
     }
 }

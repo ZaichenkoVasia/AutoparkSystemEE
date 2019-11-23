@@ -9,28 +9,24 @@ import javax.servlet.http.HttpServletRequest;
 
 public class ScheduleDataCollector extends DataCollector<Schedule> {
 
-    private static final Logger logger = Logger.getLogger(ScheduleDataCollector.class);
+    private static final Logger LOGGER = Logger.getLogger(ScheduleDataCollector.class);
 
     @Override
     public Schedule retrieveData(HttpServletRequest request) throws WrongInputDataException {
-        logger.info("Retrieving schedule data from request");
-        int counter = 2;
+        LOGGER.info("Retrieving schedule data from request");
         String departure = request.getParameter("departure");
         String arrival = request.getParameter("arrival");
-        Schedule schedule = new Schedule();
-        if (departure != null) {
-            schedule.setDeparture(departure);
-            counter--;
-        }
-        if (arrival != null) {
-            schedule.setArrival(arrival);
-            counter--;
-        }
-        if (counter != 0) {
-            logger.warn("Not all input forms filled correctly");
-            request.setAttribute("schedule", schedule);
-            throw new WrongInputDataException("Not all input form filled correctly");
-        }
+        Schedule schedule;
+        //if (departure != null) {
+        schedule = Schedule.builder()
+                .withDeparture(departure)
+                .withArrival(arrival)
+                .build();
+//        if (counter != 0) {
+//            LOGGER.warn("Not all input forms filled correctly");
+//            request.setAttribute("schedule", schedule);
+//            throw new WrongInputDataException("Not all input form filled correctly");
+//        }
         return schedule;
     }
 }

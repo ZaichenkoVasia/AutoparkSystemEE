@@ -11,11 +11,11 @@ import java.sql.Date;
 
 public class BusDataCollector extends DataCollector<Bus> {
 
-    private static final Logger logger = Logger.getLogger(BusDataCollector.class);
+    private static final Logger LOGGER = Logger.getLogger(BusDataCollector.class);
 
     @Override
     public Bus retrieveData(HttpServletRequest request) throws WrongInputDataException {
-        logger.info("Retrieving bus data from request");
+        LOGGER.info("Retrieving bus data from request");
         int counter = 7;
         String plate = request.getParameter("plate");
         String model = request.getParameter("model");
@@ -24,48 +24,25 @@ public class BusDataCollector extends DataCollector<Bus> {
         String consumption = request.getParameter("consumption");
         String release = request.getParameter("release");
         String seats = request.getParameter("seats");
-        Bus bus = new Bus();
-        if (plate != null) {
-            bus.setPlate(plate);
-            counter--;
-        }
-        if (model != null) {
-            bus.setModel(model);
-            counter--;
-        }
-        if (mileage != null) {
-            bus.setMileage(Integer.valueOf(mileage));
-            counter--;
-        }
-        if (inspection != null) {
-            bus.setInspection(Date.valueOf(inspection));
-            counter--;
-        }
-        if (consumption != null) {
-            bus.setConsumption(Integer.valueOf(consumption));
-            counter--;
-        }
-        if (release != null) {
-            bus.setRelease(Date.valueOf(release));
-            counter--;
-        }
-        if (seats != null) {
-            bus.setSeats(Integer.valueOf(seats));
-            counter--;
-        }
-        try {
-            Schedule schedule = new ScheduleDataCollector().retrieveData(request);
-            bus.setSchedule(schedule);
-        } catch (WrongInputDataException e) {
-            bus.setSchedule((Schedule) request.getAttribute("schedule"));
-            request.setAttribute("bus", bus);
-            throw new WrongInputDataException(e);
-        }
-        if (counter != 0) {
-            logger.warn("Not all input forms filled correctly");
-            request.setAttribute("bus", bus);
-            throw new WrongInputDataException("Not all input form filled correctly");
-        }
+        Schedule schedule = new ScheduleDataCollector().retrieveData(request);
+        Bus bus;
+        //if (plate != null) {
+        bus = Bus.builder()
+                .withPlate(plate)
+                .withModel(model)
+                .withMileage(Integer.valueOf(mileage))
+                .withInspection(Date.valueOf(inspection))
+                .withConsumption(Integer.valueOf(consumption))
+                .withRelease(Date.valueOf(release))
+                .withSeats(Integer.valueOf(seats))
+                .withStatus("free")
+                .withSchedule(schedule)
+                .build();
+//        if (counter != 0) {
+//            LOGGER.warn("Not all input forms filled correctly");
+//            request.setAttribute("bus", bus);
+//            throw new WrongInputDataException("Not all input form filled correctly");
+//        }
         return bus;
     }
 }
