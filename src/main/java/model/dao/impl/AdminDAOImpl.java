@@ -5,13 +5,15 @@ import domain.User;
 import model.dao.AbstractGenericDAO;
 import model.dao.AdminDAO;
 import model.dao.connection.PoolConection;
+import model.entity.AdminEntity;
+import model.entity.UserEntity;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AdminDAOImpl extends AbstractGenericDAO<Admin> implements AdminDAO {
+public class AdminDAOImpl extends AbstractGenericDAO<AdminEntity> implements AdminDAO {
 
     private static final String INSERT_ADMIN = "INSERT INTO admin (name, surname, birth, degree, graduation, iduser) VALUES(?, ?, ?, ?, ?, ?)";
     private static final String FIND_ADMIN_BY_ID = "SELECT * FROM admin JOIN user ON admin.iduser = user.iduser WHERE user.iduser = ?";
@@ -22,15 +24,15 @@ public class AdminDAOImpl extends AbstractGenericDAO<Admin> implements AdminDAO 
     }
 
     @Override
-    protected Admin parseToOne(ResultSet resultSet) throws SQLException {
-        return Admin.builder()
+    protected AdminEntity parseToOne(ResultSet resultSet) throws SQLException {
+        return AdminEntity.builder()
                 .withId(resultSet.getInt("admin.idadmin"))
                 .withName(resultSet.getString("admin.name"))
                 .withSurname(resultSet.getString("admin.surname"))
                 .withBirth(resultSet.getDate("admin.birth"))
                 .withDegree(resultSet.getString("admin.degree"))
                 .withGraduation(resultSet.getDate("admin.graduation"))
-                .withUser(User.builder()
+                .withUser(UserEntity.builder()
                         .withId(resultSet.getInt("user.iduser"))
                         .withLogin(resultSet.getString("user.login"))
                         .withPassword(resultSet.getString("user.password"))
@@ -39,7 +41,7 @@ public class AdminDAOImpl extends AbstractGenericDAO<Admin> implements AdminDAO 
     }
 
     @Override
-    protected void setInsertProperties(PreparedStatement statement, Admin element) throws SQLException {
+    protected void setInsertProperties(PreparedStatement statement, AdminEntity element) throws SQLException {
         statement.setString(1, element.getName());
         statement.setString(2, element.getSurname());
         statement.setDate(3, element.getBirth());
@@ -49,24 +51,24 @@ public class AdminDAOImpl extends AbstractGenericDAO<Admin> implements AdminDAO 
     }
 
     @Override
-    protected void setUpdateProperties(PreparedStatement statement, Admin element) throws SQLException {
+    protected void setUpdateProperties(PreparedStatement statement, AdminEntity element) throws SQLException {
         setInsertProperties(statement, element);
         statement.setInt(7, element.getId());
     }
 
     @Override
-    public Admin getAdminByUserId(Integer idUser) {
+    public AdminEntity getAdminByUserId(Integer idUser) {
         return super.getByIntegerParam(idUser, FIND_ADMIN_BY_ID);
     }
 
 
     @Override
-    public Integer insertElement(Admin element) {
+    public Integer insertElement(AdminEntity element) {
         return super.insert(element, INSERT_ADMIN);
     }
 
     @Override
-    public Admin getElementById(Integer id) {
+    public AdminEntity getElementById(Integer id) {
         return super.getByIntegerParam(id, FIND_ADMIN_BY_ID);
     }
 
@@ -76,7 +78,7 @@ public class AdminDAOImpl extends AbstractGenericDAO<Admin> implements AdminDAO 
     }
 
     @Override
-    public void updateElement(Admin element) {
+    public void updateElement(AdminEntity element) {
         super.update(element, UPDATE_ADMIN_BY_ID);
     }
 
@@ -86,7 +88,7 @@ public class AdminDAOImpl extends AbstractGenericDAO<Admin> implements AdminDAO 
     }
 
     @Override
-    public List<Admin> getPaginatedList(int startIdx, int amountElements) {
+    public List<AdminEntity> getPaginatedList(int startIdx, int amountElements) {
         throw new UnsupportedOperationException();
     }
 }

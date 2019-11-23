@@ -1,6 +1,6 @@
 package model.dao;
 
-import domain.Schedule;
+import model.entity.ScheduleEntity;
 
-public interface ScheduleDAO extends GenericDAO<Schedule, Integer> {
+public interface ScheduleDAO extends GenericDAO<ScheduleEntity, Integer> {
 }

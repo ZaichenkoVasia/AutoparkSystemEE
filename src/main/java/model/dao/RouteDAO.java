@@ -1,12 +1,10 @@
 package model.dao;
 
-import domain.Route;
-import model.exception.DAOException;
+import model.entity.RouteEntity;
 
-import java.sql.Connection;
 import java.util.List;
 
-public interface RouteDAO extends GenericDAO<Route, Integer> {
+public interface RouteDAO extends GenericDAO<RouteEntity, Integer> {
 
     void setStatusEmpty(Integer idRoute);
 
@@ -14,5 +12,5 @@ public interface RouteDAO extends GenericDAO<Route, Integer> {
 
     void cancelAll(Integer idRoute);
 
-    List<Route> searchByCriteria(String departure, String arrival);
+    List<RouteEntity> searchByCriteria(String departure, String arrival);
 }

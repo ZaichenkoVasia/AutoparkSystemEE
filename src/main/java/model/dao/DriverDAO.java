@@ -1,14 +1,14 @@
 package model.dao;
 
-import domain.Driver;
+import model.entity.DriverEntity;
 
 import java.util.List;
 
-public interface DriverDAO extends GenericDAO<Driver, Integer> {
+public interface DriverDAO extends GenericDAO<DriverEntity, Integer> {
 
-    Driver getDriverByUserId(Integer idUser);
+    DriverEntity getDriverByUserId(Integer idUser);
 
-    Driver getDriverByBusId(Integer idBus);
+    DriverEntity getDriverByBusId(Integer idBus);
 
     void setStatusNew(Integer idDriver);
 
@@ -18,5 +18,5 @@ public interface DriverDAO extends GenericDAO<Driver, Integer> {
 
     void updateBusInfoForDriver(Integer idBus, Integer idDriver);
 
-    List<Driver> getFreeDrivers();
+    List<DriverEntity> getFreeDrivers();
 }

@@ -4,13 +4,14 @@ import domain.User;
 import model.dao.AbstractGenericDAO;
 import model.dao.UserDAO;
 import model.dao.connection.PoolConection;
+import model.entity.UserEntity;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserDAOImpl extends AbstractGenericDAO<User> implements UserDAO {
+public class UserDAOImpl extends AbstractGenericDAO<UserEntity> implements UserDAO {
     private static final String FIND_USER_BY_LOGIN = "SELECT * FROM user WHERE login = ?";
     private static final String INSERT_USER = "INSERT INTO user (login, password, role) VALUES(?, ?, ?)";
     private static final String FIND_BY_ID = "SELECT * FROM user where iduser = ?";
@@ -22,8 +23,8 @@ public class UserDAOImpl extends AbstractGenericDAO<User> implements UserDAO {
     }
 
     @Override
-    protected User parseToOne(ResultSet resultSet) throws SQLException {
-        return User.builder()
+    protected UserEntity parseToOne(ResultSet resultSet) throws SQLException {
+        return UserEntity.builder()
                 .withId(resultSet.getInt("user.iduser"))
                 .withLogin(resultSet.getString("user.login"))
                 .withPassword(resultSet.getString("user.password"))
@@ -32,32 +33,32 @@ public class UserDAOImpl extends AbstractGenericDAO<User> implements UserDAO {
     }
 
     @Override
-    protected void setInsertProperties(PreparedStatement statement, User element) throws SQLException {
+    protected void setInsertProperties(PreparedStatement statement, UserEntity element) throws SQLException {
         statement.setString(1, element.getLogin());
         statement.setString(2, element.getPassword());
         statement.setString(3, "driver");
     }
 
     @Override
-    protected void setUpdateProperties(PreparedStatement statement, User element) throws SQLException {
+    protected void setUpdateProperties(PreparedStatement statement, UserEntity element) throws SQLException {
         setInsertProperties(statement, element);
         statement.setInt(4, element.getId());
     }
 
     //TODO change methods
     @Override
-    public User findByLogin(User user) {
+    public UserEntity findByLogin(UserEntity user) {
         return super.getByStringParam(user.getLogin(), FIND_USER_BY_LOGIN);
     }
 
 
     @Override
-    public Integer insertElement(User element) {
+    public Integer insertElement(UserEntity element) {
         return super.insert(element, INSERT_USER);
     }
 
     @Override
-    public User getElementById(Integer id) {
+    public UserEntity getElementById(Integer id) {
         return super.getByIntegerParam(id, FIND_BY_ID);
     }
 
@@ -67,7 +68,7 @@ public class UserDAOImpl extends AbstractGenericDAO<User> implements UserDAO {
     }
 
     @Override
-    public void updateElement(User element) {
+    public void updateElement(UserEntity element) {
         super.update(element, UPDATE_BY_ID);
     }
 
@@ -77,7 +78,7 @@ public class UserDAOImpl extends AbstractGenericDAO<User> implements UserDAO {
     }
 
     @Override
-    public List<User> getPaginatedList(int startIdx, int amountElements) {
+    public List<UserEntity> getPaginatedList(int startIdx, int amountElements) {
         throw new UnsupportedOperationException();
     }
 }

@@ -1,12 +1,12 @@
 package model.dao;
 
-import domain.Bus;
+import model.entity.BusEntity;
 
 import java.util.List;
 
-public interface BusDAO extends GenericDAO<Bus, Integer> {
+public interface BusDAO extends GenericDAO<BusEntity, Integer> {
 
-    List<Bus> getFreeBuses();
+    List<BusEntity> getFreeBuses();
 
     Integer countBusesOnRouteById(Integer idRoute);
 
@@ -14,5 +14,5 @@ public interface BusDAO extends GenericDAO<Bus, Integer> {
 
     void appointBusToRoute(Integer idRoute, Integer idBus);
 
-    List<Bus> getBusesByIdRoute(Integer idRoute);
+    List<BusEntity> getBusesByIdRoute(Integer idRoute);
 }

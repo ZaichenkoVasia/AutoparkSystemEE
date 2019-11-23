@@ -1,9 +1,8 @@
 package model.dao;
 
-import domain.User;
-import model.exception.DAOException;
+import model.entity.UserEntity;
 
-public interface UserDAO extends GenericDAO<User, Integer>{
+public interface UserDAO extends GenericDAO<UserEntity, Integer>{
 
-    User findByLogin(User user);
+    UserEntity findByLogin(UserEntity user);
 }

@@ -4,6 +4,7 @@ import controller.command.Command;
 import controller.command.impl.*;
 import controller.service.*;
 import controller.service.impl.*;
+import controller.service.mapper.*;
 import controller.util.collectors.impl.*;
 import model.dao.*;
 import model.dao.connection.PoolConection;
@@ -22,12 +23,19 @@ public class ApplicationContextInjector {
     private static final ScheduleDAO SCHEDULE_DAO = new ScheduleDAOImpl(CONNECTOR);
     private static final UserDAO USER_DAO = new UserDAOImpl(CONNECTOR);
 
-    private static final AdminService ADMIN_SERVICE = new AdminServiceImpl(ADMIN_DAO);
-    private static final BusService BUS_SERVICE = new BusServiceImpl(BUS_DAO);
-    private static final DriverService DRIVER_SERVICE = new DriverServiceImpl(DRIVER_DAO);
-    private static final RouteService ROUTE_SERVICE = new RouteServiceImpl(ROUTE_DAO);
-    private static final ScheduleService SCHEDULE_SERVICE = new ScheduleServiceImpl(SCHEDULE_DAO);
-    private static final UserService USER_SERVICE = new UserServiceImpl(USER_DAO);
+    private static final AdminMapper ADMIN_MAPPER = new AdminMapper();
+    private static final BusMapper BUS_MAPPER = new BusMapper();
+    private static final DriverMapper DRIVER_MAPPER = new DriverMapper();
+    private static final RouteMapper ROUTE_MAPPER = new RouteMapper();
+    private static final ScheduleMapper SCHEDULE_MAPPER = new ScheduleMapper();
+    private static final UserMapper USER_MAPPER = new UserMapper();
+
+    private static final AdminService ADMIN_SERVICE = new AdminServiceImpl(ADMIN_DAO, ADMIN_MAPPER);
+    private static final BusService BUS_SERVICE = new BusServiceImpl(BUS_DAO, BUS_MAPPER);
+    private static final DriverService DRIVER_SERVICE = new DriverServiceImpl(DRIVER_DAO, DRIVER_MAPPER);
+    private static final RouteService ROUTE_SERVICE = new RouteServiceImpl(ROUTE_DAO, ROUTE_MAPPER);
+    private static final ScheduleService SCHEDULE_SERVICE = new ScheduleServiceImpl(SCHEDULE_DAO, SCHEDULE_MAPPER);
+    private static final UserService USER_SERVICE = new UserServiceImpl(USER_DAO, USER_MAPPER);
     private static final BusStationService BUS_STATION_SERVICE = new BusStationServiceImpl(
             ADMIN_SERVICE, BUS_SERVICE, DRIVER_SERVICE, ROUTE_SERVICE, SCHEDULE_SERVICE, USER_SERVICE);
 

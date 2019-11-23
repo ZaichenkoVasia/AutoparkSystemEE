@@ -5,6 +5,7 @@ import model.dao.AbstractGenericDAO;
 import model.dao.RouteDAO;
 import model.dao.connection.PoolConection;
 import model.dao.constants.Constants;
+import model.entity.RouteEntity;
 import model.exception.DAOException;
 
 import java.sql.Connection;
@@ -13,7 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class RouteDAOImpl extends AbstractGenericDAO<Route> implements RouteDAO {
+public class RouteDAOImpl extends AbstractGenericDAO<RouteEntity> implements RouteDAO {
     private static final String COUNT = "SELECT COUNT(*) FROM route";
     private static final String FIND_ALL = "SELECT * FROM route LIMIT ?,?";
     private static final String FIND_BY_ID = "SELECT * FROM route WHERE idroute = ?";
@@ -29,8 +30,8 @@ public class RouteDAOImpl extends AbstractGenericDAO<Route> implements RouteDAO 
     }
 
     @Override
-    protected Route parseToOne(ResultSet resultSet) throws SQLException {
-        return Route.builder()
+    protected RouteEntity parseToOne(ResultSet resultSet) throws SQLException {
+        return RouteEntity.builder()
                 .withId(resultSet.getInt("idroute"))
                 .withNumber(resultSet.getString("route_number"))
                 .withTitle(resultSet.getString("title"))
@@ -42,7 +43,7 @@ public class RouteDAOImpl extends AbstractGenericDAO<Route> implements RouteDAO 
     }
 
     @Override
-    protected void setInsertProperties(PreparedStatement statement, Route element) throws SQLException {
+    protected void setInsertProperties(PreparedStatement statement, RouteEntity element) throws SQLException {
         statement.setString(1, element.getNumber());
         statement.setString(2, element.getTitle());
         statement.setInt(3, element.getDistance());
@@ -51,7 +52,7 @@ public class RouteDAOImpl extends AbstractGenericDAO<Route> implements RouteDAO 
     }
 
     @Override
-    protected void setUpdateProperties(PreparedStatement statement, Route element) throws SQLException {
+    protected void setUpdateProperties(PreparedStatement statement, RouteEntity element) throws SQLException {
         setInsertProperties(statement, element);
         statement.setInt(6, element.getId());
     }
@@ -72,12 +73,12 @@ public class RouteDAOImpl extends AbstractGenericDAO<Route> implements RouteDAO 
     }
 
     @Override
-    public Integer insertElement(Route element) {
+    public Integer insertElement(RouteEntity element) {
         return super.insert(element, INSERT);
     }
 
     @Override
-    public Route getElementById(Integer id) {
+    public RouteEntity getElementById(Integer id) {
         return super.getByIntegerParam(id, FIND_BY_ID);
     }
 
@@ -87,7 +88,7 @@ public class RouteDAOImpl extends AbstractGenericDAO<Route> implements RouteDAO 
     }
 
     @Override
-    public void updateElement(Route element) {
+    public void updateElement(RouteEntity element) {
         super.update(element, UPDATE);
     }
 
@@ -97,15 +98,15 @@ public class RouteDAOImpl extends AbstractGenericDAO<Route> implements RouteDAO 
     }
 
     @Override
-    public List<Route> getPaginatedList(int startIdx, int amountElements) {
+    public List<RouteEntity> getPaginatedList(int startIdx, int amountElements) {
         return getPaginatedList(startIdx, amountElements, FIND_ALL);
     }
 
     @Override
-    public List<Route> searchByCriteria(String departure, String arrival) throws DAOException {
+    public List<RouteEntity> searchByCriteria(String departure, String arrival) throws DAOException {
         LOGGER.info("Searching by criteria");
         ResultSet resultSet = null;
-        List<Route> list;
+        List<RouteEntity> list;
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_CRITERIA)) {
             statement.setString(1, departure + Constants.LIKE);

@@ -7,6 +7,9 @@ import model.dao.AbstractGenericDAO;
 import model.dao.BusDAO;
 import model.dao.connection.PoolConection;
 import model.dao.constants.Constants;
+import model.entity.BusEntity;
+import model.entity.RouteEntity;
+import model.entity.ScheduleEntity;
 import model.exception.DAOException;
 
 import java.sql.Connection;
@@ -15,7 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class BusDAOImpl extends AbstractGenericDAO<Bus> implements BusDAO {
+public class BusDAOImpl extends AbstractGenericDAO<BusEntity> implements BusDAO {
     private static final String COUNT_ALL = "SELECT COUNT(*) FROM bus";
     private static final String COUNT_BY_ROUTE = "SELECT COUNT(*) FROM bus WHERE idroute = ?";
     private static final String FIND_ALL = "SELECT * FROM bus JOIN schedule WHERE bus.idschedule = schedule.idschedule LIMIT ?,?";
@@ -34,8 +37,8 @@ public class BusDAOImpl extends AbstractGenericDAO<Bus> implements BusDAO {
     }
 
     @Override
-    protected Bus parseToOne(ResultSet resultSet) throws SQLException {
-        return Bus.builder()
+    protected BusEntity parseToOne(ResultSet resultSet) throws SQLException {
+        return BusEntity.builder()
                 .withId(resultSet.getInt("bus.idbus"))
                 .withPlate(resultSet.getString("bus.plate"))
                 .withModel(resultSet.getString("bus.model"))
@@ -45,10 +48,10 @@ public class BusDAOImpl extends AbstractGenericDAO<Bus> implements BusDAO {
                 .withRelease(resultSet.getDate("bus.release_date"))
                 .withSeats(resultSet.getInt("bus.seats"))
                 .withStatus(resultSet.getString("bus.status"))
-                .withRoute(Route.builder()
+                .withRoute(RouteEntity.builder()
                         .withId(resultSet.getInt("idroute"))
                         .build())
-                .withSchedule(Schedule.builder()
+                .withSchedule(ScheduleEntity.builder()
                         .withId(resultSet.getInt("schedule.idschedule"))
                         .withDeparture(resultSet.getString("schedule.departure"))
                         .withArrival(resultSet.getString("schedule.arrival"))
@@ -57,7 +60,7 @@ public class BusDAOImpl extends AbstractGenericDAO<Bus> implements BusDAO {
     }
 
     @Override
-    protected void setInsertProperties(PreparedStatement statement, Bus element) throws SQLException {
+    protected void setInsertProperties(PreparedStatement statement, BusEntity element) throws SQLException {
         statement.setString(1, element.getPlate());
         statement.setString(2, element.getModel());
         statement.setInt(3, element.getMileage());
@@ -69,7 +72,7 @@ public class BusDAOImpl extends AbstractGenericDAO<Bus> implements BusDAO {
     }
 
     @Override
-    protected void setUpdateProperties(PreparedStatement statement, Bus element) throws SQLException {
+    protected void setUpdateProperties(PreparedStatement statement, BusEntity element) throws SQLException {
         setInsertProperties(statement, element);
         statement.setInt(9, element.getId());
     }
@@ -80,22 +83,22 @@ public class BusDAOImpl extends AbstractGenericDAO<Bus> implements BusDAO {
     }
 
     @Override
-    public List<Bus> getBusesByIdRoute(Integer idRoute) {
+    public List<BusEntity> getBusesByIdRoute(Integer idRoute) {
         return getListByIntegerParam(idRoute, FIND_BY_ROUTE);
     }
 
     @Override
-    public List<Bus> getFreeBuses()  {
+    public List<BusEntity> getFreeBuses()  {
         return super.getListByStringParam(Constants.STATUS_FREE, FIND_BY_STATUS);
     }
 
     @Override
-    public Integer insertElement(Bus element){
+    public Integer insertElement(BusEntity element){
         return super.insert(element, INSERT);
     }
 
     @Override
-    public Bus getElementById(Integer id) {
+    public BusEntity getElementById(Integer id) {
         return getByIntegerParam(id, FIND_BY_ID);
     }
 
@@ -105,7 +108,7 @@ public class BusDAOImpl extends AbstractGenericDAO<Bus> implements BusDAO {
     }
 
     @Override
-    public void updateElement(Bus element) {
+    public void updateElement(BusEntity element) {
         super.update(element, UPDATE);
     }
 
@@ -115,7 +118,7 @@ public class BusDAOImpl extends AbstractGenericDAO<Bus> implements BusDAO {
     }
 
     @Override
-    public List<Bus> getPaginatedList(int startIdx, int amountElements) {
+    public List<BusEntity> getPaginatedList(int startIdx, int amountElements) {
         return super.getPaginatedList(startIdx, amountElements, FIND_ALL);
     }
 

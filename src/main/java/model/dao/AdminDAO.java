@@ -1,8 +1,8 @@
 package model.dao;
 
-import domain.Admin;
+import model.entity.AdminEntity;
 
-public interface AdminDAO extends GenericDAO<Admin, Integer> {
+public interface AdminDAO extends GenericDAO<AdminEntity, Integer> {
 
-    Admin getAdminByUserId(Integer idUser);
+    AdminEntity getAdminByUserId(Integer idUser);
 }

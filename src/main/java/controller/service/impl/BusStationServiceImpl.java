@@ -6,6 +6,7 @@ import domain.*;
 import org.apache.log4j.Logger;
 
 public class BusStationServiceImpl implements BusStationService {
+    private static final Logger LOGGER = Logger.getLogger(BusStationServiceImpl.class);
 
     private AdminService adminService;
     private BusService busService;
@@ -13,7 +14,6 @@ public class BusStationServiceImpl implements BusStationService {
     private RouteService routeService;
     private ScheduleService scheduleService;
     private UserService userService;
-    private static final Logger LOGGER = Logger.getLogger(BusStationServiceImpl.class);
 
     public BusStationServiceImpl(AdminService adminService, BusService busService,
                                  DriverService driverService, RouteService routeService,
@@ -70,15 +70,17 @@ public class BusStationServiceImpl implements BusStationService {
     public void deleteBus(Integer idBus) {
         LOGGER.info("Deleting bus from the system");
         Bus bus = busService.getElementById(idBus);
-        Integer idRoute = bus.getRoute().getId();
-        if (bus.getStatus().equals("work")) {
-            Integer busCounter = busService.countBusesOnRouteById(idRoute);
-            if (busCounter == 1) {
-                routeService.setStatusEmpty(idRoute);
+        if(bus.getRoute() != null) {
+            Integer idRoute = bus.getRoute().getId();
+            if (bus.getStatus().equals("work")) {
+                Integer busCounter = busService.countBusesOnRouteById(idRoute);
+                if (busCounter == 1) {
+                    routeService.setStatusEmpty(idRoute);
+                }
+                busService.cancelBusFromRoute(idBus);
             }
-            busService.cancelBusFromRoute(idBus);
+            driverService.cancelDriverFromBus(idBus);
         }
-        driverService.cancelDriverFromBus(idBus);
         busService.deleteElement(idBus);
     }
 

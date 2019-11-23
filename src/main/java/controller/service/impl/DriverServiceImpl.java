@@ -1,34 +1,43 @@
 package controller.service.impl;
 
 import controller.exception.ServiceLayerException;
-import controller.service.AbstractGenericService;
 import controller.service.DriverService;
+import controller.service.mapper.DriverMapper;
 import domain.Driver;
 import model.dao.DriverDAO;
+import model.entity.DriverEntity;
 import org.apache.log4j.Logger;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class DriverServiceImpl extends AbstractGenericService<Driver> implements DriverService {
-
-    private DriverDAO driverDAO;
+public class DriverServiceImpl implements DriverService {
     private static final Logger LOGGER = Logger.getLogger(DriverServiceImpl.class);
 
-    public DriverServiceImpl(DriverDAO driverDAO) {
-        super(driverDAO);
+    private DriverDAO driverDAO;
+    private DriverMapper mapper;
+
+    public DriverServiceImpl(DriverDAO driverDAO, DriverMapper mapper) {
         this.driverDAO = driverDAO;
+        this.mapper = mapper;
     }
 
     @Override
     public Driver getDriverByUserId(Integer idUser) {
         LOGGER.info("Getting driver by user id");
-        return driverDAO.getDriverByUserId(idUser);
+        DriverEntity driverEntity = driverDAO.getDriverByUserId(idUser);
+        return mapper.mapDriverEntityToDriver(driverEntity);
     }
 
     @Override
     public Driver getDriverByBusId(Integer idBus) {
         LOGGER.info("Getting driver by bus id");
-        return driverDAO.getDriverByBusId(idBus);
+        DriverEntity driverEntity = driverDAO.getDriverByBusId(idBus);
+        if(driverEntity == null){
+            return null;
+        }
+        return mapper.mapDriverEntityToDriver(driverEntity);
     }
 
     @Override
@@ -52,12 +61,59 @@ public class DriverServiceImpl extends AbstractGenericService<Driver> implements
     @Override
     public List<Driver> getFreeDrivers() throws ServiceLayerException {
         LOGGER.info("Getting free drivers");
-        return driverDAO.getFreeDrivers();
+        List<DriverEntity> result = driverDAO.getFreeDrivers();
+        return result.isEmpty() ? Collections.emptyList()
+                : result.stream()
+                .map(mapper::mapDriverEntityToDriver)
+                .collect(Collectors.toList());
     }
 
     @Override
     public void updateBusInfoForDriver(Integer idBus, Integer idDriver) throws ServiceLayerException {
         LOGGER.info("Assigning bus for driver");
         driverDAO.updateBusInfoForDriver(idBus, idDriver);
+    }
+
+    @Override
+    public Integer insertElement(Driver element) {
+        LOGGER.info("Inserting element");
+        DriverEntity driverEntity = mapper.mapDriverToDriverEntity(element);
+        return driverDAO.insertElement(driverEntity);
+    }
+
+    @Override
+    public Driver getElementById(Integer id) {
+        LOGGER.info("Try to get element by id");
+        DriverEntity driverEntity = driverDAO.getElementById(id);
+        return mapper.mapDriverEntityToDriver(driverEntity);
+    }
+
+    @Override
+    public void deleteElement(Integer id) {
+        LOGGER.info("Deleting element");
+        driverDAO.deleteElement(id);
+    }
+
+    @Override
+    public void updateElement(Driver element) {
+        LOGGER.info("Updating element");
+        DriverEntity driverEntity = mapper.mapDriverToDriverEntity(element);
+        driverDAO.updateElement(driverEntity);
+    }
+
+    @Override
+    public Integer getElementsAmount() {
+        LOGGER.info("Getting elements amount");
+        return driverDAO.getElementsCount();
+    }
+
+    @Override
+    public List<Driver> getPaginatedList(int startIdx, int endIdx) {
+        LOGGER.info("Getting paginated list");
+        List<DriverEntity> result = driverDAO.getPaginatedList(startIdx, endIdx);
+        return result.isEmpty() ? Collections.emptyList()
+                : result.stream()
+                .map(mapper::mapDriverEntityToDriver)
+                .collect(Collectors.toList());
     }
 }

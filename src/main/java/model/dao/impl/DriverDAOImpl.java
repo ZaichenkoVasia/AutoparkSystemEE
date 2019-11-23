@@ -7,6 +7,9 @@ import model.dao.AbstractGenericDAO;
 import model.dao.DriverDAO;
 import model.dao.connection.PoolConection;
 import model.dao.constants.Constants;
+import model.entity.BusEntity;
+import model.entity.DriverEntity;
+import model.entity.UserEntity;
 import model.exception.DAOException;
 
 import java.sql.Connection;
@@ -15,7 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class DriverDAOImpl extends AbstractGenericDAO<Driver> implements DriverDAO {
+public class DriverDAOImpl extends AbstractGenericDAO<DriverEntity> implements DriverDAO {
 
     private static final String COUNT = "SELECT COUNT(*) FROM driver";
     private static final String FIND_ALL = "SELECT * FROM driver JOIN user ON driver.iduser = user.iduser LIMIT ?,?";
@@ -35,8 +38,8 @@ public class DriverDAOImpl extends AbstractGenericDAO<Driver> implements DriverD
     }
 
     @Override
-    protected Driver parseToOne(ResultSet resultSet) throws SQLException {
-        return Driver.builder()
+    protected DriverEntity parseToOne(ResultSet resultSet) throws SQLException {
+        return DriverEntity.builder()
                 .withId(resultSet.getInt("driver.iddriver"))
                 .withName(resultSet.getString("driver.name"))
                 .withSurname(resultSet.getString("driver.surname"))
@@ -44,10 +47,10 @@ public class DriverDAOImpl extends AbstractGenericDAO<Driver> implements DriverD
                 .withLicenseTest(resultSet.getDate("driver.license_test"))
                 .withSalary(resultSet.getInt("driver.salary"))
                 .withStatus(resultSet.getString("driver.status"))
-                .withBus(Bus.builder()
+                .withBus(BusEntity.builder()
                         .withId(resultSet.getInt("driver.idbus"))
                         .build())
-                .withUser(User.builder()
+                .withUser(UserEntity.builder()
                         .withId(resultSet.getInt("user.iduser"))
                         .withLogin(resultSet.getString("user.login"))
                         .withPassword(resultSet.getString("user.password"))
@@ -56,7 +59,7 @@ public class DriverDAOImpl extends AbstractGenericDAO<Driver> implements DriverD
     }
 
     @Override
-    protected void setInsertProperties(PreparedStatement statement, Driver element) throws SQLException {
+    protected void setInsertProperties(PreparedStatement statement, DriverEntity element) throws SQLException {
         statement.setString(1, element.getName());
         statement.setString(2, element.getSurname());
         statement.setDate(3, element.getBirth());
@@ -66,18 +69,18 @@ public class DriverDAOImpl extends AbstractGenericDAO<Driver> implements DriverD
     }
 
     @Override
-    protected void setUpdateProperties(PreparedStatement statement, Driver element) throws SQLException {
+    protected void setUpdateProperties(PreparedStatement statement, DriverEntity element) throws SQLException {
         setInsertProperties(statement, element);
         statement.setInt(7, element.getId());
     }
 
     @Override
-    public Driver getDriverByUserId(Integer idUser) {
+    public DriverEntity getDriverByUserId(Integer idUser) {
         return super.getByIntegerParam(idUser, FIND_BY_USER_ID);
     }
 
     @Override
-    public Driver getDriverByBusId(Integer idBus) {
+    public DriverEntity getDriverByBusId(Integer idBus) {
         return super.getByIntegerParam(idBus, FIND_BY_BUS_ID);
     }
 
@@ -97,18 +100,18 @@ public class DriverDAOImpl extends AbstractGenericDAO<Driver> implements DriverD
     }
 
     @Override
-    public List<Driver> getFreeDrivers() {
+    public List<DriverEntity> getFreeDrivers() {
         return super.getListByStringParam(Constants.STATUS_FREE, FIND_BY_STATUS);
     }
 
 
     @Override
-    public Integer insertElement(Driver element) {
+    public Integer insertElement(DriverEntity element) {
         return super.insert(element, INSERT);
     }
 
     @Override
-    public Driver getElementById(Integer id) {
+    public DriverEntity getElementById(Integer id) {
         return super.getByIntegerParam(id, FIND_BY_ID);
     }
 
@@ -118,7 +121,7 @@ public class DriverDAOImpl extends AbstractGenericDAO<Driver> implements DriverD
     }
 
     @Override
-    public void updateElement(Driver element) {
+    public void updateElement(DriverEntity element) {
         super.update(element, UPDATE);
     }
 
@@ -128,7 +131,7 @@ public class DriverDAOImpl extends AbstractGenericDAO<Driver> implements DriverD
     }
 
     @Override
-    public List<Driver> getPaginatedList(int startIdx, int amountElements) {
+    public List<DriverEntity> getPaginatedList(int startIdx, int amountElements) {
         return super.getPaginatedList(startIdx, amountElements, FIND_ALL);
     }
 

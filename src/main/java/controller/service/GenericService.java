@@ -6,17 +6,17 @@ import controller.exception.WrongInputDataException;
 import java.sql.Connection;
 import java.util.List;
 
-public interface GenericService<E, ID> {
+public interface GenericService<D, ID> {
 
-    Integer insertElement(E elementn);
+    Integer insertElement(D element);
 
-    E getElementById(ID id);
+    D getElementById(ID id);
 
     void deleteElement(ID id);
 
-    void updateElement(E element);
+    void updateElement(D element);
 
     Integer getElementsAmount();
 
-    List<E> getPaginatedList(int startIdx, int endIdx);
+    List<D> getPaginatedList(int startIdx, int endIdx);
 }
