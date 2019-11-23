@@ -1,9 +1,7 @@
 package controller.service;
 
-import controller.exception.ServiceLayerException;
 import domain.Driver;
 
-import java.sql.Connection;
 import java.util.List;
 
 public interface DriverService extends GenericService<Driver, Integer> {

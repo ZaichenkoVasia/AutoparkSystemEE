@@ -1,6 +1,5 @@
 package model.dao.impl;
 
-import domain.Schedule;
 import model.dao.AbstractGenericDAO;
 import model.dao.ScheduleDAO;
 import model.dao.connection.PoolConection;

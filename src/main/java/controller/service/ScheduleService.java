@@ -2,5 +2,5 @@ package controller.service;
 
 import domain.Schedule;
 
-public interface ScheduleService extends GenericService<Schedule, Integer>{
+public interface ScheduleService extends GenericService<Schedule, Integer> {
 }

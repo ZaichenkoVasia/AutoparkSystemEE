@@ -1,9 +1,5 @@
 package domain;
 
-import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Time;
-
 public class Schedule {
     private final Integer id;
     private final String departure;

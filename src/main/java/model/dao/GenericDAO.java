@@ -1,13 +1,6 @@
 package model.dao;
 
-import model.exception.DAOException;
-
-import java.sql.Connection;
 import java.util.List;
-
-/**
- * Generic DAO for handling input data from service layer and retrieving from DB
- * */
 
 public interface GenericDAO<E, ID> {
 

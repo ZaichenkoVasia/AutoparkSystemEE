@@ -1,7 +1,5 @@
 package controller.service;
 
-import controller.exception.ServiceLayerException;
-import controller.exception.WrongInputDataException;
 import domain.*;
 
 public interface BusStationService {

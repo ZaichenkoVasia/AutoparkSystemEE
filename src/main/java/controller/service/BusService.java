@@ -1,12 +1,10 @@
 package controller.service;
 
-import controller.exception.ServiceLayerException;
 import domain.Bus;
 
-import java.sql.Connection;
 import java.util.List;
 
-public interface BusService extends GenericService<Bus, Integer>{
+public interface BusService extends GenericService<Bus, Integer> {
 
     List<Bus> getFreeBuses();
 

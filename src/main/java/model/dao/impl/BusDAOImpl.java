@@ -1,8 +1,5 @@
 package model.dao.impl;
 
-import domain.Bus;
-import domain.Route;
-import domain.Schedule;
 import model.dao.AbstractGenericDAO;
 import model.dao.BusDAO;
 import model.dao.connection.PoolConection;
@@ -32,7 +29,7 @@ public class BusDAOImpl extends AbstractGenericDAO<BusEntity> implements BusDAO 
     private static final String APPOINT_TO_ROUTE = "UPDATE bus, driver SET bus.status = ?, driver.status = ?, bus.idroute = ? WHERE bus.idbus = driver.idbus AND bus.idbus = ?";
 
 
-    public BusDAOImpl(PoolConection poolConection){
+    public BusDAOImpl(PoolConection poolConection) {
         super(poolConection);
     }
 
@@ -78,7 +75,7 @@ public class BusDAOImpl extends AbstractGenericDAO<BusEntity> implements BusDAO 
     }
 
     @Override
-    public Integer countBusesOnRouteById(Integer idRoute)  {
+    public Integer countBusesOnRouteById(Integer idRoute) {
         return getCountByIntegerParam(idRoute, COUNT_BY_ROUTE);
     }
 
@@ -88,12 +85,12 @@ public class BusDAOImpl extends AbstractGenericDAO<BusEntity> implements BusDAO 
     }
 
     @Override
-    public List<BusEntity> getFreeBuses()  {
+    public List<BusEntity> getFreeBuses() {
         return super.getListByStringParam(Constants.STATUS_FREE, FIND_BY_STATUS);
     }
 
     @Override
-    public Integer insertElement(BusEntity element){
+    public Integer insertElement(BusEntity element) {
         return super.insert(element, INSERT);
     }
 
@@ -123,10 +120,10 @@ public class BusDAOImpl extends AbstractGenericDAO<BusEntity> implements BusDAO 
     }
 
     @Override
-    public void cancelBusFromRoute(Integer idBus)  {
+    public void cancelBusFromRoute(Integer idBus) {
         LOGGER.info("Canceling bus from route");
         try (Connection connection = connector.getConnection();
-                PreparedStatement statement = connection.prepareStatement(CANSEL_BUS)) {
+             PreparedStatement statement = connection.prepareStatement(CANSEL_BUS)) {
             statement.setString(1, Constants.STATUS_FREE);
             statement.setString(2, Constants.STATUS_FREE);
             statement.setInt(3, idBus);
@@ -142,7 +139,7 @@ public class BusDAOImpl extends AbstractGenericDAO<BusEntity> implements BusDAO 
     public void appointBusToRoute(Integer idRoute, Integer idBus) {
         LOGGER.info("Assigning bus to route");
         try (Connection connection = connector.getConnection();
-                PreparedStatement statement = connection.prepareStatement(APPOINT_TO_ROUTE)) {
+             PreparedStatement statement = connection.prepareStatement(APPOINT_TO_ROUTE)) {
             statement.setString(1, Constants.STATUS_WORK);
             statement.setString(2, Constants.STATUS_NEW);
             statement.setInt(3, idRoute);

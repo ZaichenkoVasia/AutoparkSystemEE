@@ -70,7 +70,7 @@ public class BusStationServiceImpl implements BusStationService {
     public void deleteBus(Integer idBus) {
         LOGGER.info("Deleting bus from the system");
         Bus bus = busService.getElementById(idBus);
-        if(bus.getRoute() != null) {
+        if (bus.getRoute() != null) {
             Integer idRoute = bus.getRoute().getId();
             if (bus.getStatus().equals("work")) {
                 Integer busCounter = busService.countBusesOnRouteById(idRoute);
@@ -147,7 +147,7 @@ public class BusStationServiceImpl implements BusStationService {
             user = new User(user, Integer.valueOf(idUser));
             userService.updateElement(user);
             driver = new Driver(driver, user);
-            driver = new Driver(driver,Integer.valueOf(idDriver));
+            driver = new Driver(driver, Integer.valueOf(idDriver));
             driverService.updateElement(driver);
             return false;
         }
@@ -162,8 +162,8 @@ public class BusStationServiceImpl implements BusStationService {
             busService.insertElement(bus);
             return true;
         } else {
-            bus=new Bus(bus,Integer.valueOf(idBus));
-            schedule = new Schedule(schedule,Integer.valueOf(idSchedule));
+            bus = new Bus(bus, Integer.valueOf(idBus));
+            schedule = new Schedule(schedule, Integer.valueOf(idSchedule));
             bus = new Bus(bus, schedule);
             busService.updateElement(bus);
             scheduleService.updateElement(schedule);

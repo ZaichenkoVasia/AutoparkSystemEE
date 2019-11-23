@@ -34,7 +34,7 @@ public class DriverServiceImpl implements DriverService {
     public Driver getDriverByBusId(Integer idBus) {
         LOGGER.info("Getting driver by bus id");
         DriverEntity driverEntity = driverDAO.getDriverByBusId(idBus);
-        if(driverEntity == null){
+        if (driverEntity == null) {
             return null;
         }
         return mapper.mapDriverEntityToDriver(driverEntity);

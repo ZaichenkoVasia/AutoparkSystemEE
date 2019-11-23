@@ -1,7 +1,5 @@
 package model.dao.impl;
 
-import domain.Admin;
-import domain.User;
 import model.dao.AbstractGenericDAO;
 import model.dao.AdminDAO;
 import model.dao.connection.PoolConection;

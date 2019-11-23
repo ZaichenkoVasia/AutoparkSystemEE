@@ -2,7 +2,7 @@ package domain;
 
 import java.sql.Date;
 
-public class Admin{
+public class Admin {
     private final Integer id;
     private final String name;
     private final String surname;
@@ -63,7 +63,7 @@ public class Admin{
         return new AdminBuilder();
     }
 
-    public static final class AdminBuilder{
+    public static final class AdminBuilder {
         private Integer id;
         private String name;
         private String surname;

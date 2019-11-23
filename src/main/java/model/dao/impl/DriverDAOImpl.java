@@ -1,8 +1,5 @@
 package model.dao.impl;
 
-import domain.Bus;
-import domain.Driver;
-import domain.User;
 import model.dao.AbstractGenericDAO;
 import model.dao.DriverDAO;
 import model.dao.connection.PoolConection;

@@ -1,6 +1,5 @@
 package model.dao.impl;
 
-import domain.Route;
 import model.dao.AbstractGenericDAO;
 import model.dao.RouteDAO;
 import model.dao.connection.PoolConection;
