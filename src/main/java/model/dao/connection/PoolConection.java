@@ -1,5 +1,6 @@
 package model.dao.connection;
 
+import model.exception.DatabaseRuntimeException;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
 
@@ -41,7 +42,7 @@ public class PoolConection {
             return dataSource.getConnection();
         } catch (SQLException e) {
             logger.error("Can't execute method getConnection", e);
-            throw e;
+            throw new DatabaseRuntimeException("Can not get connection", e);
         }
     }
 

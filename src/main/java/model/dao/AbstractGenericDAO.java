@@ -2,7 +2,6 @@ package model.dao;
 
 import model.dao.connection.PoolConection;
 import model.dao.constants.Constants;
-import model.exception.DAOException;
 import model.exception.DatabaseRuntimeException;
 import org.apache.log4j.Logger;
 
@@ -33,7 +32,7 @@ public abstract class AbstractGenericDAO<E> {
             }
         } catch (SQLException e) {
             LOGGER.error("Can not insert element", e);
-            throw new DAOException("Can not insert element", e);
+            throw new DatabaseRuntimeException("Can not insert element", e);
         }
         return null;
     }
@@ -48,7 +47,7 @@ public abstract class AbstractGenericDAO<E> {
             }
         } catch (SQLException e) {
             LOGGER.error("Can not get element", e);
-            throw new DAOException("Can not get element", e);
+            throw new DatabaseRuntimeException("Can not get element", e);
         }
         return null;
     }
@@ -63,7 +62,7 @@ public abstract class AbstractGenericDAO<E> {
             }
         } catch (SQLException e) {
             LOGGER.error("Can not get element", e);
-            throw new DAOException("Can not get element", e);
+            throw new DatabaseRuntimeException("Can not get element", e);
         }
         return null;
     }
@@ -87,7 +86,7 @@ public abstract class AbstractGenericDAO<E> {
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Can not update element", e);
-            throw new DAOException("Can not update element", e);
+            throw new DatabaseRuntimeException("Can not update element", e);
         }
     }
 
@@ -109,7 +108,7 @@ public abstract class AbstractGenericDAO<E> {
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Can not delete element", e);
-            throw new DAOException("Can not delete element", e);
+            throw new DatabaseRuntimeException("Can not delete element", e);
         }
         LOGGER.info("Element was deleted from database");
     }
@@ -125,7 +124,7 @@ public abstract class AbstractGenericDAO<E> {
             }
         } catch (SQLException e) {
             LOGGER.error("Can not get count elements", e);
-            throw new DAOException("Can not get count elements", e);
+            throw new DatabaseRuntimeException("Can not get count elements", e);
         }
         return null;
     }
@@ -143,7 +142,7 @@ public abstract class AbstractGenericDAO<E> {
             }
         } catch (SQLException e) {
             LOGGER.error("Can not get count elements", e);
-            throw new DAOException("Can not get count elements", e);
+            throw new DatabaseRuntimeException("Can not get count elements", e);
         }
         return res;
     }
@@ -159,7 +158,7 @@ public abstract class AbstractGenericDAO<E> {
             list = parseAll(resultSet);
         } catch (SQLException e) {
             LOGGER.error("Can not get paganation list", e);
-            throw new DAOException("Can not get paganation list", e);
+            throw new DatabaseRuntimeException("Can not get paganation list", e);
         }
         return list;
     }
@@ -175,7 +174,7 @@ public abstract class AbstractGenericDAO<E> {
             list = parseAll(resultSet);
         } catch (SQLException e) {
             LOGGER.error("Can not get list element", e);
-            throw new DAOException("Can not get list element", e);
+            throw new DatabaseRuntimeException("Can not get list element", e);
         }
         return list;
     }
@@ -191,7 +190,7 @@ public abstract class AbstractGenericDAO<E> {
             list = parseAll(resultSet);
         } catch (SQLException e) {
             LOGGER.error("Can not get list element", e);
-            throw new DAOException("Can not get list element", e);
+            throw new DatabaseRuntimeException("Can not get list element", e);
         }
         LOGGER.info("Returning list buses assigned to route");
         return list;
@@ -205,7 +204,7 @@ public abstract class AbstractGenericDAO<E> {
             }
         } catch (SQLException e) {
             LOGGER.error("Can not parse elements", e);
-            throw new DAOException("Can not parse elements", e);
+            throw new DatabaseRuntimeException("Can not parse elements", e);
         }
         return elements;
     }

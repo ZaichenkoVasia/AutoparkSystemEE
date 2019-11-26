@@ -3,7 +3,7 @@
 //import controller.exception.ServiceLayerException;
 //import domain.Route;
 //import model.dao.impl.RouteDAOImpl;
-//import model.exception.DAOException;
+//import model.exception.DatabaseRuntimeException;
 //import org.junit.After;
 //import org.junit.Before;
 //import org.junit.Test;
@@ -31,7 +31,7 @@
 //    }
 //
 //    @Test
-//    public void searchByCriteria() throws DAOException, ServiceLayerException {
+//    public void searchByCriteria() throws DatabaseRuntimeException, ServiceLayerException {
 //        when(routeDAO.searchByCriteria(anyString(), anyString())).thenReturn(Arrays.asList(new Route(), new Route()));
 //        assertEquals(2, routeService.searchByCriteria(anyString(), anyString()).size());
 //        verify(routeDAO, atLeast(1)).searchByCriteria(anyString(), anyString());

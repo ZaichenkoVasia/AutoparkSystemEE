@@ -1,16 +1,16 @@
 package model.exception;
 
-public class DAOException extends RuntimeException{
+public class DatabaseRuntimeException extends RuntimeException{
 
-    public DAOException() {
+    public DatabaseRuntimeException() {
         super();
     }
 
-    public DAOException(String message) {
+    public DatabaseRuntimeException(String message) {
         super(message);
     }
 
-    public DAOException(String message, Throwable cause) {
+    public DatabaseRuntimeException(String message, Throwable cause) {
         super(message, cause);
     }
 }

@@ -4,7 +4,7 @@ import model.dao.AbstractGenericDAO;
 import model.dao.ScheduleDAO;
 import model.dao.connection.PoolConection;
 import model.entity.ScheduleEntity;
-import model.exception.DAOException;
+import model.exception.DatabaseRuntimeException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,32 +43,32 @@ public class ScheduleDAOImpl extends AbstractGenericDAO<ScheduleEntity> implemen
 
 
     @Override
-    public Integer insertElement(ScheduleEntity element) throws DAOException {
+    public Integer insertElement(ScheduleEntity element) throws DatabaseRuntimeException {
         return super.insert(element, INSERT);
     }
 
     @Override
-    public ScheduleEntity getElementById(Integer id) throws DAOException {
+    public ScheduleEntity getElementById(Integer id) throws DatabaseRuntimeException {
         return getByIntegerParam(id, FIND_BY_ID);
     }
 
     @Override
-    public void deleteElement(Integer integer) throws DAOException {
+    public void deleteElement(Integer integer) throws DatabaseRuntimeException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void updateElement(ScheduleEntity element) throws DAOException {
+    public void updateElement(ScheduleEntity element) throws DatabaseRuntimeException {
         super.update(element, UPDATE_BY_ID);
     }
 
     @Override
-    public Integer getElementsCount() throws DAOException {
+    public Integer getElementsCount() throws DatabaseRuntimeException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public List<ScheduleEntity> getPaginatedList(int startIdx, int amountElements) throws DAOException {
+    public List<ScheduleEntity> getPaginatedList(int startIdx, int amountElements) throws DatabaseRuntimeException {
         throw new UnsupportedOperationException();
     }
 }

@@ -3,7 +3,7 @@
 //import controller.exception.ServiceLayerException;
 //import domain.Admin;
 //import model.dao.impl.AdminDAOImpl;
-//import model.exception.DAOException;
+//import model.exception.DatabaseRuntimeException;
 //import org.junit.After;
 //import org.junit.Before;
 //import org.junit.Test;
@@ -28,7 +28,7 @@
 //    }
 //
 //    @Test
-//    public void getAdminByUserId() throws DAOException, ServiceLayerException {
+//    public void getAdminByUserId() throws DatabaseRuntimeException, ServiceLayerException {
 //        when(adminDAO.getAdminByUserId(anyInt())).thenReturn(new Admin.AdminBuilder().setId(1).createAdmin());
 //        assertEquals(new Integer(1), adminService.getAdminByUserId(anyInt()).getId());
 //        verify(adminDAO, atLeast(1)).getAdminByUserId(anyInt());

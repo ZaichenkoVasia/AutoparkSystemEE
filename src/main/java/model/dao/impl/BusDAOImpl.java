@@ -7,7 +7,7 @@ import model.dao.constants.Constants;
 import model.entity.BusEntity;
 import model.entity.RouteEntity;
 import model.entity.ScheduleEntity;
-import model.exception.DAOException;
+import model.exception.DatabaseRuntimeException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -130,7 +130,7 @@ public class BusDAOImpl extends AbstractGenericDAO<BusEntity> implements BusDAO 
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Can't execute method cancelBusFromRoute", e);
-            throw new DAOException("Can't execute method cancelBusFromRoute", e);
+            throw new DatabaseRuntimeException("Can't execute method cancelBusFromRoute", e);
         }
         LOGGER.info("Bus canceled");
     }
@@ -147,7 +147,7 @@ public class BusDAOImpl extends AbstractGenericDAO<BusEntity> implements BusDAO 
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Can't execute method appointBusToRoute", e);
-            throw new DAOException("Can't execute method appointBusToRoute", e);
+            throw new DatabaseRuntimeException("Can't execute method appointBusToRoute", e);
         }
         LOGGER.info("Bus assigned to route");
     }

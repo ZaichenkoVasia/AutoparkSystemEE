@@ -3,7 +3,7 @@
 //import controller.exception.ServiceLayerException;
 //import domain.Bus;
 //import model.dao.impl.BusDAOImpl;
-//import model.exception.DAOException;
+//import model.exception.DatabaseRuntimeException;
 //import org.junit.After;
 //import org.junit.Before;
 //import org.junit.Test;
@@ -30,21 +30,21 @@
 //    }
 //
 //    @Test
-//    public void getFreeBuses() throws DAOException, ServiceLayerException {
+//    public void getFreeBuses() throws DatabaseRuntimeException, ServiceLayerException {
 //        when(busDAO.getFreeBuses()).thenReturn(Arrays.asList(new Bus.BusBuilder().setId(1).createBus()));
 //        assertEquals(1, busService.getFreeBuses().size());
 //        verify(busDAO, atLeast(1)).getFreeBuses();
 //    }
 ////
 ////    @Test
-////    public void countBusesOnRouteById() throws DAOException, ServiceLayerException {
+////    public void countBusesOnRouteById() throws DatabaseRuntimeException, ServiceLayerException {
 ////        when(busDAO.countBusesOnRouteById(anyInt(), any())).thenReturn(5);
 ////        assertEquals(new Integer(5), busService.countBusesOnRouteById(anyInt(), any()));
 ////        verify(busDAO, atLeast(1)).countBusesOnRouteById(anyInt(), any());
 ////    }
 //
 //    @Test
-//    public void getBusesByIdRoute() throws DAOException, ServiceLayerException {
+//    public void getBusesByIdRoute() throws DatabaseRuntimeException, ServiceLayerException {
 //        when(busDAO.getBusesByIdRoute(anyInt())).thenReturn(new ArrayList<>());
 //        assertEquals(0, busService.getBusesByIdRoute(anyInt()).size());
 //        verify(busDAO, atLeast(1)).getBusesByIdRoute(anyInt());

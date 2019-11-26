@@ -5,7 +5,7 @@ import model.dao.RouteDAO;
 import model.dao.connection.PoolConection;
 import model.dao.constants.Constants;
 import model.entity.RouteEntity;
-import model.exception.DAOException;
+import model.exception.DatabaseRuntimeException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -57,17 +57,17 @@ public class RouteDAOImpl extends AbstractGenericDAO<RouteEntity> implements Rou
     }
 
     @Override
-    public void setStatusEmpty(Integer idRoute) throws DAOException {
+    public void setStatusEmpty(Integer idRoute) throws DatabaseRuntimeException {
         super.updateFieldByIntegerParam(idRoute, Constants.STATUS_EMPTY, UPDATE_BY_STATUS);
     }
 
     @Override
-    public void setStatusWork(Integer idRoute) throws DAOException {
+    public void setStatusWork(Integer idRoute) throws DatabaseRuntimeException {
         super.updateFieldByIntegerParam(idRoute, Constants.STATUS_WORK, UPDATE_BY_STATUS);
     }
 
     @Override
-    public void cancelAll(Integer idRoute) throws DAOException {
+    public void cancelAll(Integer idRoute) throws DatabaseRuntimeException {
         updateByIntegerParam(idRoute, CANSEL_ALL);
     }
 
@@ -102,7 +102,7 @@ public class RouteDAOImpl extends AbstractGenericDAO<RouteEntity> implements Rou
     }
 
     @Override
-    public List<RouteEntity> searchByCriteria(String departure, String arrival) throws DAOException {
+    public List<RouteEntity> searchByCriteria(String departure, String arrival) {
         LOGGER.info("Searching by criteria");
         ResultSet resultSet = null;
         List<RouteEntity> list;
@@ -114,7 +114,7 @@ public class RouteDAOImpl extends AbstractGenericDAO<RouteEntity> implements Rou
             list = parseAll(resultSet);
         } catch (SQLException e) {
             LOGGER.error("Can't execute method searchByCriteria", e);
-            throw new DAOException("Can't execute method searchByCriteria", e);
+            throw new DatabaseRuntimeException("Can't execute method searchByCriteria", e);
         }
         LOGGER.info("Returning list of routes according to criteria");
         return list;

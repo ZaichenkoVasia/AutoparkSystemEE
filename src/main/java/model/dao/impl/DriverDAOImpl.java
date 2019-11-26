@@ -7,7 +7,7 @@ import model.dao.constants.Constants;
 import model.entity.BusEntity;
 import model.entity.DriverEntity;
 import model.entity.UserEntity;
-import model.exception.DAOException;
+import model.exception.DatabaseRuntimeException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -142,7 +142,7 @@ public class DriverDAOImpl extends AbstractGenericDAO<DriverEntity> implements D
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Can't execute method updateBusInfoForDriver", e);
-            throw new DAOException("Can't execute method updateBusInfoForDriver", e);
+            throw new DatabaseRuntimeException("Can't execute method updateBusInfoForDriver", e);
         }
         LOGGER.info("New bus assigned");
     }

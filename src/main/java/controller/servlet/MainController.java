@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-/**
- * Application controller
- */
 public class MainController extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(MainController.class);

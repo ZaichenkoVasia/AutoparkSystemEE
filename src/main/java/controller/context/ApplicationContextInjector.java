@@ -70,9 +70,8 @@ public class ApplicationContextInjector {
         commandNameToCommand.put("EDIT_ROUTE", new EditRouteCommand(ROUTE_SERVICE));
         commandNameToCommand.put("DELETE_ROUTE", new DeleteRouteCommand(BUS_STATION_SERVICE));
 
-        commandNameToCommand.put("APPOINT_BUS", new AppointBusCommand(BUS_STATION_SERVICE));
-
         /*Bus menu commands*/
+        commandNameToCommand.put("APPOINT_BUS", new AppointBusCommand(BUS_STATION_SERVICE));
         commandNameToCommand.put("DRIVER_INFO", new DriverInfoCommand(DRIVER_SERVICE));
         commandNameToCommand.put("FREE_DRIVERS", new FreeDriversCommand(DRIVER_SERVICE));
         commandNameToCommand.put("EDIT_BUS", new EditBusCommand(BUS_SERVICE));
@@ -146,4 +145,3 @@ public class ApplicationContextInjector {
         return BUS_STATION_SERVICE;
     }
 }
-
