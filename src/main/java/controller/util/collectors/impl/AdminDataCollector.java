@@ -22,9 +22,7 @@ public class AdminDataCollector extends DataCollector<Admin> {
         String degree = request.getParameter("degree");
         String graduation = request.getParameter("graduation");
         User user = new UserDataCollector().retrieveData(request);
-        Admin admin;
-        // if (name != null) {
-        admin = Admin.builder()
+        return Admin.builder()
                 .withName(name)
                 .withSurname(surname)
                 .withBirth(Date.valueOf(birth))
@@ -32,12 +30,5 @@ public class AdminDataCollector extends DataCollector<Admin> {
                 .withGraduation(Date.valueOf(graduation))
                 .withUser(user)
                 .build();
-
-//        if (counter != 0) {
-//            LOGGER.warn("Not all input forms filled correctly");
-//            request.setAttribute("admin", admin);
-//            throw new WrongInputDataRuntimeException("Not all input form filled correctly");
-//        }
-        return admin;
     }
 }

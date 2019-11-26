@@ -2,7 +2,7 @@ package model.dao.impl;
 
 import model.dao.AbstractGenericDAO;
 import model.dao.BusDAO;
-import model.dao.connection.PoolConection;
+import model.dao.connection.PoolConnection;
 import model.dao.constants.Constants;
 import model.entity.BusEntity;
 import model.entity.RouteEntity;
@@ -28,9 +28,8 @@ public class BusDAOImpl extends AbstractGenericDAO<BusEntity> implements BusDAO 
     private static final String DELETE = "DELETE FROM bus WHERE idbus = ?";
     private static final String APPOINT_TO_ROUTE = "UPDATE bus, driver SET bus.status = ?, driver.status = ?, bus.idroute = ? WHERE bus.idbus = driver.idbus AND bus.idbus = ?";
 
-
-    public BusDAOImpl(PoolConection poolConection) {
-        super(poolConection);
+    public BusDAOImpl(PoolConnection poolConnection) {
+        super(poolConnection);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.dao.connection.PoolConection;
+import model.dao.connection.PoolConnection;
 import model.dao.constants.Constants;
 import model.exception.DatabaseRuntimeException;
 import org.apache.log4j.Logger;
@@ -13,9 +13,9 @@ public abstract class AbstractGenericDAO<E> {
 
     protected static final Logger LOGGER = Logger.getLogger(AbstractGenericDAO.class);
 
-    protected final PoolConection connector;
+    protected final PoolConnection connector;
 
-    public AbstractGenericDAO(PoolConection connector) {
+    public AbstractGenericDAO(PoolConnection connector) {
         this.connector = connector;
     }
 

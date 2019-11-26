@@ -2,7 +2,7 @@ package model.dao.impl;
 
 import model.dao.AbstractGenericDAO;
 import model.dao.RouteDAO;
-import model.dao.connection.PoolConection;
+import model.dao.connection.PoolConnection;
 import model.dao.constants.Constants;
 import model.entity.RouteEntity;
 import model.exception.DatabaseRuntimeException;
@@ -24,8 +24,8 @@ public class RouteDAOImpl extends AbstractGenericDAO<RouteEntity> implements Rou
     private static final String DELETE = "DELETE FROM route WHERE idroute = ?";
     private static final String CANSEL_ALL = "UPDATE route, bus, driver SET route.status = 'empty', bus.status = 'free', bus.idroute = null, driver.status = 'free' WHERE route.idroute = bus.idroute AND bus.idbus = driver.idbus AND route.idroute = ?";
 
-    public RouteDAOImpl(PoolConection poolConection) {
-        super(poolConection);
+    public RouteDAOImpl(PoolConnection poolConnection) {
+        super(poolConnection);
     }
 
     @Override

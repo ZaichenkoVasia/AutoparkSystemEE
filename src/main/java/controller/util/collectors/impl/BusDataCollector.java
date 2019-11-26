@@ -16,7 +16,6 @@ public class BusDataCollector extends DataCollector<Bus> {
     @Override
     public Bus retrieveData(HttpServletRequest request) throws WrongInputDataRuntimeException {
         LOGGER.info("Retrieving bus data from request");
-        int counter = 7;
         String plate = request.getParameter("plate");
         String model = request.getParameter("model");
         String mileage = request.getParameter("mileage");
@@ -25,9 +24,7 @@ public class BusDataCollector extends DataCollector<Bus> {
         String release = request.getParameter("release");
         String seats = request.getParameter("seats");
         Schedule schedule = new ScheduleDataCollector().retrieveData(request);
-        Bus bus;
-        //if (plate != null) {
-        bus = Bus.builder()
+        return Bus.builder()
                 .withPlate(plate)
                 .withModel(model)
                 .withMileage(Integer.valueOf(mileage))
@@ -38,11 +35,5 @@ public class BusDataCollector extends DataCollector<Bus> {
                 .withStatus("free")
                 .withSchedule(schedule)
                 .build();
-//        if (counter != 0) {
-//            LOGGER.warn("Not all input forms filled correctly");
-//            request.setAttribute("bus", bus);
-//            throw new WrongInputDataRuntimeException("Not all input form filled correctly");
-//        }
-        return bus;
     }
 }

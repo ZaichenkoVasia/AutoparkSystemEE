@@ -6,16 +6,20 @@ import controller.service.*;
 import controller.service.encoder.EncoderPassword;
 import controller.service.impl.*;
 import controller.service.mapper.*;
+import controller.service.validator.impl.AdminValidator;
+import controller.service.validator.impl.BusValidator;
+import controller.service.validator.impl.DriverValidator;
+import controller.service.validator.impl.RouteValidator;
 import controller.util.collectors.impl.*;
 import model.dao.*;
-import model.dao.connection.PoolConection;
+import model.dao.connection.PoolConnection;
 import model.dao.impl.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ApplicationContextInjector {
-    private static final PoolConection CONNECTOR = new PoolConection();
+    private static final PoolConnection CONNECTOR = new PoolConnection();
 
     private static final AdminDAO ADMIN_DAO = new AdminDAOImpl(CONNECTOR);
     private static final BusDAO BUS_DAO = new BusDAOImpl(CONNECTOR);
@@ -32,11 +36,15 @@ public class ApplicationContextInjector {
     private static final UserMapper USER_MAPPER = new UserMapper();
 
     private static final EncoderPassword ENCODER_PASSWORD = new EncoderPassword();
+    private static final AdminValidator ADMIN_VALIDATOR = new AdminValidator();
+    private static final BusValidator BUS_VALIDATOR = new BusValidator();
+    private static final DriverValidator DRIVER_VALIDATOR = new DriverValidator();
+    private static final RouteValidator ROUTE_VALIDATOR = new RouteValidator();
 
-    private static final AdminService ADMIN_SERVICE = new AdminServiceImpl(ADMIN_DAO, ADMIN_MAPPER);
-    private static final BusService BUS_SERVICE = new BusServiceImpl(BUS_DAO, BUS_MAPPER);
-    private static final DriverService DRIVER_SERVICE = new DriverServiceImpl(DRIVER_DAO, DRIVER_MAPPER);
-    private static final RouteService ROUTE_SERVICE = new RouteServiceImpl(ROUTE_DAO, ROUTE_MAPPER);
+    private static final AdminService ADMIN_SERVICE = new AdminServiceImpl(ADMIN_DAO, ADMIN_MAPPER, ADMIN_VALIDATOR);
+    private static final BusService BUS_SERVICE = new BusServiceImpl(BUS_DAO, BUS_MAPPER, BUS_VALIDATOR);
+    private static final DriverService DRIVER_SERVICE = new DriverServiceImpl(DRIVER_DAO, DRIVER_MAPPER, DRIVER_VALIDATOR);
+    private static final RouteService ROUTE_SERVICE = new RouteServiceImpl(ROUTE_DAO, ROUTE_MAPPER, ROUTE_VALIDATOR);
     private static final ScheduleService SCHEDULE_SERVICE = new ScheduleServiceImpl(SCHEDULE_DAO, SCHEDULE_MAPPER);
     private static final UserService USER_SERVICE = new UserServiceImpl(USER_DAO, USER_MAPPER, ENCODER_PASSWORD);
     private static final BusStationService BUS_STATION_SERVICE = new BusStationServiceImpl(

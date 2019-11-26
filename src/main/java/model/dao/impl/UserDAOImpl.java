@@ -2,7 +2,7 @@ package model.dao.impl;
 
 import model.dao.AbstractGenericDAO;
 import model.dao.UserDAO;
-import model.dao.connection.PoolConection;
+import model.dao.connection.PoolConnection;
 import model.entity.UserEntity;
 
 import java.sql.PreparedStatement;
@@ -17,8 +17,8 @@ public class UserDAOImpl extends AbstractGenericDAO<UserEntity> implements UserD
     private static final String UPDATE_BY_ID = "UPDATE user SET login = ?, password = ?, role = ? WHERE iduser = ?";
     private static final String DELETE_BY_ID = "DELETE FROM user WHERE iduser = ?";
 
-    public UserDAOImpl(PoolConection poolConection) {
-        super(poolConection);
+    public UserDAOImpl(PoolConnection poolConnection) {
+        super(poolConnection);
     }
 
     @Override

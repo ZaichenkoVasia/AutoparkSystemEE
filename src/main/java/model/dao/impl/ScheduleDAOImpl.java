@@ -2,7 +2,7 @@ package model.dao.impl;
 
 import model.dao.AbstractGenericDAO;
 import model.dao.ScheduleDAO;
-import model.dao.connection.PoolConection;
+import model.dao.connection.PoolConnection;
 import model.entity.ScheduleEntity;
 import model.exception.DatabaseRuntimeException;
 
@@ -16,8 +16,8 @@ public class ScheduleDAOImpl extends AbstractGenericDAO<ScheduleEntity> implemen
     private static final String INSERT = "INSERT INTO schedule (departure, arrival) VALUES(?, ?)";
     private static final String UPDATE_BY_ID = "UPDATE schedule SET departure = ?, arrival = ? WHERE idschedule = ?";
 
-    public ScheduleDAOImpl(PoolConection poolConection) {
-        super(poolConection);
+    public ScheduleDAOImpl(PoolConnection poolConnection) {
+        super(poolConnection);
     }
 
     @Override

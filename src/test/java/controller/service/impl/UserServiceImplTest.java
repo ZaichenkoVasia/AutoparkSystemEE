@@ -11,13 +11,13 @@
 //import project.model.dao.UserDao;
 //import project.model.domain.User;
 //import project.model.entity.UserEntity;
-//import project.model.exception.InvalidRegistrationRuntimeException;
+//import project.model.exception.InvalidDataRuntimeException;
 //import project.model.exception.UserIsRegisteredRuntimeException;
 //import project.model.exception.UserNotFoundRuntimeException;
 //import project.model.service.encoder.PasswordEncoder;
 //import project.model.service.impl.UserServiceImpl;
 //import project.model.service.mapper.UserMapper;
-//import project.model.service.validator.UserValidator;
+//import project.model.service.validator.DriverValidator;
 //
 //import java.util.Collections;
 //import java.util.List;
@@ -53,7 +53,7 @@
 //    @Mock
 //    private UserMapper mapper;
 //    @Mock
-//    private UserValidator validator;
+//    private DriverValidator validator;
 //    @Mock
 //    private PasswordEncoder encoder;
 //
@@ -90,9 +90,9 @@
 //
 //    @Test
 //    public void shouldThrowInvalidRegistrationExceptionWhenRegisterNullUser() {
-//        exception.expect(InvalidRegistrationRuntimeException.class);
+//        exception.expect(InvalidDataRuntimeException.class);
 //
-//        doThrow(InvalidRegistrationRuntimeException.class).when(validator).validate(null);
+//        doThrow(InvalidDataRuntimeException.class).when(validator).validate(null);
 //        userService.register(null);
 //    }
 //

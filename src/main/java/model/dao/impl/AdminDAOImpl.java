@@ -2,7 +2,7 @@ package model.dao.impl;
 
 import model.dao.AbstractGenericDAO;
 import model.dao.AdminDAO;
-import model.dao.connection.PoolConection;
+import model.dao.connection.PoolConnection;
 import model.entity.AdminEntity;
 import model.entity.UserEntity;
 
@@ -17,8 +17,8 @@ public class AdminDAOImpl extends AbstractGenericDAO<AdminEntity> implements Adm
     private static final String FIND_ADMIN_BY_ID = "SELECT * FROM admin JOIN user ON admin.iduser = user.iduser WHERE user.iduser = ?";
     private static final String UPDATE_ADMIN_BY_ID = "UPDATE admin SET name = ?, surname = ?, birth = ?, degree = ?, graduation = ?, iduser = ? WHERE idadmin = ?";
 
-    public AdminDAOImpl(PoolConection poolConection) {
-        super(poolConection);
+    public AdminDAOImpl(PoolConnection poolConnection) {
+        super(poolConnection);
     }
 
     @Override

@@ -16,17 +16,9 @@ public class ScheduleDataCollector extends DataCollector<Schedule> {
         LOGGER.info("Retrieving schedule data from request");
         String departure = request.getParameter("departure");
         String arrival = request.getParameter("arrival");
-        Schedule schedule;
-        //if (departure != null) {
-        schedule = Schedule.builder()
+        return Schedule.builder()
                 .withDeparture(departure)
                 .withArrival(arrival)
                 .build();
-//        if (counter != 0) {
-//            LOGGER.warn("Not all input forms filled correctly");
-//            request.setAttribute("schedule", schedule);
-//            throw new WrongInputDataRuntimeException("Not all input form filled correctly");
-//        }
-        return schedule;
     }
 }

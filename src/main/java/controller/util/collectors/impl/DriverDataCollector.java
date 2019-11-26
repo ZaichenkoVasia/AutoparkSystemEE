@@ -22,9 +22,7 @@ public class DriverDataCollector extends DataCollector<Driver> {
         String licenseTest = request.getParameter("test");
         String salary = request.getParameter("salary");
         User user = new UserDataCollector().retrieveData(request);
-        Driver driver;
-        //if (name != null) {
-        driver = Driver.builder()
+        Driver driver = Driver.builder()
                 .withName(name)
                 .withSurname(surname)
                 .withBirth(Date.valueOf(birth))
@@ -33,11 +31,7 @@ public class DriverDataCollector extends DataCollector<Driver> {
                 .withStatus("free")
                 .withUser(user)
                 .build();
-//        if (counter != 0) {
-//            LOGGER.warn("Not all input forms filled correctly");
-//            request.setAttribute("driver", driver);
-//            throw new WrongInputDataRuntimeException("Not all input form filled correctly");
-//        }
+        request.setAttribute("driver", driver);
         return driver;
     }
 }

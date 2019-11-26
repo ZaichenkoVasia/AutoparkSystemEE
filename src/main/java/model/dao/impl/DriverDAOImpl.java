@@ -2,7 +2,7 @@ package model.dao.impl;
 
 import model.dao.AbstractGenericDAO;
 import model.dao.DriverDAO;
-import model.dao.connection.PoolConection;
+import model.dao.connection.PoolConnection;
 import model.dao.constants.Constants;
 import model.entity.BusEntity;
 import model.entity.DriverEntity;
@@ -30,8 +30,8 @@ public class DriverDAOImpl extends AbstractGenericDAO<DriverEntity> implements D
     private static final String UPDATE_STATUS_BY_ID = "UPDATE driver SET status = ? WHERE iddriver = ?";
     private static final String UPDATE = "UPDATE driver SET name = ?, surname = ?, birth = ?, license_test = ?, salary = ?, iduser = ? WHERE iddriver = ?";
 
-    public DriverDAOImpl(PoolConection poolConection) {
-        super(poolConection);
+    public DriverDAOImpl(PoolConnection poolConnection) {
+        super(poolConnection);
     }
 
     @Override

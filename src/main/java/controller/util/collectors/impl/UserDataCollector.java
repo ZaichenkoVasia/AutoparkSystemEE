@@ -16,16 +16,9 @@ public class UserDataCollector extends DataCollector<User> {
         LOGGER.info("Retrieving user data from request");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        User user;
-        user = User.builder()
+        return User.builder()
                 .withLogin(login)
                 .withPassword(password)
                 .build();
-//        if (counter != 0) {
-//            LOGGER.warn("Not all input forms filled correctly");
-//            request.setAttribute("user", user);
-//            throw new WrongInputDataRuntimeException("Not all input form filled correctly");
-//        }
-        return user;
     }
 }

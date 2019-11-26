@@ -1,5 +1,6 @@
 package controller.service.impl;
 
+import controller.exception.InvalidDataRuntimeException;
 import controller.service.ScheduleService;
 import controller.service.mapper.ScheduleMapper;
 import domain.Schedule;
@@ -9,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ScheduleServiceImpl implements ScheduleService {
@@ -25,6 +27,10 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public Integer insertElement(Schedule element) {
         LOGGER.info("Inserting element");
+        if (Objects.isNull(element)) {
+            LOGGER.error("Incorrect insertElement value");
+            throw new InvalidDataRuntimeException("Incorrect insertElement value");
+        }
         ScheduleEntity scheduleEntity = mapper.mapScheduleToUserEntity(element);
         return scheduleDAO.insertElement(scheduleEntity);
     }
@@ -32,6 +38,10 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public Schedule getElementById(Integer id) {
         LOGGER.info("Try to get element by id");
+        if (Objects.isNull(id)) {
+            LOGGER.error("Incorrect getElementById value");
+            throw new InvalidDataRuntimeException("Incorrect getElementById value");
+        }
         ScheduleEntity scheduleEntity = scheduleDAO.getElementById(id);
         return mapper.mapScheduleEntityToSchedule(scheduleEntity);
     }
@@ -39,12 +49,20 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public void deleteElement(Integer id) {
         LOGGER.info("Deleting element");
+        if (Objects.isNull(id)) {
+            LOGGER.error("Incorrect deleteElement value");
+            throw new InvalidDataRuntimeException("Incorrect deleteElement value");
+        }
         scheduleDAO.deleteElement(id);
     }
 
     @Override
     public void updateElement(Schedule element) {
         LOGGER.info("Updating element");
+        if (Objects.isNull(element)) {
+            LOGGER.error("Incorrect updateElement value");
+            throw new InvalidDataRuntimeException("Incorrect updateElement value");
+        }
         ScheduleEntity scheduleEntity = mapper.mapScheduleToUserEntity(element);
         scheduleDAO.updateElement(scheduleEntity);
     }

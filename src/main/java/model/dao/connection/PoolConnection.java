@@ -9,14 +9,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class PoolConection {
+public class PoolConnection {
 
-    private static final Logger logger = Logger.getLogger(PoolConection.class);
+    private static final Logger logger = Logger.getLogger(PoolConnection.class);
 
     private DataSource dataSource;
     private static BasicDataSource basicDataSource;
 
-    public PoolConection() {
+    public PoolConnection() {
         if (basicDataSource == null) {
             try {
                 ResourceBundle dbConfig = ResourceBundle.getBundle("database");
@@ -36,7 +36,7 @@ public class PoolConection {
         }
     }
 
-    public Connection getConnection() throws SQLException{
+    public Connection getConnection() {
         logger.info("Getting connection");
         try {
             return dataSource.getConnection();
