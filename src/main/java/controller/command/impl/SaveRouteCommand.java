@@ -1,8 +1,8 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.exception.ServiceLayerException;
-import controller.exception.WrongInputDataException;
+import controller.exception.ServiceLayerRuntimeException;
+import controller.exception.WrongInputDataRuntimeException;
 import controller.service.RouteService;
 import controller.util.collectors.impl.RouteDataCollector;
 import domain.Route;
@@ -23,7 +23,7 @@ public class SaveRouteCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         logger.info("Executing SaveRouteCommand");
         String idRoute = request.getParameter("idRoute");
         try {
@@ -36,7 +36,7 @@ public class SaveRouteCommand implements Command {
                 routeService.updateElement(route);
                 request.setAttribute("message", "route.updated");
             }
-        } catch (WrongInputDataException e) {
+        } catch (WrongInputDataRuntimeException e) {
             logger.warn("Incorrect input data.", e);
             request.setAttribute("message", "input.error");
             return "WEB-INF/jsp/editing_pages/add_route.jsp";

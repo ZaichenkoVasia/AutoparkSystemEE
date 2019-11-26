@@ -1,6 +1,6 @@
 package controller.util.collectors.impl;
 
-import controller.exception.WrongInputDataException;
+import controller.exception.WrongInputDataRuntimeException;
 import controller.util.collectors.DataCollector;
 import domain.Schedule;
 import org.apache.log4j.Logger;
@@ -12,7 +12,7 @@ public class ScheduleDataCollector extends DataCollector<Schedule> {
     private static final Logger LOGGER = Logger.getLogger(ScheduleDataCollector.class);
 
     @Override
-    public Schedule retrieveData(HttpServletRequest request) throws WrongInputDataException {
+    public Schedule retrieveData(HttpServletRequest request) throws WrongInputDataRuntimeException {
         LOGGER.info("Retrieving schedule data from request");
         String departure = request.getParameter("departure");
         String arrival = request.getParameter("arrival");
@@ -25,7 +25,7 @@ public class ScheduleDataCollector extends DataCollector<Schedule> {
 //        if (counter != 0) {
 //            LOGGER.warn("Not all input forms filled correctly");
 //            request.setAttribute("schedule", schedule);
-//            throw new WrongInputDataException("Not all input form filled correctly");
+//            throw new WrongInputDataRuntimeException("Not all input form filled correctly");
 //        }
         return schedule;
     }

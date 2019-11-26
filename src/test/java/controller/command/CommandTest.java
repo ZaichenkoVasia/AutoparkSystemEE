@@ -2,8 +2,8 @@
 //
 //
 //import controller.constants.PathJSP;
-//import controller.exception.ServiceLayerException;
-//import controller.exception.WrongInputDataException;
+//import controller.exception.ServiceLayerRuntimeException;
+//import controller.exception.WrongInputDataRuntimeException;
 //import org.junit.After;
 //import org.junit.Before;
 //import org.junit.Test;
@@ -35,7 +35,7 @@
 //    }
 //
 //    @Test
-//    public void execute() throws ServiceLayerException, WrongInputDataException {
+//    public void execute() throws ServiceLayerRuntimeException, WrongInputDataRuntimeException {
 //        when(command.execute(request, response)).thenReturn("index.jsp");
 //        assertEquals("index.jsp", command.execute(request, response));
 //        assertNotNull(command.execute(request, response));

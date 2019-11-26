@@ -1,6 +1,6 @@
 //package controller.service.impl;
 //
-//import controller.exception.ServiceLayerException;
+//import controller.exception.ServiceLayerRuntimeException;
 //import domain.Route;
 //import model.dao.impl.RouteDAOImpl;
 //import model.exception.DatabaseRuntimeException;
@@ -31,7 +31,7 @@
 //    }
 //
 //    @Test
-//    public void searchByCriteria() throws DatabaseRuntimeException, ServiceLayerException {
+//    public void searchByCriteria() throws DatabaseRuntimeException, ServiceLayerRuntimeException {
 //        when(routeDAO.searchByCriteria(anyString(), anyString())).thenReturn(Arrays.asList(new Route(), new Route()));
 //        assertEquals(2, routeService.searchByCriteria(anyString(), anyString()).size());
 //        verify(routeDAO, atLeast(1)).searchByCriteria(anyString(), anyString());

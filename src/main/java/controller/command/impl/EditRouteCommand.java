@@ -1,7 +1,7 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.exception.ServiceLayerException;
+import controller.exception.ServiceLayerRuntimeException;
 import controller.service.RouteService;
 import domain.Route;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +16,7 @@ public class EditRouteCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         String idRoute = request.getParameter("idRoute");
         Route route = routeService.getElementById(Integer.parseInt(idRoute));
         request.setAttribute("route", route);

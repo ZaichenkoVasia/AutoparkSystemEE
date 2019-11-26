@@ -31,6 +31,16 @@ public class Admin {
         this.graduation = admin.graduation;
     }
 
+    public Admin(Admin admin, User user) {
+        this.id = admin.id;
+        this.name = admin.name;
+        this.surname = admin.surname;
+        this.birth = admin.birth;
+        this.user = user;
+        this.degree = admin.degree;
+        this.graduation = admin.graduation;
+    }
+
     public Integer getId() {
         return id;
     }

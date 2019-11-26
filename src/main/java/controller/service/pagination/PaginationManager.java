@@ -1,11 +1,11 @@
 package controller.service.pagination;
 
-import controller.exception.ServiceLayerException;
+import controller.exception.ServiceLayerRuntimeException;
 import controller.service.GenericService;
 
 public class PaginationManager<E> {
 
-    public Carriage getCarriage(String pageNumber, String lastPage, String entityPerPage, GenericService<E, Integer> genericService) throws ServiceLayerException {
+    public Carriage getCarriage(String pageNumber, String lastPage, String entityPerPage, GenericService<E, Integer> genericService) throws ServiceLayerRuntimeException {
         int currentPage = 0;
         int totalPages = 0;
         int totalEntityAmount = 0;

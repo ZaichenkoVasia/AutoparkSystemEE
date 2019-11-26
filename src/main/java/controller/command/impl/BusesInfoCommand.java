@@ -1,7 +1,7 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.exception.ServiceLayerException;
+import controller.exception.ServiceLayerRuntimeException;
 import controller.service.BusService;
 import domain.Bus;
 
@@ -18,7 +18,7 @@ public class BusesInfoCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         String idRoute = request.getParameter("idRoute");
         List<Bus> buses = busService.getBusesByIdRoute(Integer.valueOf(idRoute));
         if (buses.size() == 0){

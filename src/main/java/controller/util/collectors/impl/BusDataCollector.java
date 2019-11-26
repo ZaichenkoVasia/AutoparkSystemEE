@@ -1,6 +1,6 @@
 package controller.util.collectors.impl;
 
-import controller.exception.WrongInputDataException;
+import controller.exception.WrongInputDataRuntimeException;
 import controller.util.collectors.DataCollector;
 import domain.Bus;
 import domain.Schedule;
@@ -14,7 +14,7 @@ public class BusDataCollector extends DataCollector<Bus> {
     private static final Logger LOGGER = Logger.getLogger(BusDataCollector.class);
 
     @Override
-    public Bus retrieveData(HttpServletRequest request) throws WrongInputDataException {
+    public Bus retrieveData(HttpServletRequest request) throws WrongInputDataRuntimeException {
         LOGGER.info("Retrieving bus data from request");
         int counter = 7;
         String plate = request.getParameter("plate");
@@ -41,7 +41,7 @@ public class BusDataCollector extends DataCollector<Bus> {
 //        if (counter != 0) {
 //            LOGGER.warn("Not all input forms filled correctly");
 //            request.setAttribute("bus", bus);
-//            throw new WrongInputDataException("Not all input form filled correctly");
+//            throw new WrongInputDataRuntimeException("Not all input form filled correctly");
 //        }
         return bus;
     }

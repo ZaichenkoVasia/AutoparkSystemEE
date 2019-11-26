@@ -3,6 +3,7 @@ package controller.context;
 import controller.command.Command;
 import controller.command.impl.*;
 import controller.service.*;
+import controller.service.encoder.EncoderPassword;
 import controller.service.impl.*;
 import controller.service.mapper.*;
 import controller.util.collectors.impl.*;
@@ -30,14 +31,17 @@ public class ApplicationContextInjector {
     private static final ScheduleMapper SCHEDULE_MAPPER = new ScheduleMapper();
     private static final UserMapper USER_MAPPER = new UserMapper();
 
+    private static final EncoderPassword ENCODER_PASSWORD = new EncoderPassword();
+
     private static final AdminService ADMIN_SERVICE = new AdminServiceImpl(ADMIN_DAO, ADMIN_MAPPER);
     private static final BusService BUS_SERVICE = new BusServiceImpl(BUS_DAO, BUS_MAPPER);
     private static final DriverService DRIVER_SERVICE = new DriverServiceImpl(DRIVER_DAO, DRIVER_MAPPER);
     private static final RouteService ROUTE_SERVICE = new RouteServiceImpl(ROUTE_DAO, ROUTE_MAPPER);
     private static final ScheduleService SCHEDULE_SERVICE = new ScheduleServiceImpl(SCHEDULE_DAO, SCHEDULE_MAPPER);
-    private static final UserService USER_SERVICE = new UserServiceImpl(USER_DAO, USER_MAPPER);
+    private static final UserService USER_SERVICE = new UserServiceImpl(USER_DAO, USER_MAPPER, ENCODER_PASSWORD);
     private static final BusStationService BUS_STATION_SERVICE = new BusStationServiceImpl(
-            ADMIN_SERVICE, BUS_SERVICE, DRIVER_SERVICE, ROUTE_SERVICE, SCHEDULE_SERVICE, USER_SERVICE);
+            ADMIN_SERVICE, BUS_SERVICE, DRIVER_SERVICE, ROUTE_SERVICE,
+            SCHEDULE_SERVICE, USER_SERVICE, ENCODER_PASSWORD);
 
     private static final AdminDataCollector ADMIN_DATA_COLLECTOR = new AdminDataCollector();
     private static final BusDataCollector BUS_DATA_COLLECTOR = new BusDataCollector();
@@ -51,7 +55,7 @@ public class ApplicationContextInjector {
     private static Map<String, Command> initCommand() {
         Map<String, Command> commandNameToCommand = new HashMap<>();
         commandNameToCommand.put("EMPTY", new EmptyCommand());
-        commandNameToCommand.put("LOGIN", new LoginCommand(USER_SERVICE, USER_DATA_COLLECTOR));
+        commandNameToCommand.put("LOGIN", new LoginCommand(USER_SERVICE, USER_DATA_COLLECTOR, ENCODER_PASSWORD));
         commandNameToCommand.put("LOGIN_PAGE", new LoginPageCommand());
         commandNameToCommand.put("LOGOUT_PAGE", new LogOutCommand());
         commandNameToCommand.put("LANGUAGE", new LanguageCommand());

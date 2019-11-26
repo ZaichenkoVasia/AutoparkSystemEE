@@ -1,7 +1,7 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.exception.ServiceLayerException;
+import controller.exception.ServiceLayerRuntimeException;
 import controller.service.DriverService;
 import controller.service.pagination.Carriage;
 import controller.service.pagination.PaginationManager;
@@ -20,7 +20,7 @@ public class DriversCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         String page = request.getParameter("page");
         String lastPage = request.getParameter("lastPage");
         PaginationManager<Driver> paginationManager = new PaginationManager<>();

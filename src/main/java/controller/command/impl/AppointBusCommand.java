@@ -1,7 +1,7 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.exception.ServiceLayerException;
+import controller.exception.ServiceLayerRuntimeException;
 import controller.service.BusStationService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +16,7 @@ public class AppointBusCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException{
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         Integer idRoute = Integer.valueOf(request.getParameter("idRoute"));
         Integer idBus = Integer.valueOf(request.getParameter("idBus"));
         if (busStationService.appointBusToRoute(idRoute, idBus)) {

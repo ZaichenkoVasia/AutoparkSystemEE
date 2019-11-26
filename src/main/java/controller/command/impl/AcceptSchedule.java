@@ -1,7 +1,7 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.exception.ServiceLayerException;
+import controller.exception.ServiceLayerRuntimeException;
 import controller.service.DriverService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +16,7 @@ public class AcceptSchedule implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         String idDriver = request.getParameter("idDriver");
         String status = request.getParameter("status");
         if (!status.equals("new")){

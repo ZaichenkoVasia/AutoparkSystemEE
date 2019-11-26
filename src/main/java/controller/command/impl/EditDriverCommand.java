@@ -1,7 +1,7 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.exception.ServiceLayerException;
+import controller.exception.ServiceLayerRuntimeException;
 import controller.service.DriverService;
 import domain.Driver;
 
@@ -17,7 +17,7 @@ public class EditDriverCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         Integer idDriver = Integer.valueOf(request.getParameter("idDriver"));
         Driver driver = driverService.getElementById(idDriver);
         request.setAttribute("driver", driver);

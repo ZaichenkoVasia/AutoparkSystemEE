@@ -1,7 +1,9 @@
 package controller.service.impl;
 
-import controller.exception.ServiceLayerException;
+import controller.exception.ServiceLayerRuntimeException;
+import controller.exception.UserNotExistRuntimeException;
 import controller.service.UserService;
+import controller.service.encoder.EncoderPassword;
 import controller.service.mapper.UserMapper;
 import domain.User;
 import model.dao.UserDAO;
@@ -17,18 +19,26 @@ public class UserServiceImpl implements UserService {
 
     private UserDAO userDAO;
     private UserMapper mapper;
+    private EncoderPassword encoderPassword;
 
-    public UserServiceImpl(UserDAO userDAO, UserMapper mapper) {
+    public UserServiceImpl(UserDAO userDAO, UserMapper mapper, EncoderPassword encoderPassword) {
         this.userDAO = userDAO;
         this.mapper = mapper;
+        this.encoderPassword = encoderPassword;
     }
 
     @Override
-    public User findUserByLoginData(User user) throws ServiceLayerException {
+    public User findUserByLoginData(User user) throws ServiceLayerRuntimeException {
+        String encodedPassword = encoderPassword.encode(user.getPassword());
         LOGGER.info("Try to find user by login data");
         UserEntity userEntity = mapper.mapUserToUserEntity(user);
         userEntity = userDAO.findByLogin(userEntity);
+        if (!userEntity.getPassword().equals(encodedPassword)) {
+            LOGGER.error("User with this login and password is not exist");
+            throw new UserNotExistRuntimeException("User with this login and password is not exist");
+        }
         return mapper.mapUserEntityToUser(userEntity);
+
     }
 
     @Override

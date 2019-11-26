@@ -1,7 +1,7 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.exception.ServiceLayerException;
+import controller.exception.ServiceLayerRuntimeException;
 import controller.service.BusService;
 import domain.Bus;
 
@@ -17,7 +17,7 @@ public class EditBusCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         String idBus = request.getParameter("idBus");
         Bus bus = busService.getElementById(Integer.parseInt(idBus));
         request.setAttribute("bus", bus);

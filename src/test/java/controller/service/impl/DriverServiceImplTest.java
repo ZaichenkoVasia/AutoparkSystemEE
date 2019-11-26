@@ -1,6 +1,6 @@
 //package controller.service.impl;
 //
-//import controller.exception.ServiceLayerException;
+//import controller.exception.ServiceLayerRuntimeException;
 //import domain.Driver;
 //import model.dao.impl.DriverDAOImpl;
 //import model.exception.DatabaseRuntimeException;
@@ -31,14 +31,14 @@
 //    }
 //
 ////    @Test
-////    public void getDriverByUserId() throws DatabaseRuntimeException, ServiceLayerException {
+////    public void getDriverByUserId() throws DatabaseRuntimeException, ServiceLayerRuntimeException {
 ////        when(driverDAO.getDriverByUserId(anyInt(), any())).thenReturn(new Driver.DriverBuilder().setName("User").createDriver());
 ////        assertEquals("User", driverService.getDriverByUserId(anyInt(), any()).getName());
 ////        verify(driverDAO, atLeast(1)).getDriverByUserId(anyInt(), any());
 ////    }
 //
 //    @Test
-//    public void getFreeDrivers() throws DatabaseRuntimeException, ServiceLayerException {
+//    public void getFreeDrivers() throws DatabaseRuntimeException, ServiceLayerRuntimeException {
 //        when(driverDAO.getFreeDrivers()).thenReturn(Arrays.asList(new Driver(), new Driver()));
 //        assertEquals(2, driverService.getFreeDrivers().size());
 //        verify(driverDAO, atLeast(1)).getFreeDrivers();

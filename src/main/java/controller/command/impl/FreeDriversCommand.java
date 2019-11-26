@@ -1,7 +1,7 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.exception.ServiceLayerException;
+import controller.exception.ServiceLayerRuntimeException;
 import controller.service.DriverService;
 import domain.Driver;
 
@@ -18,7 +18,7 @@ public class FreeDriversCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         String idBus = request.getParameter("idBus");
         List<Driver> drivers = driverService.getFreeDrivers();
         if (drivers.size() == 0) {

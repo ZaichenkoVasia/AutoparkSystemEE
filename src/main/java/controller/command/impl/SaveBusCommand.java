@@ -1,8 +1,8 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.exception.ServiceLayerException;
-import controller.exception.WrongInputDataException;
+import controller.exception.ServiceLayerRuntimeException;
+import controller.exception.WrongInputDataRuntimeException;
 import controller.service.BusStationService;
 import controller.util.collectors.impl.BusDataCollector;
 import domain.Bus;
@@ -23,7 +23,7 @@ public class SaveBusCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         logger.info("Executing SaveBusCommand");
         String idBus = request.getParameter("idBus");
         String idSchedule = request.getParameter("idSchedule");
@@ -34,7 +34,7 @@ public class SaveBusCommand implements Command {
             }else {
                 request.setAttribute("message", "bus.updated");
             }
-        } catch (WrongInputDataException e) {
+        } catch (WrongInputDataRuntimeException e) {
             logger.warn("Incorrect input data", e);
             request.setAttribute("message", "input.error");
             return "WEB-INF/jsp/editing_pages/add_bus.jsp";

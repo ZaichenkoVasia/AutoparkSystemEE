@@ -22,6 +22,14 @@ public class User {
         this.role = user.role;
     }
 
+    public User(User user, String password) {
+        this.id = user.id;
+        this.login = user.login;
+        this.password = password;
+        this.role = user.role;
+    }
+
+
     public Integer getId() {
         return id;
     }

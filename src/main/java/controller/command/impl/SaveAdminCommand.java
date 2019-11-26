@@ -1,8 +1,8 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.exception.ServiceLayerException;
-import controller.exception.WrongInputDataException;
+import controller.exception.ServiceLayerRuntimeException;
+import controller.exception.WrongInputDataRuntimeException;
 import controller.service.BusStationService;
 import controller.util.collectors.impl.AdminDataCollector;
 import domain.Admin;
@@ -23,7 +23,7 @@ public class SaveAdminCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         logger.info("Executing SaveAdminCommand");
         String idAdmin = request.getParameter("idAdmin");
         String idUser = request.getParameter("idUser");
@@ -34,7 +34,7 @@ public class SaveAdminCommand implements Command {
             }else {
                 request.setAttribute("message", "admin.updated");
             }
-        } catch (WrongInputDataException e) {
+        } catch (WrongInputDataRuntimeException e) {
             logger.warn("Incorrect input data", e);
             request.setAttribute("message", "input.error");
             return "WEB-INF/jsp/admin/account.jsp";

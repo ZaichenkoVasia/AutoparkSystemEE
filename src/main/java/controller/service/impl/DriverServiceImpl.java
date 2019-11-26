@@ -1,6 +1,6 @@
 package controller.service.impl;
 
-import controller.exception.ServiceLayerException;
+import controller.exception.ServiceLayerRuntimeException;
 import controller.service.DriverService;
 import controller.service.mapper.DriverMapper;
 import domain.Driver;
@@ -59,7 +59,7 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public List<Driver> getFreeDrivers() throws ServiceLayerException {
+    public List<Driver> getFreeDrivers() throws ServiceLayerRuntimeException {
         LOGGER.info("Getting free drivers");
         List<DriverEntity> result = driverDAO.getFreeDrivers();
         return result.isEmpty() ? Collections.emptyList()
@@ -69,7 +69,7 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public void updateBusInfoForDriver(Integer idBus, Integer idDriver) throws ServiceLayerException {
+    public void updateBusInfoForDriver(Integer idBus, Integer idDriver) throws ServiceLayerRuntimeException {
         LOGGER.info("Assigning bus for driver");
         driverDAO.updateBusInfoForDriver(idBus, idDriver);
     }

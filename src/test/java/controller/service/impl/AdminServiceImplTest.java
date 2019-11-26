@@ -1,6 +1,6 @@
 //package controller.service.impl;
 //
-//import controller.exception.ServiceLayerException;
+//import controller.exception.ServiceLayerRuntimeException;
 //import domain.Admin;
 //import model.dao.impl.AdminDAOImpl;
 //import model.exception.DatabaseRuntimeException;
@@ -28,7 +28,7 @@
 //    }
 //
 //    @Test
-//    public void getAdminByUserId() throws DatabaseRuntimeException, ServiceLayerException {
+//    public void getAdminByUserId() throws DatabaseRuntimeException, ServiceLayerRuntimeException {
 //        when(adminDAO.getAdminByUserId(anyInt())).thenReturn(new Admin.AdminBuilder().setId(1).createAdmin());
 //        assertEquals(new Integer(1), adminService.getAdminByUserId(anyInt()).getId());
 //        verify(adminDAO, atLeast(1)).getAdminByUserId(anyInt());

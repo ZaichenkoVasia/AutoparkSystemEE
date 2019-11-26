@@ -1,7 +1,8 @@
 package controller.service.impl;
 
-import controller.exception.ServiceLayerException;
+import controller.exception.ServiceLayerRuntimeException;
 import controller.service.*;
+import controller.service.encoder.EncoderPassword;
 import domain.*;
 import org.apache.log4j.Logger;
 
@@ -14,16 +15,19 @@ public class BusStationServiceImpl implements BusStationService {
     private RouteService routeService;
     private ScheduleService scheduleService;
     private UserService userService;
+    private EncoderPassword encoderPassword;
 
     public BusStationServiceImpl(AdminService adminService, BusService busService,
                                  DriverService driverService, RouteService routeService,
-                                 ScheduleService scheduleService, UserService userService) {
+                                 ScheduleService scheduleService, UserService userService,
+                                 EncoderPassword encoderPassword) {
         this.adminService = adminService;
         this.busService = busService;
         this.driverService = driverService;
         this.routeService = routeService;
         this.scheduleService = scheduleService;
         this.userService = userService;
+        this.encoderPassword = encoderPassword;
     }
 
     @Override
@@ -103,7 +107,7 @@ public class BusStationServiceImpl implements BusStationService {
     }
 
     @Override
-    public void deleteDriver(Integer idDriver) throws ServiceLayerException {
+    public void deleteDriver(Integer idDriver) throws ServiceLayerRuntimeException {
         LOGGER.info("Deleting bus from the system");
         Driver driver = driverService.getElementById(idDriver);
         if (driver.getStatus().equals("work") || driver.getStatus().equals("new")) {
@@ -120,10 +124,13 @@ public class BusStationServiceImpl implements BusStationService {
     }
 
     @Override
-    public Boolean saveAdmin(Admin admin, User user, String idAdmin, String idUser) throws ServiceLayerException {
+    public Boolean saveAdmin(Admin admin, User user, String idAdmin, String idUser) throws ServiceLayerRuntimeException {
         LOGGER.info("Saving admin");
         if (idUser == null || idUser.isEmpty()) {
+            String encodedPassword = encoderPassword.encode(user.getPassword());
+            user = new User(user, encodedPassword);
             user = new User(user, userService.insertElement(user));
+            admin = new Admin(admin, user);
             adminService.insertElement(admin);
             return true;
         } else {
@@ -136,9 +143,11 @@ public class BusStationServiceImpl implements BusStationService {
     }
 
     @Override
-    public Boolean saveDriver(Driver driver, User user, String idDriver, String idUser) throws ServiceLayerException {
+    public Boolean saveDriver(Driver driver, User user, String idDriver, String idUser) throws ServiceLayerRuntimeException {
         LOGGER.info("Saving driver");
         if (idUser == null || idUser.isEmpty()) {
+            String encodedPassword = encoderPassword.encode(user.getPassword());
+            user = new User(user, encodedPassword);
             user = new User(user, userService.insertElement(user));
             driver = new Driver(driver, user);
             driverService.insertElement(driver);
@@ -154,7 +163,7 @@ public class BusStationServiceImpl implements BusStationService {
     }
 
     @Override
-    public Boolean saveBus(Bus bus, Schedule schedule, String idBus, String idSchedule) throws ServiceLayerException {
+    public Boolean saveBus(Bus bus, Schedule schedule, String idBus, String idSchedule) throws ServiceLayerRuntimeException {
         LOGGER.info("Saving bus");
         if (idBus == null || idBus.isEmpty()) {
             schedule = new Schedule(schedule, scheduleService.insertElement(schedule));
@@ -172,7 +181,7 @@ public class BusStationServiceImpl implements BusStationService {
     }
 
     @Override
-    public void cancelBus(Integer idBus, Integer idRoute) throws ServiceLayerException {
+    public void cancelBus(Integer idBus, Integer idRoute) throws ServiceLayerRuntimeException {
         LOGGER.info("Cancel bus from the route");
         busService.cancelBusFromRoute(idBus);
         Integer busCounter = busService.countBusesOnRouteById(idRoute);
@@ -182,7 +191,7 @@ public class BusStationServiceImpl implements BusStationService {
     }
 
     @Override
-    public Boolean cancelDriver(Integer idBus) throws ServiceLayerException {
+    public Boolean cancelDriver(Integer idBus) throws ServiceLayerRuntimeException {
         LOGGER.info("Cancel driver from bus");
         Driver driver = driverService.getDriverByBusId(idBus);
         if (driver == null) {

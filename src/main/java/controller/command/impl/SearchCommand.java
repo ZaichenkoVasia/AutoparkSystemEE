@@ -1,7 +1,7 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.exception.ServiceLayerException;
+import controller.exception.ServiceLayerRuntimeException;
 import controller.service.RouteService;
 import domain.Route;
 
@@ -18,7 +18,7 @@ public class SearchCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         String departure = request.getParameter("departure");
         String arrival = request.getParameter("arrival");
         if (!departure.isEmpty() && !arrival.isEmpty()) {

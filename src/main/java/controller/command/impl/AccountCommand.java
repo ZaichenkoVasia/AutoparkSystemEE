@@ -1,7 +1,7 @@
 package controller.command.impl;
 
 import controller.command.Command;
-import controller.exception.ServiceLayerException;
+import controller.exception.ServiceLayerRuntimeException;
 import controller.service.*;
 import domain.*;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ public class AccountCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerException{
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null){

@@ -1,6 +1,6 @@
 package controller.util.collectors.impl;
 
-import controller.exception.WrongInputDataException;
+import controller.exception.WrongInputDataRuntimeException;
 import controller.util.collectors.DataCollector;
 import domain.Admin;
 import domain.User;
@@ -14,7 +14,7 @@ public class AdminDataCollector extends DataCollector<Admin> {
     private static final Logger LOGGER = Logger.getLogger(AdminDataCollector.class);
 
     @Override
-    public Admin retrieveData(HttpServletRequest request) throws WrongInputDataException {
+    public Admin retrieveData(HttpServletRequest request) throws WrongInputDataRuntimeException {
         LOGGER.info("Retrieving admin data from request");
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
@@ -36,7 +36,7 @@ public class AdminDataCollector extends DataCollector<Admin> {
 //        if (counter != 0) {
 //            LOGGER.warn("Not all input forms filled correctly");
 //            request.setAttribute("admin", admin);
-//            throw new WrongInputDataException("Not all input form filled correctly");
+//            throw new WrongInputDataRuntimeException("Not all input form filled correctly");
 //        }
         return admin;
     }

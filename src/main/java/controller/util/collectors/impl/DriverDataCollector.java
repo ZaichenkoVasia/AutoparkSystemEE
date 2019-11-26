@@ -1,6 +1,6 @@
 package controller.util.collectors.impl;
 
-import controller.exception.WrongInputDataException;
+import controller.exception.WrongInputDataRuntimeException;
 import controller.util.collectors.DataCollector;
 import domain.Driver;
 import domain.User;
@@ -14,7 +14,7 @@ public class DriverDataCollector extends DataCollector<Driver> {
     private static final Logger LOGGER = Logger.getLogger(DriverDataCollector.class);
 
     @Override
-    public Driver retrieveData(HttpServletRequest request) throws WrongInputDataException {
+    public Driver retrieveData(HttpServletRequest request) throws WrongInputDataRuntimeException {
         LOGGER.info("Retrieving driver data from request");
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
@@ -36,7 +36,7 @@ public class DriverDataCollector extends DataCollector<Driver> {
 //        if (counter != 0) {
 //            LOGGER.warn("Not all input forms filled correctly");
 //            request.setAttribute("driver", driver);
-//            throw new WrongInputDataException("Not all input form filled correctly");
+//            throw new WrongInputDataRuntimeException("Not all input form filled correctly");
 //        }
         return driver;
     }
