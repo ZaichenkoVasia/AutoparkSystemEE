@@ -12,7 +12,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 public class RouteDAOImpl extends AbstractGenericDAO<RouteEntity> implements RouteDAO {
     private static final String COUNT = "SELECT COUNT(*) FROM route";
@@ -58,17 +57,17 @@ public class RouteDAOImpl extends AbstractGenericDAO<RouteEntity> implements Rou
     }
 
     @Override
-    public void setStatusEmpty(Integer idRoute) throws DatabaseRuntimeException {
+    public void setStatusEmpty(Integer idRoute) {
         updateFieldByIntegerParam(idRoute, Constants.STATUS_EMPTY, UPDATE_BY_STATUS);
     }
 
     @Override
-    public void setStatusWork(Integer idRoute) throws DatabaseRuntimeException {
+    public void setStatusWork(Integer idRoute) {
         updateFieldByIntegerParam(idRoute, Constants.STATUS_WORK, UPDATE_BY_STATUS);
     }
 
     @Override
-    public void cancelAll(Integer idRoute) throws DatabaseRuntimeException {
+    public void cancelAll(Integer idRoute) {
         updateByIntegerParam(idRoute, CANSEL_ALL);
     }
 
@@ -99,7 +98,7 @@ public class RouteDAOImpl extends AbstractGenericDAO<RouteEntity> implements Rou
 
     @Override
     public List<RouteEntity> findPaginatedList(int startIdx, int amountElements) {
-        return getPaginatedList(startIdx, amountElements, FIND_ALL);
+        return findPaginatedList(startIdx, amountElements, FIND_ALL);
     }
 
     @Override

@@ -131,7 +131,7 @@ public abstract class AbstractGenericDAO<E> {
 
     protected Integer findCountByIntegerParam(Integer dataInt, String query) {
         LOGGER.info("Counting");
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         Integer res = null;
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -147,8 +147,8 @@ public abstract class AbstractGenericDAO<E> {
         return res;
     }
 
-    protected List<E> getPaginatedList(int startIdx, int amountElements, String query) {
-        ResultSet resultSet = null;
+    protected List<E> findPaginatedList(int startIdx, int amountElements, String query) {
+        ResultSet resultSet;
         List<E> list;
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -165,7 +165,7 @@ public abstract class AbstractGenericDAO<E> {
 
     protected List<E> findListByIntegerParam(Integer dataInt, String query) {
         LOGGER.info("Getting");
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         List<E> list;
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -181,7 +181,7 @@ public abstract class AbstractGenericDAO<E> {
 
     protected List<E> findListByStringParam(String data, String query) {
         LOGGER.info("Getting");
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         List<E> list;
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {

@@ -14,7 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 public class DriverDAOImpl extends AbstractGenericDAO<DriverEntity> implements DriverDAO {
 
@@ -130,7 +129,7 @@ public class DriverDAOImpl extends AbstractGenericDAO<DriverEntity> implements D
 
     @Override
     public List<DriverEntity> findPaginatedList(int startIdx, int amountElements) {
-        return super.getPaginatedList(startIdx, amountElements, FIND_ALL);
+        return findPaginatedList(startIdx, amountElements, FIND_ALL);
     }
 
     @Override

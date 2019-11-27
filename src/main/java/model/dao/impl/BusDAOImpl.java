@@ -14,7 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 public class BusDAOImpl extends AbstractGenericDAO<BusEntity> implements BusDAO {
     private static final String COUNT_ALL = "SELECT COUNT(*) FROM bus";
@@ -116,7 +115,7 @@ public class BusDAOImpl extends AbstractGenericDAO<BusEntity> implements BusDAO 
 
     @Override
     public List<BusEntity> findPaginatedList(int startIdx, int amountElements) {
-        return super.getPaginatedList(startIdx, amountElements, FIND_ALL);
+        return findPaginatedList(startIdx, amountElements, FIND_ALL);
     }
 
     @Override
