@@ -2,7 +2,7 @@ package controller.util.collectors.impl;
 
 import controller.exception.WrongInputDataRuntimeException;
 import controller.util.collectors.DataCollector;
-import domain.User;
+import model.domain.User;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;

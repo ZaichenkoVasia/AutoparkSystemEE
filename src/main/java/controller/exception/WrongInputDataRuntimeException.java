@@ -10,10 +10,6 @@ public class WrongInputDataRuntimeException extends RuntimeException {
         super(message);
     }
 
-    public WrongInputDataRuntimeException(Throwable cause) {
-        super(cause);
-    }
-
     public WrongInputDataRuntimeException(String message, Throwable cause) {
         super(message, cause);
     }

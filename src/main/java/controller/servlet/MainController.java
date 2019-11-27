@@ -1,7 +1,7 @@
 package controller.servlet;
 
 import controller.command.Command;
-import controller.command.impl.EmptyCommand;
+import controller.command.impl.menu.EmptyCommand;
 import controller.context.ApplicationContextInjector;
 import org.apache.log4j.Logger;
 

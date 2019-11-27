@@ -1,0 +1,41 @@
+package controller.filter;
+
+import controller.filter.permission_list.DriverPermissions;
+import controller.filter.permission_list.UserPermissions;
+import model.domain.User;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+
+public class PermissionFilter implements Filter {
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
+
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        HttpSession session = ((HttpServletRequest) servletRequest).getSession();
+        User user = (User) session.getAttribute("user");
+        String command = servletRequest.getParameter("command");
+        if (command != null && !command.isEmpty()) {
+            try {
+                if (user == null) {
+                    UserPermissions.valueOf(command.toUpperCase());
+                } else if (user.getRole().equals("driver")) {
+                    DriverPermissions.valueOf(command.toUpperCase());
+                }
+            } catch (IllegalArgumentException exc) {
+                servletRequest.setAttribute("message", "access.denied");
+            }
+            filterChain.doFilter(servletRequest, servletResponse);
+        }
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+}
