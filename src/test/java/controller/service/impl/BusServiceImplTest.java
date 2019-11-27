@@ -30,10 +30,10 @@
 //    }
 //
 //    @Test
-//    public void getFreeBuses() throws DatabaseRuntimeException, ServiceLayerRuntimeException {
-//        when(busDAO.getFreeBuses()).thenReturn(Arrays.asList(new Bus.BusBuilder().setId(1).createBus()));
-//        assertEquals(1, busService.getFreeBuses().size());
-//        verify(busDAO, atLeast(1)).getFreeBuses();
+//    public void findFreeBuses() throws DatabaseRuntimeException, ServiceLayerRuntimeException {
+//        when(busDAO.findFreeBuses()).thenReturn(Arrays.asList(new Bus.BusBuilder().setId(1).createBus()));
+//        assertEquals(1, busService.findFreeBuses().size());
+//        verify(busDAO, atLeast(1)).findFreeBuses();
 //    }
 ////
 ////    @Test
@@ -44,10 +44,10 @@
 ////    }
 //
 //    @Test
-//    public void getBusesByIdRoute() throws DatabaseRuntimeException, ServiceLayerRuntimeException {
-//        when(busDAO.getBusesByIdRoute(anyInt())).thenReturn(new ArrayList<>());
-//        assertEquals(0, busService.getBusesByIdRoute(anyInt()).size());
-//        verify(busDAO, atLeast(1)).getBusesByIdRoute(anyInt());
+//    public void findBusesByIdRoute() throws DatabaseRuntimeException, ServiceLayerRuntimeException {
+//        when(busDAO.findBusesByIdRoute(anyInt())).thenReturn(new ArrayList<>());
+//        assertEquals(0, busService.findBusesByIdRoute(anyInt()).size());
+//        verify(busDAO, atLeast(1)).findBusesByIdRoute(anyInt());
 //    }
 //
 //    @Test

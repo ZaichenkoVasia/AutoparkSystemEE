@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class ScheduleDAOImpl extends AbstractGenericDAO<ScheduleEntity> implements ScheduleDAO {
     private static final String FIND_BY_ID = "SELECT * FROM schedule WHERE idschedule = ?";
@@ -44,12 +45,12 @@ public class ScheduleDAOImpl extends AbstractGenericDAO<ScheduleEntity> implemen
 
     @Override
     public Integer insertElement(ScheduleEntity element) throws DatabaseRuntimeException {
-        return super.insert(element, INSERT);
+        return insert(element, INSERT);
     }
 
     @Override
-    public ScheduleEntity getElementById(Integer id) throws DatabaseRuntimeException {
-        return getByIntegerParam(id, FIND_BY_ID);
+    public ScheduleEntity findElementById(Integer id) throws DatabaseRuntimeException {
+        return findByIntegerParam(id, FIND_BY_ID);
     }
 
     @Override
@@ -59,16 +60,16 @@ public class ScheduleDAOImpl extends AbstractGenericDAO<ScheduleEntity> implemen
 
     @Override
     public void updateElement(ScheduleEntity element) throws DatabaseRuntimeException {
-        super.update(element, UPDATE_BY_ID);
+        update(element, UPDATE_BY_ID);
     }
 
     @Override
-    public Integer getElementsCount() throws DatabaseRuntimeException {
+    public Integer count() throws DatabaseRuntimeException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public List<ScheduleEntity> getPaginatedList(int startIdx, int amountElements) throws DatabaseRuntimeException {
+    public List<ScheduleEntity> findPaginatedList(int startIdx, int amountElements) throws DatabaseRuntimeException {
         throw new UnsupportedOperationException();
     }
 }

@@ -31,10 +31,10 @@
 //    }
 //
 //    @Test
-//    public void searchByCriteria() throws DatabaseRuntimeException, ServiceLayerRuntimeException {
-//        when(routeDAO.searchByCriteria(anyString(), anyString())).thenReturn(Arrays.asList(new Route(), new Route()));
-//        assertEquals(2, routeService.searchByCriteria(anyString(), anyString()).size());
-//        verify(routeDAO, atLeast(1)).searchByCriteria(anyString(), anyString());
+//    public void findByCriteria() throws DatabaseRuntimeException, ServiceLayerRuntimeException {
+//        when(routeDAO.findByCriteria(anyString(), anyString())).thenReturn(Arrays.asList(new Route(), new Route()));
+//        assertEquals(2, routeService.findByCriteria(anyString(), anyString()).size());
+//        verify(routeDAO, atLeast(1)).findByCriteria(anyString(), anyString());
 //    }
 //
 //    @Test

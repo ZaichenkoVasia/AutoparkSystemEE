@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class UserDAOImpl extends AbstractGenericDAO<UserEntity> implements UserDAO {
     private static final String FIND_USER_BY_LOGIN = "SELECT * FROM user WHERE login = ?";
@@ -44,40 +45,38 @@ public class UserDAOImpl extends AbstractGenericDAO<UserEntity> implements UserD
         statement.setInt(4, element.getId());
     }
 
-    //TODO change methods
     @Override
     public UserEntity findByLogin(UserEntity user) {
-        return super.getByStringParam(user.getLogin(), FIND_USER_BY_LOGIN);
+        return findByStringParam(user.getLogin(), FIND_USER_BY_LOGIN);
     }
-
 
     @Override
     public Integer insertElement(UserEntity element) {
-        return super.insert(element, INSERT_USER);
+        return insert(element, INSERT_USER);
     }
 
     @Override
-    public UserEntity getElementById(Integer id) {
-        return super.getByIntegerParam(id, FIND_BY_ID);
+    public UserEntity findElementById(Integer id) {
+        return findByIntegerParam(id, FIND_BY_ID);
     }
 
     @Override
     public void deleteElement(Integer id) {
-        super.delete(id, DELETE_BY_ID);
+        delete(id, DELETE_BY_ID);
     }
 
     @Override
     public void updateElement(UserEntity element) {
-        super.update(element, UPDATE_BY_ID);
+        update(element, UPDATE_BY_ID);
     }
 
     @Override
-    public Integer getElementsCount() {
+    public Integer count() {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public List<UserEntity> getPaginatedList(int startIdx, int amountElements) {
+    public List<UserEntity> findPaginatedList(int startIdx, int amountElements) {
         throw new UnsupportedOperationException();
     }
 }

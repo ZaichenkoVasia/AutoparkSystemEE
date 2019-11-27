@@ -29,24 +29,24 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public Driver getDriverByUserId(Integer idUser) {
+    public Driver findDriverByUserId(Integer idUser) {
         LOGGER.info("Getting driver by user id");
         if (Objects.isNull(idUser)) {
-            LOGGER.error("Incorrect getDriverByUserId value");
-            throw new InvalidDataRuntimeException("Incorrect getDriverByUserId value");
+            LOGGER.error("Incorrect findDriverByUserId value");
+            throw new InvalidDataRuntimeException("Incorrect findDriverByUserId value");
         }
-        DriverEntity driverEntity = driverDAO.getDriverByUserId(idUser);
+        DriverEntity driverEntity = driverDAO.findDriverByUserId(idUser);
         return mapper.mapDriverEntityToDriver(driverEntity);
     }
 
     @Override
-    public Driver getDriverByBusId(Integer idBus) {
+    public Driver findDriverByBusId(Integer idBus) {
         LOGGER.info("Getting driver by bus id");
         if (Objects.isNull(idBus)) {
-            LOGGER.error("Incorrect getDriverByBusId value");
-            throw new InvalidDataRuntimeException("Incorrect getDriverByBusId value");
+            LOGGER.error("Incorrect findDriverByBusId value");
+            throw new InvalidDataRuntimeException("Incorrect findDriverByBusId value");
         }
-        DriverEntity driverEntity = driverDAO.getDriverByBusId(idBus);
+        DriverEntity driverEntity = driverDAO.findDriverByBusId(idBus);
         if (driverEntity == null) {
             return null;
         }
@@ -84,7 +84,7 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public List<Driver> getFreeDrivers() throws ServiceLayerRuntimeException {
+    public List<Driver> findFreeDrivers() throws ServiceLayerRuntimeException {
         LOGGER.info("Getting free drivers");
         List<DriverEntity> result = driverDAO.getFreeDrivers();
         return result.isEmpty() ? Collections.emptyList()
@@ -116,13 +116,13 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public Driver getElementById(Integer id) {
+    public Driver findElementById(Integer id) {
         LOGGER.info("Try to get element by id");
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect getElementById value");
-            throw new InvalidDataRuntimeException("Incorrect getElementById value");
+            LOGGER.error("Incorrect findElementById value");
+            throw new InvalidDataRuntimeException("Incorrect findElementById value");
         }
-        DriverEntity driverEntity = driverDAO.getElementById(id);
+        DriverEntity driverEntity = driverDAO.findElementById(id);
         return mapper.mapDriverEntityToDriver(driverEntity);
     }
 
@@ -149,15 +149,15 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public Integer getElementsAmount() {
+    public Integer findElementsAmount() {
         LOGGER.info("Getting elements amount");
-        return driverDAO.getElementsCount();
+        return driverDAO.count();
     }
 
     @Override
-    public List<Driver> getPaginatedList(int startIdx, int endIdx) {
+    public List<Driver> findPaginatedList(int startIdx, int endIdx) {
         LOGGER.info("Getting paginated list");
-        List<DriverEntity> result = driverDAO.getPaginatedList(startIdx, endIdx);
+        List<DriverEntity> result = driverDAO.findPaginatedList(startIdx, endIdx);
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapDriverEntityToDriver)

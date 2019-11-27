@@ -28,13 +28,13 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Admin getAdminByUserId(Integer idUser) {
+    public Admin findAdminByUserId(Integer idUser) {
         LOGGER.info("Try to get admin info by user id");
         if (Objects.isNull(idUser)) {
             LOGGER.error("Id user is not exist");
             throw new InvalidDataRuntimeException("Id user is not exist");
         }
-        AdminEntity adminEntity = adminDAO.getAdminByUserId(idUser);
+        AdminEntity adminEntity = adminDAO.findAdminByUserId(idUser);
         return mapper.mapAdminEntityToAdmin(adminEntity);
     }
 
@@ -51,13 +51,13 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Admin getElementById(Integer id) {
+    public Admin findElementById(Integer id) {
         LOGGER.info("Try to get element by id");
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect getElementById value");
-            throw new InvalidDataRuntimeException("Incorrect getElementById value");
+            LOGGER.error("Incorrect findElementById value");
+            throw new InvalidDataRuntimeException("Incorrect findElementById value");
         }
-        AdminEntity adminEntity = adminDAO.getAdminByUserId(id);
+        AdminEntity adminEntity = adminDAO.findAdminByUserId(id);
         return mapper.mapAdminEntityToAdmin(adminEntity);
     }
 
@@ -84,15 +84,15 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Integer getElementsAmount() {
+    public Integer findElementsAmount() {
         LOGGER.info("Getting elements amount");
-        return adminDAO.getElementsCount();
+        return adminDAO.count();
     }
 
     @Override
-    public List<Admin> getPaginatedList(int startIdx, int endIdx) {
+    public List<Admin> findPaginatedList(int startIdx, int endIdx) {
         LOGGER.info("Getting paginated list");
-        List<AdminEntity> result = adminDAO.getPaginatedList(startIdx, endIdx);
+        List<AdminEntity> result = adminDAO.findPaginatedList(startIdx, endIdx);
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapAdminEntityToAdmin)

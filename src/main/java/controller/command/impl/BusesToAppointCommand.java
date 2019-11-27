@@ -20,7 +20,7 @@ public class BusesToAppointCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         String idRoute = request.getParameter("idRoute");
-        List<Bus> buses = busService.getFreeBuses();
+        List<Bus> buses = busService.findFreeBuses();
         if (buses.size() == 0){
             request.setAttribute("message","no.buses.to.appoint");
             return "index.jsp";

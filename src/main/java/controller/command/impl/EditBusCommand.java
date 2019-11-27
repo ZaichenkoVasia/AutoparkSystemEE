@@ -19,7 +19,7 @@ public class EditBusCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         String idBus = request.getParameter("idBus");
-        Bus bus = busService.getElementById(Integer.parseInt(idBus));
+        Bus bus = busService.findElementById(Integer.parseInt(idBus));
         request.setAttribute("bus", bus);
         return "WEB-INF/jsp/editing_pages/add_bus.jsp";
     }

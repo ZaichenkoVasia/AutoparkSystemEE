@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BusDAO extends GenericDAO<BusEntity, Integer> {
 
-    List<BusEntity> getFreeBuses();
+    List<BusEntity> findFreeBuses();
 
     Integer countBusesOnRouteById(Integer idRoute);
 
@@ -14,5 +14,5 @@ public interface BusDAO extends GenericDAO<BusEntity, Integer> {
 
     void appointBusToRoute(Integer idRoute, Integer idBus);
 
-    List<BusEntity> getBusesByIdRoute(Integer idRoute);
+    List<BusEntity> findBusesByIdRoute(Integer idRoute);
 }

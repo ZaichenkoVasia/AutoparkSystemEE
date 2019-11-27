@@ -12,7 +12,7 @@ public class PaginationManager<E> {
         int startFromIdx = 0;
         int entities = Integer.valueOf(entityPerPage);
         if (pageNumber == null) {
-            totalEntityAmount = genericService.getElementsAmount();
+            totalEntityAmount = genericService.findElementsAmount();
             currentPage = 1;
             totalPages = (int) Math.ceil((double) totalEntityAmount / entities);
         } else {

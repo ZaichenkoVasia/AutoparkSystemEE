@@ -36,13 +36,13 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public Schedule getElementById(Integer id) {
+    public Schedule findElementById(Integer id) {
         LOGGER.info("Try to get element by id");
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect getElementById value");
-            throw new InvalidDataRuntimeException("Incorrect getElementById value");
+            LOGGER.error("Incorrect findElementById value");
+            throw new InvalidDataRuntimeException("Incorrect findElementById value");
         }
-        ScheduleEntity scheduleEntity = scheduleDAO.getElementById(id);
+        ScheduleEntity scheduleEntity = scheduleDAO.findElementById(id);
         return mapper.mapScheduleEntityToSchedule(scheduleEntity);
     }
 
@@ -68,15 +68,15 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public Integer getElementsAmount() {
+    public Integer findElementsAmount() {
         LOGGER.info("Getting elements amount");
-        return scheduleDAO.getElementsCount();
+        return scheduleDAO.count();
     }
 
     @Override
-    public List<Schedule> getPaginatedList(int startIdx, int endIdx) {
+    public List<Schedule> findPaginatedList(int startIdx, int endIdx) {
         LOGGER.info("Getting paginated list");
-        List<ScheduleEntity> result = scheduleDAO.getPaginatedList(startIdx, endIdx);
+        List<ScheduleEntity> result = scheduleDAO.findPaginatedList(startIdx, endIdx);
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapScheduleEntityToSchedule)

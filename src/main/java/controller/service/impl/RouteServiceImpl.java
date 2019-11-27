@@ -61,10 +61,10 @@ public class RouteServiceImpl implements RouteService {
     public List<Route> searchByCriteria(String departure, String arrival) {
         LOGGER.info("Searching by criteria");
         if (departure.isEmpty() || arrival.isEmpty()) {
-            LOGGER.error("Incorrect searchByCriteria value");
-            throw new InvalidDataRuntimeException("Incorrect searchByCriteria value");
+            LOGGER.error("Incorrect findByCriteria value");
+            throw new InvalidDataRuntimeException("Incorrect findByCriteria value");
         }
-        List<RouteEntity> result = routeDAO.searchByCriteria(departure, arrival);
+        List<RouteEntity> result = routeDAO.findByCriteria(departure, arrival);
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapRouteEntityToRoute)
@@ -84,13 +84,13 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public Route getElementById(Integer id) {
+    public Route findElementById(Integer id) {
         LOGGER.info("Try to get element by id");
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect getElementById value");
-            throw new InvalidDataRuntimeException("Incorrect getElementById value");
+            LOGGER.error("Incorrect findElementById value");
+            throw new InvalidDataRuntimeException("Incorrect findElementById value");
         }
-        RouteEntity routeEntity = routeDAO.getElementById(id);
+        RouteEntity routeEntity = routeDAO.findElementById(id);
         return mapper.mapRouteEntityToRoute(routeEntity);
     }
 
@@ -117,15 +117,15 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public Integer getElementsAmount() {
+    public Integer findElementsAmount() {
         LOGGER.info("Getting elements amount");
-        return routeDAO.getElementsCount();
+        return routeDAO.count();
     }
 
     @Override
-    public List<Route> getPaginatedList(int startIdx, int endIdx) {
+    public List<Route> findPaginatedList(int startIdx, int endIdx) {
         LOGGER.info("Getting paginated list");
-        List<RouteEntity> result = routeDAO.getPaginatedList(startIdx, endIdx);
+        List<RouteEntity> result = routeDAO.findPaginatedList(startIdx, endIdx);
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapRouteEntityToRoute)

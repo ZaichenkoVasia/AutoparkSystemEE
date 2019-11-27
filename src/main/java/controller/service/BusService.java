@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BusService extends GenericService<Bus, Integer> {
 
-    List<Bus> getFreeBuses();
+    List<Bus> findFreeBuses();
 
     Integer countBusesOnRouteById(Integer idRoute);
 
@@ -14,5 +14,5 @@ public interface BusService extends GenericService<Bus, Integer> {
 
     void appointBusToRoute(Integer idRoute, Integer idBus);
 
-    List<Bus> getBusesByIdRoute(Integer idRoute);
+    List<Bus> findBusesByIdRoute(Integer idRoute);
 }

@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class RouteDAOImpl extends AbstractGenericDAO<RouteEntity> implements RouteDAO {
     private static final String COUNT = "SELECT COUNT(*) FROM route";
@@ -58,12 +59,12 @@ public class RouteDAOImpl extends AbstractGenericDAO<RouteEntity> implements Rou
 
     @Override
     public void setStatusEmpty(Integer idRoute) throws DatabaseRuntimeException {
-        super.updateFieldByIntegerParam(idRoute, Constants.STATUS_EMPTY, UPDATE_BY_STATUS);
+        updateFieldByIntegerParam(idRoute, Constants.STATUS_EMPTY, UPDATE_BY_STATUS);
     }
 
     @Override
     public void setStatusWork(Integer idRoute) throws DatabaseRuntimeException {
-        super.updateFieldByIntegerParam(idRoute, Constants.STATUS_WORK, UPDATE_BY_STATUS);
+        updateFieldByIntegerParam(idRoute, Constants.STATUS_WORK, UPDATE_BY_STATUS);
     }
 
     @Override
@@ -73,36 +74,36 @@ public class RouteDAOImpl extends AbstractGenericDAO<RouteEntity> implements Rou
 
     @Override
     public Integer insertElement(RouteEntity element) {
-        return super.insert(element, INSERT);
+        return insert(element, INSERT);
     }
 
     @Override
-    public RouteEntity getElementById(Integer id) {
-        return super.getByIntegerParam(id, FIND_BY_ID);
+    public RouteEntity findElementById(Integer id) {
+        return findByIntegerParam(id, FIND_BY_ID);
     }
 
     @Override
     public void deleteElement(Integer id) {
-        super.delete(id, DELETE);
+        delete(id, DELETE);
     }
 
     @Override
     public void updateElement(RouteEntity element) {
-        super.update(element, UPDATE);
+        update(element, UPDATE);
     }
 
     @Override
-    public Integer getElementsCount() {
-        return getCount(COUNT);
+    public Integer count() {
+        return findCount(COUNT);
     }
 
     @Override
-    public List<RouteEntity> getPaginatedList(int startIdx, int amountElements) {
+    public List<RouteEntity> findPaginatedList(int startIdx, int amountElements) {
         return getPaginatedList(startIdx, amountElements, FIND_ALL);
     }
 
     @Override
-    public List<RouteEntity> searchByCriteria(String departure, String arrival) {
+    public List<RouteEntity> findByCriteria(String departure, String arrival) {
         LOGGER.info("Searching by criteria");
         ResultSet resultSet = null;
         List<RouteEntity> list;
@@ -113,8 +114,8 @@ public class RouteDAOImpl extends AbstractGenericDAO<RouteEntity> implements Rou
             resultSet = statement.executeQuery();
             list = parseAll(resultSet);
         } catch (SQLException e) {
-            LOGGER.error("Can't execute method searchByCriteria", e);
-            throw new DatabaseRuntimeException("Can't execute method searchByCriteria", e);
+            LOGGER.error("Can't execute method findByCriteria", e);
+            throw new DatabaseRuntimeException("Can't execute method findByCriteria", e);
         }
         LOGGER.info("Returning list of routes according to criteria");
         return list;

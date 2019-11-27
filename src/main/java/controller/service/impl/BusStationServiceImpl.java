@@ -31,14 +31,14 @@ public class BusStationServiceImpl implements BusStationService {
     }
 
     @Override
-    public Driver getDriverAccountDataByUserId(Integer idUser) {
+    public Driver findDriverAccountDataByUserId(Integer idUser) {
         LOGGER.info("Getting driver account info");
-        Driver driver = driverService.getDriverByUserId(idUser);
+        Driver driver = driverService.findDriverByUserId(idUser);
         if (driver.getBus().getId() != 0) {
-            Bus bus = busService.getElementById(driver.getBus().getId());
+            Bus bus = busService.findElementById(driver.getBus().getId());
             driver = new Driver(driver, bus);
             if (bus.getStatus().equals("work")) {
-                Route route = routeService.getElementById(bus.getRoute().getId());
+                Route route = routeService.findElementById(bus.getRoute().getId());
                 bus = new Bus(bus, route);
             }
         }
@@ -58,7 +58,7 @@ public class BusStationServiceImpl implements BusStationService {
     @Override
     public Boolean appointBusToRoute(Integer idRoute, Integer idBus) {
         LOGGER.info("Assigning bus to the route");
-        Driver driver = driverService.getDriverByBusId(idBus);
+        Driver driver = driverService.findDriverByBusId(idBus);
         if (driver == null) {
             return false;
         }
@@ -73,7 +73,7 @@ public class BusStationServiceImpl implements BusStationService {
     @Override
     public void deleteBus(Integer idBus) {
         LOGGER.info("Deleting bus from the system");
-        Bus bus = busService.getElementById(idBus);
+        Bus bus = busService.findElementById(idBus);
         if (bus.getRoute() != null) {
             Integer idRoute = bus.getRoute().getId();
             if (bus.getStatus().equals("work")) {
@@ -91,7 +91,7 @@ public class BusStationServiceImpl implements BusStationService {
     @Override
     public Boolean appointDriverToBus(Integer idBus, Integer idDriver) {
         LOGGER.info("Assigning driver to the bus");
-        Driver existingDriver = driverService.getDriverByBusId(idBus);
+        Driver existingDriver = driverService.findDriverByBusId(idBus);
         if (existingDriver == null) {
             driverService.updateBusInfoForDriver(idBus, idDriver);
             return true;
@@ -109,9 +109,9 @@ public class BusStationServiceImpl implements BusStationService {
     @Override
     public void deleteDriver(Integer idDriver) throws ServiceLayerRuntimeException {
         LOGGER.info("Deleting bus from the system");
-        Driver driver = driverService.getElementById(idDriver);
+        Driver driver = driverService.findElementById(idDriver);
         if (driver.getStatus().equals("work") || driver.getStatus().equals("new")) {
-            Bus bus = busService.getElementById(driver.getBus().getId());
+            Bus bus = busService.findElementById(driver.getBus().getId());
             Integer idRoute = bus.getRoute().getId();
             Integer busCount = busService.countBusesOnRouteById(idRoute);
             if (busCount == 1) {
@@ -193,14 +193,14 @@ public class BusStationServiceImpl implements BusStationService {
     @Override
     public Boolean cancelDriver(Integer idBus) throws ServiceLayerRuntimeException {
         LOGGER.info("Cancel driver from bus");
-        Driver driver = driverService.getDriverByBusId(idBus);
+        Driver driver = driverService.findDriverByBusId(idBus);
         if (driver == null) {
             return false;
         }
         if (driver.getStatus().equals("free")) {
             driverService.cancelDriverFromBus(idBus);
         } else if (driver.getStatus().equals("work")) {
-            Bus bus = busService.getElementById(idBus);
+            Bus bus = busService.findElementById(idBus);
             Integer busCounter = busService.countBusesOnRouteById(bus.getRoute().getId());
             if (busCounter == 1) {
                 routeService.cancelAll(bus.getRoute().getId());

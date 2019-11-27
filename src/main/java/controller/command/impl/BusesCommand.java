@@ -25,7 +25,7 @@ public class BusesCommand implements Command {
         String lastPage = request.getParameter("lastPage");
         PaginationManager<Bus> paginationManager = new PaginationManager<>();
         Carriage carriage = paginationManager.getCarriage(page, lastPage, "5", busService);
-        List<Bus> buses = busService.getPaginatedList(carriage.getStartIdx(), carriage.getEntityAmount());
+        List<Bus> buses = busService.findPaginatedList(carriage.getStartIdx(), carriage.getEntityAmount());
         request.setAttribute("lastPage", carriage.getLastPage());
         request.setAttribute("currentPage", carriage.getCurrentPage());
         request.setAttribute("list", buses);

@@ -28,10 +28,10 @@
 //    }
 //
 //    @Test
-//    public void getAdminByUserId() throws DatabaseRuntimeException, ServiceLayerRuntimeException {
-//        when(adminDAO.getAdminByUserId(anyInt())).thenReturn(new Admin.AdminBuilder().setId(1).createAdmin());
-//        assertEquals(new Integer(1), adminService.getAdminByUserId(anyInt()).getId());
-//        verify(adminDAO, atLeast(1)).getAdminByUserId(anyInt());
+//    public void findAdminByUserId() throws DatabaseRuntimeException, ServiceLayerRuntimeException {
+//        when(adminDAO.findAdminByUserId(anyInt())).thenReturn(new Admin.AdminBuilder().setId(1).createAdmin());
+//        assertEquals(new Integer(1), adminService.findAdminByUserId(anyInt()).getId());
+//        verify(adminDAO, atLeast(1)).findAdminByUserId(anyInt());
 //    }
 //
 //    @Test

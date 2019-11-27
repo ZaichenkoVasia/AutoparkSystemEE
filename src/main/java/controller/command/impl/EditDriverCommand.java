@@ -19,7 +19,7 @@ public class EditDriverCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         Integer idDriver = Integer.valueOf(request.getParameter("idDriver"));
-        Driver driver = driverService.getElementById(idDriver);
+        Driver driver = driverService.findElementById(idDriver);
         request.setAttribute("driver", driver);
         return "WEB-INF/jsp/editing_pages/add_driver.jsp";
     }

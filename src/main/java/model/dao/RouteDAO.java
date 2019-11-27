@@ -12,5 +12,5 @@ public interface RouteDAO extends GenericDAO<RouteEntity, Integer> {
 
     void cancelAll(Integer idRoute);
 
-    List<RouteEntity> searchByCriteria(String departure, String arrival);
+    List<RouteEntity> findByCriteria(String departure, String arrival);
 }

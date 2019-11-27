@@ -19,7 +19,7 @@ public class DriverInfoCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         String idBus = request.getParameter("idBus");
-        Driver driver = driverService.getDriverByBusId(Integer.parseInt(idBus));
+        Driver driver = driverService.findDriverByBusId(Integer.parseInt(idBus));
         if (driver == null) {
             request.setAttribute("message","driver.not.assigned");
             return "index.jsp";

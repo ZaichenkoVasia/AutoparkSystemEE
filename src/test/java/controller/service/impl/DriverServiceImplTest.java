@@ -31,17 +31,17 @@
 //    }
 //
 ////    @Test
-////    public void getDriverByUserId() throws DatabaseRuntimeException, ServiceLayerRuntimeException {
-////        when(driverDAO.getDriverByUserId(anyInt(), any())).thenReturn(new Driver.DriverBuilder().setName("User").createDriver());
-////        assertEquals("User", driverService.getDriverByUserId(anyInt(), any()).getName());
-////        verify(driverDAO, atLeast(1)).getDriverByUserId(anyInt(), any());
+////    public void findDriverByUserId() throws DatabaseRuntimeException, ServiceLayerRuntimeException {
+////        when(driverDAO.findDriverByUserId(anyInt(), any())).thenReturn(new Driver.DriverBuilder().setName("User").createDriver());
+////        assertEquals("User", driverService.findDriverByUserId(anyInt(), any()).getName());
+////        verify(driverDAO, atLeast(1)).findDriverByUserId(anyInt(), any());
 ////    }
 //
 //    @Test
-//    public void getFreeDrivers() throws DatabaseRuntimeException, ServiceLayerRuntimeException {
-//        when(driverDAO.getFreeDrivers()).thenReturn(Arrays.asList(new Driver(), new Driver()));
-//        assertEquals(2, driverService.getFreeDrivers().size());
-//        verify(driverDAO, atLeast(1)).getFreeDrivers();
+//    public void findFreeDrivers() throws DatabaseRuntimeException, ServiceLayerRuntimeException {
+//        when(driverDAO.findFreeDrivers()).thenReturn(Arrays.asList(new Driver(), new Driver()));
+//        assertEquals(2, driverService.findFreeDrivers().size());
+//        verify(driverDAO, atLeast(1)).findFreeDrivers();
 //    }
 //
 //    @Test

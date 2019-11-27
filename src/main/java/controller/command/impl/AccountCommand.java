@@ -26,11 +26,11 @@ public class AccountCommand implements Command {
             return "WEB-INF/jsp/login.jsp";
         }
         if (user.getRole().equals("admin")){
-            Admin admin = adminService.getAdminByUserId(user.getId());
+            Admin admin = adminService.findAdminByUserId(user.getId());
             request.setAttribute("admin", admin);
             return "WEB-INF/jsp/admin/account.jsp";
         }else {
-            Driver driver = busStationService.getDriverAccountDataByUserId(user.getId());
+            Driver driver = busStationService.findDriverAccountDataByUserId(user.getId());
             request.setAttribute("driver", driver);
             return "WEB-INF/jsp/driver/account.jsp";
         }

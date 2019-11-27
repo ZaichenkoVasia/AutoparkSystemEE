@@ -6,13 +6,13 @@ public interface GenericService<D, ID> {
 
     Integer insertElement(D element);
 
-    D getElementById(ID id);
+    D findElementById(ID id);
 
     void deleteElement(ID id);
 
     void updateElement(D element);
 
-    Integer getElementsAmount();
+    Integer findElementsAmount();
 
-    List<D> getPaginatedList(int startIdx, int endIdx);
+    List<D> findPaginatedList(int startIdx, int endIdx);
 }

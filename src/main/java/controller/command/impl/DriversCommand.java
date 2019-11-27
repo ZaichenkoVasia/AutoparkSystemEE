@@ -25,7 +25,7 @@ public class DriversCommand implements Command {
         String lastPage = request.getParameter("lastPage");
         PaginationManager<Driver> paginationManager = new PaginationManager<>();
         Carriage carriage = paginationManager.getCarriage(page, lastPage, "5", driverService);
-        List<Driver> drivers = driverService.getPaginatedList(carriage.getStartIdx(), carriage.getEntityAmount());
+        List<Driver> drivers = driverService.findPaginatedList(carriage.getStartIdx(), carriage.getEntityAmount());
         request.setAttribute("lastPage", carriage.getLastPage());
         request.setAttribute("currentPage", carriage.getCurrentPage());
         request.setAttribute("list", drivers);

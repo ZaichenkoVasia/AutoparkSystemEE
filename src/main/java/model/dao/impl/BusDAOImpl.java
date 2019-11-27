@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class BusDAOImpl extends AbstractGenericDAO<BusEntity> implements BusDAO {
     private static final String COUNT_ALL = "SELECT COUNT(*) FROM bus";
@@ -75,46 +76,46 @@ public class BusDAOImpl extends AbstractGenericDAO<BusEntity> implements BusDAO 
 
     @Override
     public Integer countBusesOnRouteById(Integer idRoute) {
-        return getCountByIntegerParam(idRoute, COUNT_BY_ROUTE);
+        return findCountByIntegerParam(idRoute, COUNT_BY_ROUTE);
     }
 
     @Override
-    public List<BusEntity> getBusesByIdRoute(Integer idRoute) {
-        return getListByIntegerParam(idRoute, FIND_BY_ROUTE);
+    public List<BusEntity> findBusesByIdRoute(Integer idRoute) {
+        return findListByIntegerParam(idRoute, FIND_BY_ROUTE);
     }
 
     @Override
-    public List<BusEntity> getFreeBuses() {
-        return super.getListByStringParam(Constants.STATUS_FREE, FIND_BY_STATUS);
+    public List<BusEntity> findFreeBuses() {
+        return findListByStringParam(Constants.STATUS_FREE, FIND_BY_STATUS);
     }
 
     @Override
     public Integer insertElement(BusEntity element) {
-        return super.insert(element, INSERT);
+        return insert(element, INSERT);
     }
 
     @Override
-    public BusEntity getElementById(Integer id) {
-        return getByIntegerParam(id, FIND_BY_ID);
+    public BusEntity findElementById(Integer id) {
+        return findByIntegerParam(id, FIND_BY_ID);
     }
 
     @Override
     public void deleteElement(Integer id) {
-        super.delete(id, DELETE);
+        delete(id, DELETE);
     }
 
     @Override
     public void updateElement(BusEntity element) {
-        super.update(element, UPDATE);
+        update(element, UPDATE);
     }
 
     @Override
-    public Integer getElementsCount() {
-        return super.getCount(COUNT_ALL);
+    public Integer count() {
+        return findCount(COUNT_ALL);
     }
 
     @Override
-    public List<BusEntity> getPaginatedList(int startIdx, int amountElements) {
+    public List<BusEntity> findPaginatedList(int startIdx, int amountElements) {
         return super.getPaginatedList(startIdx, amountElements, FIND_ALL);
     }
 

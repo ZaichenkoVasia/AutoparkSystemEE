@@ -6,7 +6,7 @@ public interface BusStationService {
 
     Boolean saveAdmin(Admin admin, User user, String idAdmin, String idUser);
 
-    Driver getDriverAccountDataByUserId(Integer idUser);
+    Driver findDriverAccountDataByUserId(Integer idUser);
 
     Boolean cancelDriver(Integer idBus);
 

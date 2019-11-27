@@ -20,7 +20,7 @@ public class BusesInfoCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         String idRoute = request.getParameter("idRoute");
-        List<Bus> buses = busService.getBusesByIdRoute(Integer.valueOf(idRoute));
+        List<Bus> buses = busService.findBusesByIdRoute(Integer.valueOf(idRoute));
         if (buses.size() == 0){
             request.setAttribute("message", "route.is.empty");
             return "index.jsp";

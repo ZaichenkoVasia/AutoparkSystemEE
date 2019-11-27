@@ -25,7 +25,7 @@ public class RoutesCommand implements Command {
         String lastPage = request.getParameter("lastPage");
         PaginationManager<Route> paginationManager = new PaginationManager<>();
         Carriage carriage = paginationManager.getCarriage(page, lastPage, "5", routeService);
-        List<Route> routes = routeService.getPaginatedList(carriage.getStartIdx(), carriage.getEntityAmount());
+        List<Route> routes = routeService.findPaginatedList(carriage.getStartIdx(), carriage.getEntityAmount());
         request.setAttribute("lastPage", carriage.getLastPage());
         request.setAttribute("currentPage", carriage.getCurrentPage());
         request.setAttribute("list", routes);

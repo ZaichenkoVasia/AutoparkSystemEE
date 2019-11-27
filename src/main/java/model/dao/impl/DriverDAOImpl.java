@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class DriverDAOImpl extends AbstractGenericDAO<DriverEntity> implements DriverDAO {
 
@@ -72,13 +73,13 @@ public class DriverDAOImpl extends AbstractGenericDAO<DriverEntity> implements D
     }
 
     @Override
-    public DriverEntity getDriverByUserId(Integer idUser) {
-        return super.getByIntegerParam(idUser, FIND_BY_USER_ID);
+    public DriverEntity findDriverByUserId(Integer idUser) {
+        return findByIntegerParam(idUser, FIND_BY_USER_ID);
     }
 
     @Override
-    public DriverEntity getDriverByBusId(Integer idBus) {
-        return super.getByIntegerParam(idBus, FIND_BY_BUS_ID);
+    public DriverEntity findDriverByBusId(Integer idBus) {
+        return findByIntegerParam(idBus, FIND_BY_BUS_ID);
     }
 
     @Override
@@ -98,37 +99,37 @@ public class DriverDAOImpl extends AbstractGenericDAO<DriverEntity> implements D
 
     @Override
     public List<DriverEntity> getFreeDrivers() {
-        return super.getListByStringParam(Constants.STATUS_FREE, FIND_BY_STATUS);
+        return super.findListByStringParam(Constants.STATUS_FREE, FIND_BY_STATUS);
     }
 
 
     @Override
     public Integer insertElement(DriverEntity element) {
-        return super.insert(element, INSERT);
+        return insert(element, INSERT);
     }
 
     @Override
-    public DriverEntity getElementById(Integer id) {
-        return super.getByIntegerParam(id, FIND_BY_ID);
+    public DriverEntity findElementById(Integer id) {
+        return findByIntegerParam(id, FIND_BY_ID);
     }
 
     @Override
     public void deleteElement(Integer id) {
-        super.delete(id, DELETE);
+        delete(id, DELETE);
     }
 
     @Override
     public void updateElement(DriverEntity element) {
-        super.update(element, UPDATE);
+        update(element, UPDATE);
     }
 
     @Override
-    public Integer getElementsCount() {
-        return super.getCount(COUNT);
+    public Integer count() {
+        return findCount(COUNT);
     }
 
     @Override
-    public List<DriverEntity> getPaginatedList(int startIdx, int amountElements) {
+    public List<DriverEntity> findPaginatedList(int startIdx, int amountElements) {
         return super.getPaginatedList(startIdx, amountElements, FIND_ALL);
     }
 

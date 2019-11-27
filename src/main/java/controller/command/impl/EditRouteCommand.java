@@ -18,7 +18,7 @@ public class EditRouteCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         String idRoute = request.getParameter("idRoute");
-        Route route = routeService.getElementById(Integer.parseInt(idRoute));
+        Route route = routeService.findElementById(Integer.parseInt(idRoute));
         request.setAttribute("route", route);
         return "WEB-INF/jsp/editing_pages/add_route.jsp";
     }

@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface DriverService extends GenericService<Driver, Integer> {
 
-    Driver getDriverByUserId(Integer idUser);
+    Driver findDriverByUserId(Integer idUser);
 
-    Driver getDriverByBusId(Integer idBus);
+    Driver findDriverByBusId(Integer idBus);
 
     void setStatusNew(Integer idDriver);
 
@@ -18,5 +18,5 @@ public interface DriverService extends GenericService<Driver, Integer> {
 
     void updateBusInfoForDriver(Integer idBus, Integer idDriver);
 
-    List<Driver> getFreeDrivers();
+    List<Driver> findFreeDrivers();
 }

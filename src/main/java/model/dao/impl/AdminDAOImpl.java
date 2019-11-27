@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class AdminDAOImpl extends AbstractGenericDAO<AdminEntity> implements AdminDAO {
 
@@ -55,19 +56,19 @@ public class AdminDAOImpl extends AbstractGenericDAO<AdminEntity> implements Adm
     }
 
     @Override
-    public AdminEntity getAdminByUserId(Integer idUser) {
-        return super.getByIntegerParam(idUser, FIND_ADMIN_BY_ID);
+    public AdminEntity findAdminByUserId(Integer idUser) {
+        return findByIntegerParam(idUser, FIND_ADMIN_BY_ID);
     }
 
 
     @Override
     public Integer insertElement(AdminEntity element) {
-        return super.insert(element, INSERT_ADMIN);
+        return insert(element, INSERT_ADMIN);
     }
 
     @Override
-    public AdminEntity getElementById(Integer id) {
-        return super.getByIntegerParam(id, FIND_ADMIN_BY_ID);
+    public AdminEntity findElementById(Integer id) {
+        return findByIntegerParam(id, FIND_ADMIN_BY_ID);
     }
 
     @Override
@@ -77,16 +78,16 @@ public class AdminDAOImpl extends AbstractGenericDAO<AdminEntity> implements Adm
 
     @Override
     public void updateElement(AdminEntity element) {
-        super.update(element, UPDATE_ADMIN_BY_ID);
+        update(element, UPDATE_ADMIN_BY_ID);
     }
 
     @Override
-    public Integer getElementsCount() {
+    public Integer count() {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public List<AdminEntity> getPaginatedList(int startIdx, int amountElements) {
+    public List<AdminEntity> findPaginatedList(int startIdx, int amountElements) {
         throw new UnsupportedOperationException();
     }
 }

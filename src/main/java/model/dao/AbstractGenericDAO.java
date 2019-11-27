@@ -37,7 +37,7 @@ public abstract class AbstractGenericDAO<E> {
         return null;
     }
 
-    protected E getByIntegerParam(Integer data, String query) {
+    protected E findByIntegerParam(Integer data, String query) {
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, data);
@@ -52,7 +52,7 @@ public abstract class AbstractGenericDAO<E> {
         return null;
     }
 
-    protected E getByStringParam(String data, String query) {
+    protected E findByStringParam(String data, String query) {
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, data);
@@ -113,7 +113,7 @@ public abstract class AbstractGenericDAO<E> {
         LOGGER.info("Element was deleted from database");
     }
 
-    protected Integer getCount(String query) {
+    protected Integer findCount(String query) {
         LOGGER.info("Getting amount of element");
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
@@ -129,7 +129,7 @@ public abstract class AbstractGenericDAO<E> {
         return null;
     }
 
-    protected Integer getCountByIntegerParam(Integer dataInt, String query) {
+    protected Integer findCountByIntegerParam(Integer dataInt, String query) {
         LOGGER.info("Counting");
         ResultSet resultSet = null;
         Integer res = null;
@@ -163,7 +163,7 @@ public abstract class AbstractGenericDAO<E> {
         return list;
     }
 
-    protected List<E> getListByIntegerParam(Integer dataInt, String query) {
+    protected List<E> findListByIntegerParam(Integer dataInt, String query) {
         LOGGER.info("Getting");
         ResultSet resultSet = null;
         List<E> list;
@@ -179,7 +179,7 @@ public abstract class AbstractGenericDAO<E> {
         return list;
     }
 
-    protected List<E> getListByStringParam(String data, String query) {
+    protected List<E> findListByStringParam(String data, String query) {
         LOGGER.info("Getting");
         ResultSet resultSet = null;
         List<E> list;

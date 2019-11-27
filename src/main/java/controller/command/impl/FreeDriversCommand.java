@@ -20,7 +20,7 @@ public class FreeDriversCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         String idBus = request.getParameter("idBus");
-        List<Driver> drivers = driverService.getFreeDrivers();
+        List<Driver> drivers = driverService.findFreeDrivers();
         if (drivers.size() == 0) {
             request.setAttribute("message", "no.drivers.to.appoint");
             return "index.jsp";

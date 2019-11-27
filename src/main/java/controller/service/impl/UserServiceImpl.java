@@ -59,13 +59,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getElementById(Integer id) {
+    public User findElementById(Integer id) {
         LOGGER.info("Try to get element by id");
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect getElementById value");
-            throw new InvalidDataRuntimeException("Incorrect getElementById value");
+            LOGGER.error("Incorrect findElementById value");
+            throw new InvalidDataRuntimeException("Incorrect findElementById value");
         }
-        UserEntity userEntity = userDAO.getElementById(id);
+        UserEntity userEntity = userDAO.findElementById(id);
         return mapper.mapUserEntityToUser(userEntity);
     }
 
@@ -91,15 +91,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer getElementsAmount() {
+    public Integer findElementsAmount() {
         LOGGER.info("Getting elements amount");
-        return userDAO.getElementsCount();
+        return userDAO.count();
     }
 
     @Override
-    public List<User> getPaginatedList(int startIdx, int endIdx) {
+    public List<User> findPaginatedList(int startIdx, int endIdx) {
         LOGGER.info("Getting paginated list");
-        List<UserEntity> result = userDAO.getPaginatedList(startIdx, endIdx);
+        List<UserEntity> result = userDAO.findPaginatedList(startIdx, endIdx);
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapUserEntityToUser)

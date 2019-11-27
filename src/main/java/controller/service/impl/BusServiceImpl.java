@@ -28,9 +28,9 @@ public class BusServiceImpl implements BusService {
     }
 
     @Override
-    public List<Bus> getFreeBuses() {
+    public List<Bus> findFreeBuses() {
         LOGGER.info("Getting free buses");
-        List<BusEntity> result = busDAO.getFreeBuses();
+        List<BusEntity> result = busDAO.findFreeBuses();
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapBusEntityToBus)
@@ -68,13 +68,13 @@ public class BusServiceImpl implements BusService {
     }
 
     @Override
-    public List<Bus> getBusesByIdRoute(Integer idRoute) {
+    public List<Bus> findBusesByIdRoute(Integer idRoute) {
         LOGGER.info("Getting buses by route id");
         if (Objects.isNull(idRoute)) {
-            LOGGER.error("Incorrect getBusesByIdRoute value");
-            throw new InvalidDataRuntimeException("Incorrect getBusesByIdRoute value");
+            LOGGER.error("Incorrect findBusesByIdRoute value");
+            throw new InvalidDataRuntimeException("Incorrect findBusesByIdRoute value");
         }
-        List<BusEntity> result = busDAO.getBusesByIdRoute(idRoute);
+        List<BusEntity> result = busDAO.findBusesByIdRoute(idRoute);
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapBusEntityToBus)
@@ -94,13 +94,13 @@ public class BusServiceImpl implements BusService {
     }
 
     @Override
-    public Bus getElementById(Integer id) {
+    public Bus findElementById(Integer id) {
         LOGGER.info("Try to get element by id");
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect getElementById value");
-            throw new InvalidDataRuntimeException("Incorrect getElementById value");
+            LOGGER.error("Incorrect findElementById value");
+            throw new InvalidDataRuntimeException("Incorrect findElementById value");
         }
-        BusEntity busEntity = busDAO.getElementById(id);
+        BusEntity busEntity = busDAO.findElementById(id);
         return mapper.mapBusEntityToBus(busEntity);
     }
 
@@ -127,15 +127,15 @@ public class BusServiceImpl implements BusService {
     }
 
     @Override
-    public Integer getElementsAmount() {
+    public Integer findElementsAmount() {
         LOGGER.info("Getting elements amount");
-        return busDAO.getElementsCount();
+        return busDAO.count();
     }
 
     @Override
-    public List<Bus> getPaginatedList(int startIdx, int endIdx) {
+    public List<Bus> findPaginatedList(int startIdx, int endIdx) {
         LOGGER.info("Getting paginated list");
-        List<BusEntity> result = busDAO.getPaginatedList(startIdx, endIdx);
+        List<BusEntity> result = busDAO.findPaginatedList(startIdx, endIdx);
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()
                 .map(mapper::mapBusEntityToBus)
