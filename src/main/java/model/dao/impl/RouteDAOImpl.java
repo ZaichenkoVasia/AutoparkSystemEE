@@ -108,8 +108,8 @@ public class RouteDAOImpl extends AbstractGenericDAO<RouteEntity> implements Rou
         List<RouteEntity> list;
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_CRITERIA)) {
-            statement.setString(1, departure + Constants.LIKE);
-            statement.setString(2, arrival + Constants.LIKE);
+            statement.setString(1, departure + "%");
+            statement.setString(2, arrival + "%");
             resultSet = statement.executeQuery();
             list = parseAll(resultSet);
         } catch (SQLException e) {

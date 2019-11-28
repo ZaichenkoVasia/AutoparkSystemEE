@@ -1,7 +1,6 @@
 package model.dao;
 
 import model.dao.connection.PoolConnection;
-import model.dao.constants.Constants;
 import model.exception.DatabaseRuntimeException;
 import org.apache.log4j.Logger;
 
@@ -120,7 +119,7 @@ public abstract class AbstractGenericDAO<E> {
              ResultSet resultSet = statement.executeQuery()) {
             if (resultSet.next()) {
                 LOGGER.info("Returning amount of entity");
-                return resultSet.getInt(Constants.ELEMENTS_COUNT);
+                return resultSet.getInt("COUNT(*)");
             }
         } catch (SQLException e) {
             LOGGER.error("Can not get count elements", e);
@@ -138,7 +137,7 @@ public abstract class AbstractGenericDAO<E> {
             statement.setInt(1, dataInt);
             resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                res = resultSet.getInt(Constants.ELEMENTS_COUNT);
+                res = resultSet.getInt("COUNT(*)");
             }
         } catch (SQLException e) {
             LOGGER.error("Can not get count elements", e);

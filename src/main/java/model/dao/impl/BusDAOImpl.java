@@ -140,7 +140,7 @@ public class BusDAOImpl extends AbstractGenericDAO<BusEntity> implements BusDAO 
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(APPOINT_TO_ROUTE)) {
             statement.setString(1, Constants.STATUS_WORK);
-            statement.setString(2, Constants.STATUS_NEW);
+            statement.setString(2, Constants.STATUS_FREE);
             statement.setInt(3, idRoute);
             statement.setInt(4, idBus);
             statement.executeUpdate();

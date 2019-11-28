@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 public class UserDAOImpl extends AbstractGenericDAO<UserEntity> implements UserDAO {
     private static final String FIND_USER_BY_LOGIN = "SELECT * FROM user WHERE login = ?";

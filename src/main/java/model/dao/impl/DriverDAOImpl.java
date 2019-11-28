@@ -83,7 +83,7 @@ public class DriverDAOImpl extends AbstractGenericDAO<DriverEntity> implements D
 
     @Override
     public void setStatusNew(Integer idDriver) {
-        updateFieldByIntegerParam(idDriver, Constants.STATUS_NEW, UPDATE_STATUS_BY_ID);
+        updateFieldByIntegerParam(idDriver, Constants.STATUS_FREE, UPDATE_STATUS_BY_ID);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class DriverDAOImpl extends AbstractGenericDAO<DriverEntity> implements D
 
     @Override
     public void cancelDriverFromBus(Integer idBus) {
-        updateFieldByIntegerParam(idBus, Constants.STATUS_NEW, CANSEL_DRIVER);
+        updateFieldByIntegerParam(idBus, Constants.STATUS_FREE, CANSEL_DRIVER);
     }
 
     @Override
