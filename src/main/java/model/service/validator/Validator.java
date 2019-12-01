@@ -14,7 +14,7 @@ public abstract class Validator<E> {
     protected void validateByStringParam(String param, Pattern pattern, String errorMessage) {
         Matcher matcher = pattern.matcher(param);
 
-        if (!matcher.find()) {
+        if (!matcher.matches()) {
             LOGGER.warn(errorMessage);
             throw new InvalidDataRuntimeException(errorMessage);
         }
@@ -22,7 +22,7 @@ public abstract class Validator<E> {
 
     protected void validateByIntegerParam(Integer param, Pattern pattern, String errorMessage) {
         Matcher matcher = pattern.matcher(param.toString());
-        if (!matcher.find()) {
+        if (!matcher.matches()) {
             LOGGER.warn(errorMessage);
             throw new InvalidDataRuntimeException(errorMessage);
         }

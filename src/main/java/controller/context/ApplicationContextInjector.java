@@ -83,20 +83,17 @@ public class ApplicationContextInjector {
         commandNameToCommand.put("DRIVERS", new DriversCommand(DRIVER_SERVICE));
         commandNameToCommand.put("ROUTES", new RoutesCommand(ROUTE_SERVICE));
 
-        /*Route menu commands*/
         commandNameToCommand.put("BUSES_INFO", new BusesInfoCommand(BUS_SERVICE));
         commandNameToCommand.put("BUSES_TO_APPOINT", new BusesToAppointCommand(BUS_SERVICE));
         commandNameToCommand.put("EDIT_ROUTE", new EditRouteCommand(ROUTE_SERVICE));
         commandNameToCommand.put("DELETE_ROUTE", new DeleteRouteCommand(BUS_STATION_SERVICE));
 
-        /*Bus menu commands*/
         commandNameToCommand.put("APPOINT_BUS", new AppointBusCommand(BUS_STATION_SERVICE));
         commandNameToCommand.put("DRIVER_INFO", new DriverInfoCommand(DRIVER_SERVICE));
         commandNameToCommand.put("FREE_DRIVERS", new FreeDriversCommand(DRIVER_SERVICE));
         commandNameToCommand.put("EDIT_BUS", new EditBusCommand(BUS_SERVICE));
         commandNameToCommand.put("DELETE_BUS", new DeleteBusCommand(BUS_STATION_SERVICE));
-
-        /*Driver menu commands*/
+        
         commandNameToCommand.put("APPOINT_DRIVER", new AppointDriverCommand(BUS_STATION_SERVICE));
         commandNameToCommand.put("EDIT_DRIVER", new EditDriverCommand(DRIVER_SERVICE));
         commandNameToCommand.put("EDIT_DRIVER_ACCOUNT", new EditDriverCommand(DRIVER_SERVICE));
@@ -133,30 +130,6 @@ public class ApplicationContextInjector {
             }
         }
         return injector;
-    }
-
-    public static AdminService getAdminService() {
-        return ADMIN_SERVICE;
-    }
-
-    public static BusService getBusService() {
-        return BUS_SERVICE;
-    }
-
-    public static DriverService getDriverService() {
-        return DRIVER_SERVICE;
-    }
-
-    public static RouteService getRouteService() {
-        return ROUTE_SERVICE;
-    }
-
-    public static ScheduleService getScheduleService() {
-        return SCHEDULE_SERVICE;
-    }
-
-    public UserService getUserService() {
-        return USER_SERVICE;
     }
 
     public static BusStationService getBusStationService() {

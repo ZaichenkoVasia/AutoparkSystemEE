@@ -48,50 +48,50 @@ public class DriverValidatorTest {
     public void shouldThrowInvalidDataRuntimeExceptionValidatingNull() {
         validator.validate(null);
     }
-//
-//    @Test(expected = InvalidDataRuntimeException.class)
-//    public void shouldThrowInvalidDataRuntimeExceptionValidatingInvalidName() {
-//        Driver driver = Driver.builder()
-//                .withName("WrongName123")
-//                .build();
-//        validator.validate(driver);
-//    }
-//
-//    @Test(expected = InvalidDataRuntimeException.class)
-//    public void shouldThrowInvalidDataRuntimeExceptionValidatingInvalidSurname() {
-//        Driver driver = Driver.builder()
-//                .withName("Name")
-//                .withSurname("WrongSurname123")
-//                .build();
-//        validator.validate(driver);
-//    }
-//
-//    @Test(expected = InvalidDataRuntimeException.class)
-//    public void shouldThrowInvalidDataRuntimeExceptionValidatingInvalidPassword() {
-//        User user = User.builder()
-//                .withLogin("email@gmail.com")
-//                .withPassword("WrongPassword$")
-//                .build();
-//        Driver driver = Driver.builder()
-//                .withName("Name")
-//                .withSurname("Surname")
-//                .withUser(user)
-//                .build();
-//        validator.validate(driver);
-//    }
-//
-//    @Test(expected = InvalidDataRuntimeException.class)
-//    public void shouldThrowInvalidDataRuntimeExceptionValidatingInvalidSalary() {
-//        User user = User.builder()
-//                .withLogin("email@gmail.com")
-//                .withPassword("password")
-//                .build();
-//        Driver driver = Driver.builder()
-//                .withName("Name")
-//                .withSurname("Surname")
-//                .withUser(user)
-//                .withSalary(1000000000)
-//                .build();
-//        validator.validate(driver);
-//    }
+
+    @Test(expected = InvalidDataRuntimeException.class)
+    public void shouldThrowInvalidDataRuntimeExceptionValidatingInvalidName() {
+        Driver driver = Driver.builder()
+                .withName("WrongName123")
+                .build();
+        validator.validate(driver);
+    }
+
+    @Test(expected = InvalidDataRuntimeException.class)
+    public void shouldThrowInvalidDataRuntimeExceptionValidatingInvalidSurname() {
+        Driver driver = Driver.builder()
+                .withName("Name")
+                .withSurname("WrongSurname123")
+                .build();
+        validator.validate(driver);
+    }
+
+    @Test(expected = InvalidDataRuntimeException.class)
+    public void shouldThrowInvalidDataRuntimeExceptionValidatingInvalidPassword() {
+        User user = User.builder()
+                .withLogin("email@gmail.com")
+                .withPassword("WrongPassword$")
+                .build();
+        Driver driver = Driver.builder()
+                .withName("Name")
+                .withSurname("Surname")
+                .withUser(user)
+                .build();
+        validator.validate(driver);
+    }
+
+    @Test(expected = InvalidDataRuntimeException.class)
+    public void shouldThrowInvalidDataRuntimeExceptionValidatingInvalidSalary() {
+        User user = User.builder()
+                .withLogin("email@gmail.com")
+                .withPassword("password")
+                .build();
+        Driver driver = Driver.builder()
+                .withName("Name")
+                .withSurname("Surname")
+                .withUser(user)
+                .withSalary(1000000000)
+                .build();
+        validator.validate(driver);
+    }
 }

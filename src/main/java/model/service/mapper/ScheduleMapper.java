@@ -4,7 +4,7 @@ import model.domain.Schedule;
 import model.entity.ScheduleEntity;
 
 public class ScheduleMapper {
-    public ScheduleEntity mapScheduleToUserEntity(Schedule schedule) {
+    public ScheduleEntity mapScheduleToScheduleEntity(Schedule schedule) {
         return ScheduleEntity.builder()
                 .withId(schedule.getId())
                 .withDeparture(schedule.getDeparture())

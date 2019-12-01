@@ -32,7 +32,7 @@ public class BusMapper {
             return busEntity;
         }
 
-        if (busEntity.getRoute().getId() == 0 || busEntity.getRoute().getId() == null) {
+        if (bus.getRoute().getId() == 0 || bus.getRoute().getId() == null) {
             return busEntity;
         }
         return BusEntity.builder()

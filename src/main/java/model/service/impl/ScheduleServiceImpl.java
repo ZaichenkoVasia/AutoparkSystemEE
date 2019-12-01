@@ -31,7 +31,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             LOGGER.error("Incorrect insertElement value");
             throw new InvalidDataRuntimeException("Incorrect insertElement value");
         }
-        ScheduleEntity scheduleEntity = mapper.mapScheduleToUserEntity(element);
+        ScheduleEntity scheduleEntity = mapper.mapScheduleToScheduleEntity(element);
         return scheduleDAO.insertElement(scheduleEntity);
     }
 
@@ -63,7 +63,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             LOGGER.error("Incorrect updateElement value");
             throw new InvalidDataRuntimeException("Incorrect updateElement value");
         }
-        ScheduleEntity scheduleEntity = mapper.mapScheduleToUserEntity(element);
+        ScheduleEntity scheduleEntity = mapper.mapScheduleToScheduleEntity(element);
         scheduleDAO.updateElement(scheduleEntity);
     }
 
