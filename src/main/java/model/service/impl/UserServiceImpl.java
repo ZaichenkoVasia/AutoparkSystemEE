@@ -31,16 +31,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByLoginData(User user) throws ServiceLayerRuntimeException {
-        LOGGER.info("Try to find user by login data");
         if (Objects.isNull(user)) {
-            LOGGER.error("Incorrect findUserByLoginData value");
+            LOGGER.warn("Incorrect findUserByLoginData value");
             throw new InvalidDataRuntimeException("Incorrect findUserByLoginData value");
         }
         String encodedPassword = encoderPassword.encode(user.getPassword());
         UserEntity userEntity = mapper.mapUserToUserEntity(user);
         userEntity = userDAO.findByLogin(userEntity);
         if (!userEntity.getPassword().equals(encodedPassword)) {
-            LOGGER.error("User with this login and password is not exist");
+            LOGGER.warn("User with this login and password is not exist");
             throw new UserNotExistRuntimeException("User with this login and password is not exist");
         }
         return mapper.mapUserEntityToUser(userEntity);
@@ -49,9 +48,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer insertElement(User element) {
-        LOGGER.info("Inserting element");
         if (Objects.isNull(element)) {
-            LOGGER.error("Incorrect insertElement value");
+            LOGGER.warn("Incorrect insertElement value");
             throw new InvalidDataRuntimeException("Incorrect insertElement value");
         }
         UserEntity userEntity = mapper.mapUserToUserEntity(element);
@@ -71,7 +69,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteElement(Integer id) {
-        LOGGER.info("Deleting element");
         if (Objects.isNull(id)) {
             LOGGER.error("Incorrect deleteElement value");
             throw new InvalidDataRuntimeException("Incorrect deleteElement value");
@@ -81,24 +78,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateElement(User element) {
-        LOGGER.info("Updating element");
         if (Objects.isNull(element)) {
             LOGGER.error("Incorrect updateElement value");
             throw new InvalidDataRuntimeException("Incorrect updateElement value");
         }
-        UserEntity scheduleEntity = mapper.mapUserToUserEntity(element);
-        userDAO.updateElement(scheduleEntity);
+        UserEntity userEntity = mapper.mapUserToUserEntity(element);
+        userDAO.updateElement(userEntity);
     }
 
     @Override
     public Integer findElementsAmount() {
-        LOGGER.info("Getting elements amount");
         return userDAO.count();
     }
 
     @Override
     public List<User> findPaginatedList(int startIdx, int endIdx) {
-        LOGGER.info("Getting paginated list");
         List<UserEntity> result = userDAO.findPaginatedList(startIdx, endIdx);
         return result.isEmpty() ? Collections.emptyList()
                 : result.stream()

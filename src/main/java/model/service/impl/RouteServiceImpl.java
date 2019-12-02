@@ -60,7 +60,7 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public List<Route> searchByCriteria(String departure, String arrival) {
         LOGGER.info("Searching by criteria");
-        if (departure.isEmpty() || arrival.isEmpty()) {
+        if (Objects.isNull(departure) || Objects.isNull(arrival)) {
             LOGGER.error("Incorrect findByCriteria value");
             throw new InvalidDataRuntimeException("Incorrect findByCriteria value");
         }
