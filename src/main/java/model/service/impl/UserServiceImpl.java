@@ -9,6 +9,7 @@ import model.service.mapper.UserMapper;
 import model.domain.User;
 import model.dao.UserDAO;
 import model.entity.UserEntity;
+import model.service.validator.impl.UserValidator;
 import org.apache.log4j.Logger;
 
 import java.util.Collections;
@@ -22,11 +23,13 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDAO;
     private UserMapper mapper;
     private EncoderPassword encoderPassword;
+    private UserValidator validator;
 
-    public UserServiceImpl(UserDAO userDAO, UserMapper mapper, EncoderPassword encoderPassword) {
+    public UserServiceImpl(UserDAO userDAO, UserMapper mapper, EncoderPassword encoderPassword, UserValidator userValidator) {
         this.userDAO = userDAO;
         this.mapper = mapper;
         this.encoderPassword = encoderPassword;
+        this.validator = userValidator;
     }
 
     @Override
@@ -52,6 +55,7 @@ public class UserServiceImpl implements UserService {
             LOGGER.warn("Incorrect insertElement value");
             throw new InvalidDataRuntimeException("Incorrect insertElement value");
         }
+        validator.validate(element);
         UserEntity userEntity = mapper.mapUserToUserEntity(element);
         return userDAO.insertElement(userEntity);
     }
@@ -82,6 +86,7 @@ public class UserServiceImpl implements UserService {
             LOGGER.error("Incorrect updateElement value");
             throw new InvalidDataRuntimeException("Incorrect updateElement value");
         }
+        validator.validate(element);
         UserEntity userEntity = mapper.mapUserToUserEntity(element);
         userDAO.updateElement(userEntity);
     }

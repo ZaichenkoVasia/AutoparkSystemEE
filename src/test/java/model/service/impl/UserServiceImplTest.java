@@ -7,6 +7,8 @@ import model.exception.InvalidDataRuntimeException;
 import model.exception.UserNotExistRuntimeException;
 import model.service.encoder.EncoderPassword;
 import model.service.mapper.UserMapper;
+import model.service.validator.impl.DriverValidator;
+import model.service.validator.impl.UserValidator;
 import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
@@ -45,6 +47,9 @@ public class UserServiceImplTest {
     private UserMapper mapper;
 
     @Mock
+    private UserValidator validator;
+
+    @Mock
     private EncoderPassword encoder;
 
     @InjectMocks
@@ -52,7 +57,7 @@ public class UserServiceImplTest {
 
     @After
     public void resetMock() {
-        reset(repository, mapper, encoder);
+        reset(repository, mapper, encoder, validator);
     }
 
     @Test

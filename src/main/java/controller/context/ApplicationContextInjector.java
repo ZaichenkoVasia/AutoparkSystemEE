@@ -13,10 +13,7 @@ import model.service.*;
 import model.service.encoder.EncoderPassword;
 import model.service.impl.*;
 import model.service.mapper.*;
-import model.service.validator.impl.AdminValidator;
-import model.service.validator.impl.BusValidator;
-import model.service.validator.impl.DriverValidator;
-import model.service.validator.impl.RouteValidator;
+import model.service.validator.impl.*;
 import controller.util.collectors.impl.*;
 import model.dao.*;
 import model.dao.connection.PoolConnection;
@@ -47,13 +44,14 @@ public class ApplicationContextInjector {
     private static final BusValidator BUS_VALIDATOR = new BusValidator();
     private static final DriverValidator DRIVER_VALIDATOR = new DriverValidator();
     private static final RouteValidator ROUTE_VALIDATOR = new RouteValidator();
+    private static final UserValidator USER_VALIDATOR = new UserValidator();
 
     private static final AdminService ADMIN_SERVICE = new AdminServiceImpl(ADMIN_DAO, ADMIN_MAPPER, ADMIN_VALIDATOR);
     private static final BusService BUS_SERVICE = new BusServiceImpl(BUS_DAO, BUS_MAPPER, BUS_VALIDATOR);
     private static final DriverService DRIVER_SERVICE = new DriverServiceImpl(DRIVER_DAO, DRIVER_MAPPER, DRIVER_VALIDATOR);
     private static final RouteService ROUTE_SERVICE = new RouteServiceImpl(ROUTE_DAO, ROUTE_MAPPER, ROUTE_VALIDATOR);
     private static final ScheduleService SCHEDULE_SERVICE = new ScheduleServiceImpl(SCHEDULE_DAO, SCHEDULE_MAPPER);
-    private static final UserService USER_SERVICE = new UserServiceImpl(USER_DAO, USER_MAPPER, ENCODER_PASSWORD);
+    private static final UserService USER_SERVICE = new UserServiceImpl(USER_DAO, USER_MAPPER, ENCODER_PASSWORD, USER_VALIDATOR);
     private static final BusStationService BUS_STATION_SERVICE = new BusStationServiceImpl(
             ADMIN_SERVICE, BUS_SERVICE, DRIVER_SERVICE, ROUTE_SERVICE,
             SCHEDULE_SERVICE, USER_SERVICE, ENCODER_PASSWORD);

@@ -14,9 +14,6 @@
         <c:otherwise>
             <h2><fmt:message key="welcome.message"/></h2>
             <p><fmt:message key="functionality"/></p>
-            <ul>
-                <li><fmt:message key="li.first"/></li>
-            </ul>
         </c:otherwise>
     </c:choose>
 </div>
