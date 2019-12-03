@@ -14,7 +14,7 @@ public class AdminDataCollector extends DataCollector<Admin> {
     private static final Logger LOGGER = Logger.getLogger(AdminDataCollector.class);
 
     @Override
-    public Admin retrieveData(HttpServletRequest request) throws WrongInputDataRuntimeException {
+    public Admin retrieveData(HttpServletRequest request) {
         LOGGER.info("Retrieving admin data from request");
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");

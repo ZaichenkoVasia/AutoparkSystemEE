@@ -1,9 +1,7 @@
 package model.service.mapper;
 
-import model.domain.Admin;
 import model.domain.Driver;
 import model.domain.User;
-import model.entity.AdminEntity;
 import model.entity.DriverEntity;
 import model.entity.UserEntity;
 import org.junit.Test;
