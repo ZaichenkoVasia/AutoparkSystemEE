@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
@@ -40,6 +41,6 @@ public class LogOutCommandTest {
         String expected = "index.jsp";
         String actual = command.execute(request, responce);
 
-        assertEquals(expected, actual);
+        assertThat(expected, is(actual));
     }
 }

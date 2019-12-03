@@ -1,8 +1,8 @@
-package controller.command.impl.user;
+package controller.command.impl.driver;
 
 import controller.exception.WrongInputDataRuntimeException;
-import controller.util.collectors.impl.AdminDataCollector;
-import model.domain.Admin;
+import controller.util.collectors.impl.DriverDataCollector;
+import model.domain.Driver;
 import model.domain.User;
 import model.service.BusStationService;
 import org.junit.After;
@@ -19,12 +19,11 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SaveAdminCommandTest {
-    private static final Admin ADMIN = getAdmin();
+public class SaveDriverCommandTest {
+    private static final Driver DRIVER = getDriver();
 
     @Mock
     private HttpServletRequest request;
@@ -36,10 +35,10 @@ public class SaveAdminCommandTest {
     private BusStationService service;
 
     @Mock
-    private AdminDataCollector collector;
+    private DriverDataCollector collector;
 
     @InjectMocks
-    private SaveAdminCommand command;
+    private SaveDriverCommand command;
 
     @After
     public void resetMock() {
@@ -47,38 +46,36 @@ public class SaveAdminCommandTest {
     }
 
     @Test
-    public void executeShouldSaveAdmin() {
+    public void executeShouldSaveDriver() {
         when(request.getParameter(anyString())).thenReturn("1");
-        when(collector.retrieveData(request)).thenReturn(ADMIN);
-        when(service.saveAdmin(any(Admin.class), any(User.class), anyString(), anyString())).thenReturn(true);
+        when(collector.retrieveData(request)).thenReturn(DRIVER);
+        when(service.saveDriver(any(Driver.class), any(User.class), anyString(), anyString())).thenReturn(true);
 
         String expected = "index.jsp";
         String actual = command.execute(request, responce);
 
         assertThat(expected, is(actual));
+        verify(request).setAttribute(anyString(), any());
     }
 
     @Test
-    public void executeShouldNotSaveAdmin() {
+    public void executeShouldNotSaveDriver() {
         when(request.getParameter(anyString())).thenReturn("-1");
         when(collector.retrieveData(request)).thenThrow(WrongInputDataRuntimeException.class);
 
-        String expected = "WEB-INF/jsp/admin/account.jsp";
+        String expected = "WEB-INF/jsp/editing_pages/add_driver.jsp";
         String actual = command.execute(request, responce);
 
         assertThat(expected, is(actual));
     }
 
-    private static Admin getAdmin() {
-        return Admin.builder()
+    private static Driver getDriver() {
+        return Driver.builder()
                 .withId(1)
-                .withName("admin.name")
-                .withSurname("admin.surname")
-                .withDegree("admin.degree")
+                .withName("name")
+                .withSurname("surname")
                 .withUser(User.builder()
                         .withId(1)
-                        .withLogin("user.login")
-                        .withPassword("user.password")
                         .build())
                 .build();
     }

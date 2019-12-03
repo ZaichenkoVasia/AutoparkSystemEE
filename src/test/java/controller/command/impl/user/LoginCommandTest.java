@@ -1,8 +1,6 @@
 package controller.command.impl.user;
 
-import controller.exception.WrongInputDataRuntimeException;
 import controller.util.collectors.impl.UserDataCollector;
-import model.domain.Admin;
 import model.domain.User;
 import model.service.UserService;
 import model.service.encoder.EncoderPassword;
@@ -17,7 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.reset;
@@ -66,7 +65,7 @@ public class LoginCommandTest {
         String expected = "index.jsp";
         String actual = command.execute(request, responce);
 
-        assertEquals(expected, actual);
+        assertThat(expected, is(actual));
     }
 
     @Test
@@ -79,7 +78,7 @@ public class LoginCommandTest {
         String expected = "WEB-INF/jsp/login.jsp";
         String actual = command.execute(request, responce);
 
-        assertEquals(expected, actual);
+        assertThat(expected, is(actual));
     }
 
     private static User getUser() {

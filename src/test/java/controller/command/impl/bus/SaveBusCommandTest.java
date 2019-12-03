@@ -1,9 +1,10 @@
-package controller.command.impl.user;
+package controller.command.impl.bus;
 
 import controller.exception.WrongInputDataRuntimeException;
-import controller.util.collectors.impl.AdminDataCollector;
-import model.domain.Admin;
-import model.domain.User;
+import controller.util.collectors.impl.BusDataCollector;
+import model.domain.Bus;
+import model.domain.Route;
+import model.domain.Schedule;
 import model.service.BusStationService;
 import org.junit.After;
 import org.junit.Test;
@@ -19,12 +20,11 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SaveAdminCommandTest {
-    private static final Admin ADMIN = getAdmin();
+public class SaveBusCommandTest {
+    private static final Bus BUS = getBus();
 
     @Mock
     private HttpServletRequest request;
@@ -36,10 +36,10 @@ public class SaveAdminCommandTest {
     private BusStationService service;
 
     @Mock
-    private AdminDataCollector collector;
+    private BusDataCollector collector;
 
     @InjectMocks
-    private SaveAdminCommand command;
+    private SaveBusCommand command;
 
     @After
     public void resetMock() {
@@ -47,38 +47,38 @@ public class SaveAdminCommandTest {
     }
 
     @Test
-    public void executeShouldSaveAdmin() {
+    public void executeShouldSaveBus() {
         when(request.getParameter(anyString())).thenReturn("1");
-        when(collector.retrieveData(request)).thenReturn(ADMIN);
-        when(service.saveAdmin(any(Admin.class), any(User.class), anyString(), anyString())).thenReturn(true);
+        when(collector.retrieveData(request)).thenReturn(BUS);
+        when(service.saveBus(any(Bus.class), any(Schedule.class), anyString(), anyString())).thenReturn(true);
 
         String expected = "index.jsp";
         String actual = command.execute(request, responce);
 
         assertThat(expected, is(actual));
+        verify(request).setAttribute(anyString(), any());
     }
 
     @Test
-    public void executeShouldNotSaveAdmin() {
+    public void executeShouldNotSaveBus() {
         when(request.getParameter(anyString())).thenReturn("-1");
         when(collector.retrieveData(request)).thenThrow(WrongInputDataRuntimeException.class);
 
-        String expected = "WEB-INF/jsp/admin/account.jsp";
+        String expected = "WEB-INF/jsp/editing_pages/add_bus.jsp";
         String actual = command.execute(request, responce);
 
         assertThat(expected, is(actual));
     }
 
-    private static Admin getAdmin() {
-        return Admin.builder()
+    private static Bus getBus() {
+        return Bus.builder()
                 .withId(1)
-                .withName("admin.name")
-                .withSurname("admin.surname")
-                .withDegree("admin.degree")
-                .withUser(User.builder()
+                .withModel("model")
+                .withRoute(Route.builder()
                         .withId(1)
-                        .withLogin("user.login")
-                        .withPassword("user.password")
+                        .build())
+                .withSchedule(Schedule.builder()
+                        .withId(1)
                         .build())
                 .build();
     }

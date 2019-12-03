@@ -1,5 +1,6 @@
-package controller.command.impl.user;
+package controller.command.impl.bus;
 
+import model.service.BusStationService;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,32 +13,39 @@ import javax.servlet.http.HttpServletResponse;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LoginPageCommandTest {
+public class AppointBusCommandTest {
+
     @Mock
     private HttpServletRequest request;
 
     @Mock
     private HttpServletResponse responce;
 
+    @Mock
+    private BusStationService service;
+
     @InjectMocks
-    private LoginPageCommand command;
+    private AppointBusCommand command;
 
     @After
     public void resetMock() {
-        reset(request, responce);
+        reset(request, responce, service);
     }
 
     @Test
-    public void executeShouldReturnSuccessfulLoginPage() {
-        when(request.getParameter(anyString())).thenReturn("admin");
-        String expected = "WEB-INF/jsp/login.jsp";
+    public void executeShouldAppointBus() {
+        when(request.getParameter(anyString())).thenReturn("1");
+        when(service.appointBusToRoute(any(Integer.class), any(Integer.class))).thenReturn(true);
+
+        String expected = "index.jsp";
         String actual = command.execute(request, responce);
 
         assertThat(expected, is(actual));
+        verify(request).setAttribute(anyString(), any());
     }
 }
