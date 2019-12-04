@@ -19,12 +19,13 @@ public class AcceptSchedule implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         String idDriver = request.getParameter("idDriver");
         String status = request.getParameter("status");
-        if (!status.equals("new")){
-            request.setAttribute("message", "schedule.already.confirmed");
+        if (status.equals("new") || status.equals("free")){
+            driverService.setStatusWork(Integer.parseInt(idDriver));
+            request.setAttribute("message", "schedule.confirmed");
             return "index.jsp";
         }
-        driverService.setStatusWork(Integer.parseInt(idDriver));
-        request.setAttribute("message", "schedule.confirmed");
+        request.setAttribute("message", "schedule.already.confirmed");
         return "index.jsp";
+
     }
 }

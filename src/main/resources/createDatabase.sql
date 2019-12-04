@@ -27,7 +27,7 @@ CREATE TABLE autopark.route (
   distance INT,
   departure VARCHAR(128),
   arrival VARCHAR(128),
-  status VARCHAR(128)
+  status VARCHAR(128) NOT NULL DEFAULT 'free'
 ) ENGINE InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE autopark.schedule (
@@ -45,7 +45,7 @@ CREATE TABLE autopark.bus (
   consumption INT,
   release_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   seats INT,
-  status VARCHAR(128),
+  status VARCHAR(128) NOT NULL DEFAULT 'free',
   idschedule INT UNIQUE,
    FOREIGN KEY (idschedule) REFERENCES autopark.schedule (idschedule)
     ON UPDATE CASCADE
@@ -63,7 +63,7 @@ CREATE TABLE autopark.driver (
   birth TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   license_test TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   salary INT,
-  status VARCHAR(128),
+  status VARCHAR(128) NOT NULL DEFAULT 'free',
   iduser INT UNIQUE,
    FOREIGN KEY (iduser) REFERENCES autopark.user (iduser)
     ON UPDATE CASCADE
