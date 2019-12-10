@@ -8,8 +8,9 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="../../../style/main.css">
+<%--    <link rel="stylesheet" type="text/css" href="../../../style/main.css">--%>
     <style>
+        <%@include file ="../../../style/main.css"%>
         .banner {
             background-size: 100%;
             background-repeat: no-repeat;
