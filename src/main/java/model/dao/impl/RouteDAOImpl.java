@@ -113,7 +113,7 @@ public class RouteDAOImpl extends AbstractGenericDAO<RouteEntity> implements Rou
             resultSet = statement.executeQuery();
             list = parseAll(resultSet);
         } catch (SQLException e) {
-            LOGGER.error("Can't execute method findByCriteria", e);
+            LOGGER.warn("Can't execute method findByCriteria", e);
             throw new DatabaseRuntimeException("Can't execute method findByCriteria", e);
         }
         LOGGER.info("Returning list of routes according to criteria");

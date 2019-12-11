@@ -31,7 +31,7 @@ public class RouteServiceImpl implements RouteService {
     public void setStatusEmpty(Integer idRoute) {
         LOGGER.info("Setting status empty for route");
         if (Objects.isNull(idRoute)) {
-            LOGGER.error("Incorrect setStatusEmpty value");
+            LOGGER.warn("Incorrect setStatusEmpty value");
             throw new InvalidDataRuntimeException("Incorrect setStatusEmpty value");
         }
         routeDAO.setStatusEmpty(idRoute);
@@ -41,7 +41,7 @@ public class RouteServiceImpl implements RouteService {
     public void setStatusWork(Integer idRoute) {
         LOGGER.info("Setting status work for route");
         if (Objects.isNull(idRoute)) {
-            LOGGER.error("Incorrect setStatusWork value");
+            LOGGER.warn("Incorrect setStatusWork value");
             throw new InvalidDataRuntimeException("Incorrect setStatusWork value");
         }
         routeDAO.setStatusWork(idRoute);
@@ -51,7 +51,7 @@ public class RouteServiceImpl implements RouteService {
     public void cancelAll(Integer idRoute) {
         LOGGER.info("Cancel all buses from route");
         if (Objects.isNull(idRoute)) {
-            LOGGER.error("Incorrect cancelAll value");
+            LOGGER.warn("Incorrect cancelAll value");
             throw new InvalidDataRuntimeException("Incorrect cancelAll value");
         }
         routeDAO.cancelAll(idRoute);
@@ -61,7 +61,7 @@ public class RouteServiceImpl implements RouteService {
     public List<Route> searchByCriteria(String departure, String arrival) {
         LOGGER.info("Searching by criteria");
         if (Objects.isNull(departure) || Objects.isNull(arrival)) {
-            LOGGER.error("Incorrect findByCriteria value");
+            LOGGER.warn("Incorrect findByCriteria value");
             throw new InvalidDataRuntimeException("Incorrect findByCriteria value");
         }
         List<RouteEntity> result = routeDAO.findByCriteria(departure, arrival);
@@ -75,7 +75,7 @@ public class RouteServiceImpl implements RouteService {
     public Integer insertElement(Route element) {
         LOGGER.info("Inserting element");
         if (Objects.isNull(element)) {
-            LOGGER.error("Incorrect insertElement value");
+            LOGGER.warn("Incorrect insertElement value");
             throw new InvalidDataRuntimeException("Incorrect insertElement value");
         }
         routeValidator.validate(element);
@@ -87,7 +87,7 @@ public class RouteServiceImpl implements RouteService {
     public Route findElementById(Integer id) {
         LOGGER.info("Try to get element by id");
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect findElementById value");
+            LOGGER.warn("Incorrect findElementById value");
             throw new InvalidDataRuntimeException("Incorrect findElementById value");
         }
         RouteEntity routeEntity = routeDAO.findElementById(id);
@@ -98,7 +98,7 @@ public class RouteServiceImpl implements RouteService {
     public void deleteElement(Integer id) {
         LOGGER.info("Deleting element");
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect deleteElement value");
+            LOGGER.warn("Incorrect deleteElement value");
             throw new InvalidDataRuntimeException("Incorrect deleteElement value");
         }
         routeDAO.deleteElement(id);
@@ -108,7 +108,7 @@ public class RouteServiceImpl implements RouteService {
     public void updateElement(Route element) {
         LOGGER.info("Updating element");
         if (Objects.isNull(element)) {
-            LOGGER.error("Incorrect updateElement value");
+            LOGGER.warn("Incorrect updateElement value");
             throw new InvalidDataRuntimeException("Incorrect updateElement value");
         }
         routeValidator.validate(element);

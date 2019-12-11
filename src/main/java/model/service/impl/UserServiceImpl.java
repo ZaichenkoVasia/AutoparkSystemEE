@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
     public User findElementById(Integer id) {
         LOGGER.info("Try to get element by id");
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect findElementById value");
+            LOGGER.warn("Incorrect findElementById value");
             throw new InvalidDataRuntimeException("Incorrect findElementById value");
         }
         UserEntity userEntity = userDAO.findElementById(id);
@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteElement(Integer id) {
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect deleteElement value");
+            LOGGER.warn("Incorrect deleteElement value");
             throw new InvalidDataRuntimeException("Incorrect deleteElement value");
         }
         userDAO.deleteElement(id);
@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateElement(User element) {
         if (Objects.isNull(element)) {
-            LOGGER.error("Incorrect updateElement value");
+            LOGGER.warn("Incorrect updateElement value");
             throw new InvalidDataRuntimeException("Incorrect updateElement value");
         }
         validator.validate(element);

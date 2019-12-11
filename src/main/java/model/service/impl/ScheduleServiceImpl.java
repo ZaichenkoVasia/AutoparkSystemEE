@@ -28,7 +28,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     public Integer insertElement(Schedule element) {
         LOGGER.info("Inserting element");
         if (Objects.isNull(element)) {
-            LOGGER.error("Incorrect insertElement value");
+            LOGGER.warn("Incorrect insertElement value");
             throw new InvalidDataRuntimeException("Incorrect insertElement value");
         }
         ScheduleEntity scheduleEntity = mapper.mapScheduleToScheduleEntity(element);
@@ -39,7 +39,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     public Schedule findElementById(Integer id) {
         LOGGER.info("Try to get element by id");
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect findElementById value");
+            LOGGER.warn("Incorrect findElementById value");
             throw new InvalidDataRuntimeException("Incorrect findElementById value");
         }
         ScheduleEntity scheduleEntity = scheduleDAO.findElementById(id);
@@ -50,7 +50,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     public void deleteElement(Integer id) {
         LOGGER.info("Deleting element");
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect deleteElement value");
+            LOGGER.warn("Incorrect deleteElement value");
             throw new InvalidDataRuntimeException("Incorrect deleteElement value");
         }
         scheduleDAO.deleteElement(id);
@@ -60,7 +60,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     public void updateElement(Schedule element) {
         LOGGER.info("Updating element");
         if (Objects.isNull(element)) {
-            LOGGER.error("Incorrect updateElement value");
+            LOGGER.warn("Incorrect updateElement value");
             throw new InvalidDataRuntimeException("Incorrect updateElement value");
         }
         ScheduleEntity scheduleEntity = mapper.mapScheduleToScheduleEntity(element);

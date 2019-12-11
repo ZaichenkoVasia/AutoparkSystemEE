@@ -32,7 +32,7 @@ public class DriverServiceImpl implements DriverService {
     public Driver findDriverByUserId(Integer idUser) {
         LOGGER.info("Getting driver by user id");
         if (Objects.isNull(idUser)) {
-            LOGGER.error("Incorrect findDriverByUserId value");
+            LOGGER.warn("Incorrect findDriverByUserId value");
             throw new InvalidDataRuntimeException("Incorrect findDriverByUserId value");
         }
         DriverEntity driverEntity = driverDAO.findDriverByUserId(idUser);
@@ -43,7 +43,7 @@ public class DriverServiceImpl implements DriverService {
     public Driver findDriverByBusId(Integer idBus) {
         LOGGER.info("Getting driver by bus id");
         if (Objects.isNull(idBus)) {
-            LOGGER.error("Incorrect findDriverByBusId value");
+            LOGGER.warn("Incorrect findDriverByBusId value");
             throw new InvalidDataRuntimeException("Incorrect findDriverByBusId value");
         }
         DriverEntity driverEntity = driverDAO.findDriverByBusId(idBus);
@@ -57,7 +57,7 @@ public class DriverServiceImpl implements DriverService {
     public void setStatusNew(Integer idDriver) {
         LOGGER.info("Setting status new for driver");
         if (Objects.isNull(idDriver)) {
-            LOGGER.error("Incorrect setStatusNew value");
+            LOGGER.warn("Incorrect setStatusNew value");
             throw new InvalidDataRuntimeException("Incorrect setStatusNew value");
         }
         driverDAO.setStatusNew(idDriver);
@@ -67,7 +67,7 @@ public class DriverServiceImpl implements DriverService {
     public void setStatusWork(Integer idDriver) {
         LOGGER.info("Setting status work for driver");
         if (Objects.isNull(idDriver)) {
-            LOGGER.error("Incorrect setStatusNew value");
+            LOGGER.warn("Incorrect setStatusNew value");
             throw new InvalidDataRuntimeException("Incorrect setStatusNew value");
         }
         driverDAO.setStatusWork(idDriver);
@@ -77,7 +77,7 @@ public class DriverServiceImpl implements DriverService {
     public void cancelDriverFromBus(Integer idBus) {
         LOGGER.info("Cancel driver from bus");
         if (Objects.isNull(idBus)) {
-            LOGGER.error("Incorrect cancelDriverFromBus value");
+            LOGGER.warn("Incorrect cancelDriverFromBus value");
             throw new InvalidDataRuntimeException("Incorrect cancelDriverFromBus value");
         }
         driverDAO.cancelDriverFromBus(idBus);
@@ -97,7 +97,7 @@ public class DriverServiceImpl implements DriverService {
     public void updateBusInfoForDriver(Integer idBus, Integer idDriver) throws ServiceLayerRuntimeException {
         LOGGER.info("Assigning bus for driver");
         if (Objects.isNull(idBus) || Objects.isNull(idDriver)) {
-            LOGGER.error("Incorrect updateBusInfoForDriver value");
+            LOGGER.warn("Incorrect updateBusInfoForDriver value");
             throw new InvalidDataRuntimeException("Incorrect updateBusInfoForDriver value");
         }
         driverDAO.updateBusInfoForDriver(idBus, idDriver);
@@ -107,7 +107,7 @@ public class DriverServiceImpl implements DriverService {
     public Integer insertElement(Driver element) {
         LOGGER.info("Inserting element");
         if (Objects.isNull(element)) {
-            LOGGER.error("Incorrect insertElement value");
+            LOGGER.warn("Incorrect insertElement value");
             throw new InvalidDataRuntimeException("Incorrect insertElement value");
         }
         driverValidator.validate(element);
@@ -119,7 +119,7 @@ public class DriverServiceImpl implements DriverService {
     public Driver findElementById(Integer id) {
         LOGGER.info("Try to get element by id");
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect findElementById value");
+            LOGGER.warn("Incorrect findElementById value");
             throw new InvalidDataRuntimeException("Incorrect findElementById value");
         }
         DriverEntity driverEntity = driverDAO.findElementById(id);
@@ -130,7 +130,7 @@ public class DriverServiceImpl implements DriverService {
     public void deleteElement(Integer id) {
         LOGGER.info("Deleting element");
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect deleteElement value");
+            LOGGER.warn("Incorrect deleteElement value");
             throw new InvalidDataRuntimeException("Incorrect deleteElement value");
         }
         driverDAO.deleteElement(id);
@@ -140,7 +140,7 @@ public class DriverServiceImpl implements DriverService {
     public void updateElement(Driver element) {
         LOGGER.info("Updating element");
         if (Objects.isNull(element)) {
-            LOGGER.error("Incorrect updateElement value");
+            LOGGER.warn("Incorrect updateElement value");
             throw new InvalidDataRuntimeException("Incorrect updateElement value");
         }
         driverValidator.validate(element);

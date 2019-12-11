@@ -128,7 +128,7 @@ public class BusDAOImpl extends AbstractGenericDAO<BusEntity> implements BusDAO 
             statement.setInt(3, idBus);
             statement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("Can't execute method cancelBusFromRoute", e);
+            LOGGER.warn("Can't execute method cancelBusFromRoute", e);
             throw new DatabaseRuntimeException("Can't execute method cancelBusFromRoute", e);
         }
         LOGGER.info("Bus canceled");
@@ -145,7 +145,7 @@ public class BusDAOImpl extends AbstractGenericDAO<BusEntity> implements BusDAO 
             statement.setInt(4, idBus);
             statement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("Can't execute method appointBusToRoute", e);
+            LOGGER.warn("Can't execute method appointBusToRoute", e);
             throw new DatabaseRuntimeException("Can't execute method appointBusToRoute", e);
         }
         LOGGER.info("Bus assigned to route");

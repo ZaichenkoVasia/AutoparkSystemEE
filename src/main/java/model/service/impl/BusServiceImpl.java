@@ -41,7 +41,7 @@ public class BusServiceImpl implements BusService {
     public Integer countBusesOnRouteById(Integer idRoute) {
         LOGGER.info("Counting buses on route");
         if (Objects.isNull(idRoute)) {
-            LOGGER.error("Incorrect countBusesOnRouteById value");
+            LOGGER.warn("Incorrect countBusesOnRouteById value");
             throw new InvalidDataRuntimeException("Incorrect countBusesOnRouteById value");
         }
         return busDAO.countBusesOnRouteById(idRoute);
@@ -51,7 +51,7 @@ public class BusServiceImpl implements BusService {
     public void cancelBusFromRoute(Integer idBus) {
         LOGGER.info("Try cancel bus from route");
         if (Objects.isNull(idBus)) {
-            LOGGER.error("Incorrect cancelBusFromRoute value");
+            LOGGER.warn("Incorrect cancelBusFromRoute value");
             throw new InvalidDataRuntimeException("Incorrect cancelBusFromRoute value");
         }
         busDAO.cancelBusFromRoute(idBus);
@@ -61,7 +61,7 @@ public class BusServiceImpl implements BusService {
     public void appointBusToRoute(Integer idRoute, Integer idBus) {
         LOGGER.info("Assigning appoint bus to route");
         if (Objects.isNull(idBus) || Objects.isNull(idRoute)) {
-            LOGGER.error("Incorrect appointBusToRoute value");
+            LOGGER.warn("Incorrect appointBusToRoute value");
             throw new InvalidDataRuntimeException("Incorrect appointBusToRoute value");
         }
         busDAO.appointBusToRoute(idRoute, idBus);
@@ -71,7 +71,7 @@ public class BusServiceImpl implements BusService {
     public List<Bus> findBusesByIdRoute(Integer idRoute) {
         LOGGER.info("Getting buses by route id");
         if (Objects.isNull(idRoute)) {
-            LOGGER.error("Incorrect findBusesByIdRoute value");
+            LOGGER.warn("Incorrect findBusesByIdRoute value");
             throw new InvalidDataRuntimeException("Incorrect findBusesByIdRoute value");
         }
         List<BusEntity> result = busDAO.findBusesByIdRoute(idRoute);
@@ -85,7 +85,7 @@ public class BusServiceImpl implements BusService {
     public Integer insertElement(Bus element) {
         LOGGER.info("Inserting element");
         if (Objects.isNull(element)) {
-            LOGGER.error("Incorrect insertElement value");
+            LOGGER.warn("Incorrect insertElement value");
             throw new InvalidDataRuntimeException("Incorrect insertElement value");
         }
         busValidator.validate(element);
@@ -97,7 +97,7 @@ public class BusServiceImpl implements BusService {
     public Bus findElementById(Integer id) {
         LOGGER.info("Try to get element by id");
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect findElementById value");
+            LOGGER.warn("Incorrect findElementById value");
             throw new InvalidDataRuntimeException("Incorrect findElementById value");
         }
         BusEntity busEntity = busDAO.findElementById(id);
@@ -108,7 +108,7 @@ public class BusServiceImpl implements BusService {
     public void deleteElement(Integer id) {
         LOGGER.info("Deleting element");
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect deleteElement value");
+            LOGGER.warn("Incorrect deleteElement value");
             throw new InvalidDataRuntimeException("Incorrect deleteElement value");
         }
         busDAO.deleteElement(id);
@@ -118,7 +118,7 @@ public class BusServiceImpl implements BusService {
     public void updateElement(Bus element) {
         LOGGER.info("Updating element");
         if (Objects.isNull(element)) {
-            LOGGER.error("Incorrect updateElement value");
+            LOGGER.warn("Incorrect updateElement value");
             throw new InvalidDataRuntimeException("Incorrect updateElement value");
         }
         busValidator.validate(element);

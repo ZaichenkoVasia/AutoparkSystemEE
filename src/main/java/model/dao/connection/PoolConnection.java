@@ -41,7 +41,7 @@ public class PoolConnection {
         try {
             return dataSource.getConnection();
         } catch (SQLException e) {
-            logger.error("Can't execute method getConnection", e);
+            LOGGER.warn("Can't execute method getConnection", e);
             throw new DatabaseRuntimeException("Can not get connection", e);
         }
     }

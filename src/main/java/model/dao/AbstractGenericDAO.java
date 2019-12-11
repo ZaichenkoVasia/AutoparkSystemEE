@@ -45,7 +45,7 @@ public abstract class AbstractGenericDAO<E> {
                 return parseToOne(resultSet);
             }
         } catch (SQLException e) {
-            LOGGER.error("Can not get element", e);
+            LOGGER.warn("Can not get element", e);
             throw new DatabaseRuntimeException("Can not get element", e);
         }
         return null;
@@ -60,7 +60,7 @@ public abstract class AbstractGenericDAO<E> {
                 return parseToOne(resultSet);
             }
         } catch (SQLException e) {
-            LOGGER.error("Can not get element", e);
+            LOGGER.warn("Can not get element", e);
             throw new DatabaseRuntimeException("Can not get element", e);
         }
         return null;
@@ -73,7 +73,7 @@ public abstract class AbstractGenericDAO<E> {
             preparedStatement.setInt(2, dataInt);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("Can not update element", e);
+            LOGGER.warn("Can not update element", e);
             throw new DatabaseRuntimeException("Can not update element", e);
         }
     }
@@ -84,7 +84,7 @@ public abstract class AbstractGenericDAO<E> {
             statement.setInt(1, dataInt);
             statement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("Can not update element", e);
+            LOGGER.warn("Can not update element", e);
             throw new DatabaseRuntimeException("Can not update element", e);
         }
     }
@@ -95,7 +95,7 @@ public abstract class AbstractGenericDAO<E> {
             setUpdateProperties(preparedStatement, entity);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("Can not update element", e);
+            LOGGER.warn("Can not update element", e);
             throw new DatabaseRuntimeException("Can not update element", e);
         }
     }
@@ -106,7 +106,7 @@ public abstract class AbstractGenericDAO<E> {
             statement.setInt(1, dataInt);
             statement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("Can not delete element", e);
+            LOGGER.warn("Can not delete element", e);
             throw new DatabaseRuntimeException("Can not delete element", e);
         }
         LOGGER.info("Element was deleted from database");
@@ -122,7 +122,7 @@ public abstract class AbstractGenericDAO<E> {
                 return resultSet.getInt("COUNT(*)");
             }
         } catch (SQLException e) {
-            LOGGER.error("Can not get count elements", e);
+            LOGGER.warn("Can not get count elements", e);
             throw new DatabaseRuntimeException("Can not get count elements", e);
         }
         return null;
@@ -140,7 +140,7 @@ public abstract class AbstractGenericDAO<E> {
                 res = resultSet.getInt("COUNT(*)");
             }
         } catch (SQLException e) {
-            LOGGER.error("Can not get count elements", e);
+            LOGGER.warn("Can not get count elements", e);
             throw new DatabaseRuntimeException("Can not get count elements", e);
         }
         return res;
@@ -156,7 +156,7 @@ public abstract class AbstractGenericDAO<E> {
             resultSet = statement.executeQuery();
             list = parseAll(resultSet);
         } catch (SQLException e) {
-            LOGGER.error("Can not get paganation list", e);
+            LOGGER.warn("Can not get paganation list", e);
             throw new DatabaseRuntimeException("Can not get paganation list", e);
         }
         return list;
@@ -172,7 +172,7 @@ public abstract class AbstractGenericDAO<E> {
             resultSet = statement.executeQuery();
             list = parseAll(resultSet);
         } catch (SQLException e) {
-            LOGGER.error("Can not get list element", e);
+            LOGGER.warn("Can not get list element", e);
             throw new DatabaseRuntimeException("Can not get list element", e);
         }
         return list;
@@ -188,7 +188,7 @@ public abstract class AbstractGenericDAO<E> {
             resultSet = statement.executeQuery();
             list = parseAll(resultSet);
         } catch (SQLException e) {
-            LOGGER.error("Can not get list element", e);
+            LOGGER.warn("Can not get list element", e);
             throw new DatabaseRuntimeException("Can not get list element", e);
         }
         LOGGER.info("Returning list buses assigned to route");
@@ -202,7 +202,7 @@ public abstract class AbstractGenericDAO<E> {
                 elements.add(parseToOne(resultSet));
             }
         } catch (SQLException e) {
-            LOGGER.error("Can not parse elements", e);
+            LOGGER.warn("Can not parse elements", e);
             throw new DatabaseRuntimeException("Can not parse elements", e);
         }
         return elements;

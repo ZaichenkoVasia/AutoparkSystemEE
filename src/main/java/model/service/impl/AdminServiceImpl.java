@@ -31,7 +31,7 @@ public class AdminServiceImpl implements AdminService {
     public Admin findAdminByUserId(Integer idUser) {
         LOGGER.info("Try to get admin info by user id");
         if (Objects.isNull(idUser)) {
-            LOGGER.error("Id user is not exist");
+            LOGGER.warn("Id user is not exist");
             throw new InvalidDataRuntimeException("Id user is not exist");
         }
         AdminEntity adminEntity = adminDAO.findAdminByUserId(idUser);
@@ -42,7 +42,7 @@ public class AdminServiceImpl implements AdminService {
     public Integer insertElement(Admin element) {
         LOGGER.info("Inserting element");
         if (Objects.isNull(element)) {
-            LOGGER.error("Incorrect insert value");
+            LOGGER.warn("Incorrect insert value");
             throw new InvalidDataRuntimeException("Incorrect insert value");
         }
         adminValidator.validate(element);
@@ -54,7 +54,7 @@ public class AdminServiceImpl implements AdminService {
     public Admin findElementById(Integer id) {
         LOGGER.info("Try to get element by id");
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect findElementById value");
+            LOGGER.warn("Incorrect findElementById value");
             throw new InvalidDataRuntimeException("Incorrect findElementById value");
         }
         AdminEntity adminEntity = adminDAO.findAdminByUserId(id);
@@ -65,7 +65,7 @@ public class AdminServiceImpl implements AdminService {
     public void deleteElement(Integer id) {
         LOGGER.info("Deleting element");
         if (Objects.isNull(id)) {
-            LOGGER.error("Incorrect deleteElement value");
+            LOGGER.warn("Incorrect deleteElement value");
             throw new InvalidDataRuntimeException("Incorrect deleteElement value");
         }
         adminDAO.deleteElement(id);
@@ -75,7 +75,7 @@ public class AdminServiceImpl implements AdminService {
     public void updateElement(Admin element) {
         LOGGER.info("Updating element");
         if (Objects.isNull(element)) {
-            LOGGER.error("Incorrect updateElement value");
+            LOGGER.warn("Incorrect updateElement value");
             throw new InvalidDataRuntimeException("Incorrect updateElement value");
         }
         adminValidator.validate(element);
