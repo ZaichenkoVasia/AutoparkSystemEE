@@ -12,11 +12,11 @@ public class LanguageCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String language = request.getParameter("lang");
-        if (language.equals("en")){
+        if (language.equals("en")) {
             session.setAttribute("lang", "en_US");
-        }else if (language.equals("ua")){
-            session.setAttribute("lang","uk_UA");
-        }else {
+        } else if (language.equals("ua")) {
+            session.setAttribute("lang", "uk_UA");
+        } else {
             session.setAttribute("lang", "ru_RU");
         }
         request.setAttribute("message", "language.changed");

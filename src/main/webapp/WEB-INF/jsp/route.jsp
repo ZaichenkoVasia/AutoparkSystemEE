@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="lang" value="${empty lang ? 'uk_UA' : sessionScope.lang}" scope="session"/>
 <fmt:setLocale value="${lang}"/>
@@ -44,11 +44,11 @@
     </table>
     <hr>
     <c:if test="${not empty currentPage}">
-    <jsp:include page="/WEB-INF/jsp/includes/pagination.jsp">
-        <jsp:param name="command" value="routes"/>
-        <jsp:param name="currentPage" value="${currentPage}"/>
-        <jsp:param name="lastPage" value="${lastPage}"/>
-    </jsp:include>
+        <jsp:include page="/WEB-INF/jsp/includes/pagination.jsp">
+            <jsp:param name="command" value="routes"/>
+            <jsp:param name="currentPage" value="${currentPage}"/>
+            <jsp:param name="lastPage" value="${lastPage}"/>
+        </jsp:include>
     </c:if>
 </div>
 <jsp:include page="/WEB-INF/jsp/includes/column_right.jsp"/>

@@ -2,8 +2,8 @@ package controller.command.impl.bus;
 
 import controller.command.Command;
 import controller.exception.ServiceLayerRuntimeException;
-import model.service.BusService;
 import model.domain.Bus;
+import model.service.BusService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +21,7 @@ public class BusesInfoCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         String idRoute = request.getParameter("idRoute");
         List<Bus> buses = busService.findBusesByIdRoute(Integer.valueOf(idRoute));
-        if (buses.size() == 0){
+        if (buses.size() == 0) {
             request.setAttribute("message", "route.is.empty");
             return "index.jsp";
         }

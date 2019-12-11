@@ -1,12 +1,12 @@
 package model.service.impl;
 
+import model.dao.RouteDAO;
+import model.domain.Route;
+import model.entity.RouteEntity;
 import model.exception.InvalidDataRuntimeException;
 import model.service.RouteService;
 import model.service.mapper.RouteMapper;
 import model.service.validator.impl.RouteValidator;
-import model.domain.Route;
-import model.dao.RouteDAO;
-import model.entity.RouteEntity;
 import org.apache.log4j.Logger;
 
 import java.util.Collections;

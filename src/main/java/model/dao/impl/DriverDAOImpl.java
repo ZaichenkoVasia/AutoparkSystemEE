@@ -141,7 +141,7 @@ public class DriverDAOImpl extends AbstractGenericDAO<DriverEntity> implements D
             statement.setInt(2, idDriver);
             statement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("Can't execute method updateBusInfoForDriver", e);
+            LOGGER.warn("Can't execute method updateBusInfoForDriver", e);
             throw new DatabaseRuntimeException("Can't execute method updateBusInfoForDriver", e);
         }
         LOGGER.info("New bus assigned");

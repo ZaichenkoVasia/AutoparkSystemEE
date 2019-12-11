@@ -3,9 +3,9 @@ package controller.command.impl.user;
 import controller.command.Command;
 import controller.exception.ServiceLayerRuntimeException;
 import controller.exception.WrongInputDataRuntimeException;
-import model.service.BusStationService;
 import controller.util.collectors.impl.AdminDataCollector;
 import model.domain.Admin;
+import model.service.BusStationService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +29,9 @@ public class SaveAdminCommand implements Command {
         String idUser = request.getParameter("idUser");
         try {
             Admin admin = adminDataCollector.retrieveData(request);
-            if (busStationService.saveAdmin(admin, admin.getUser(), idAdmin, idUser)){
+            if (busStationService.saveAdmin(admin, admin.getUser(), idAdmin, idUser)) {
                 request.setAttribute("message", "admin.saved");
-            }else {
+            } else {
                 request.setAttribute("message", "admin.updated");
             }
         } catch (WrongInputDataRuntimeException e) {

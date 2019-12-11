@@ -6,10 +6,19 @@
     clear: both;
     height: 0;
 }
-* html .clearfix             { zoom: 1; } /* IE6 */
-*:first-child+html .clearfix { zoom: 1; } /* IE7 */
 
-body{
+* html .clearfix {
+    zoom: 1;
+}
+
+/* IE6 */
+*:first-child + html .clearfix {
+    zoom: 1;
+}
+
+/* IE7 */
+
+body {
     padding: 0;
     margin: 0;
 }
@@ -23,10 +32,11 @@ h2 {
     color: rgb(204, 31, 38);
 }
 
-#simple-text{/*id element*/
+#simple-text { /*id element*/
     color: red;
 }
-.my-class{/*имя класса*/
+
+.my-class { /*имя класса*/
     font-size: 20px;
 }
 
@@ -34,14 +44,14 @@ h2 {
     color: red;
 }
 
-.site-header{
+.site-header {
     background: #ff5317;
     color: #8eabde;
     padding: 10px 30px;
     box-shadow: 0 2px 1px #32b2bc;
 }
 
-.site-header h1{
+.site-header h1 {
     color: white;
     margin: 0px;
     font-size: 20px;
@@ -49,17 +59,17 @@ h2 {
     float: left;
 }
 
-#main-menu{
+#main-menu {
     float: right;
     background: #ff5317;
 }
 
-#main-menu ul{
+#main-menu ul {
     padding: 0;
     margin: 0;
 }
 
-#main-menu ul li{
+#main-menu ul li {
     list-style-type: none;
     display: inline;
     margin-right: 10px;
@@ -67,15 +77,16 @@ h2 {
     text-transform: uppercase;
 }
 
-#main-menu ul li a{
+#main-menu ul li a {
     text-decoration: none;
     color: white;
 }
 
-#main-menu ul li a:hover{
+#main-menu ul li a:hover {
     color: #f05f40;
     cursor: pointer;
 }
+
 #footer-site {
     padding-bottom: 5px;
     padding-top: 5px;
@@ -83,38 +94,39 @@ h2 {
     color: #ffffff;
     text-align: center;
 }
+
 #footer-site,
 #footer-site a {
-    color:#ffffff;
+    color: #ffffff;
 }
 
 #footer-site a {
     text-decoration: none;
 }
 
-#footer-site ul li{
+#footer-site ul li {
     text-decoration: none;
     display: inline;
     margin: 5px;
 }
 
-.widget-social li{
+.widget-social li {
     list-style: none;
     display: inline-block;
     margin: 0 5px;
 }
 
-.wiget-social li:hover{
+.wiget-social li:hover {
     color: #12f2b2 !important;
 }
 
-.col-sidebar{
+.col-sidebar {
     width: 20%;
     float: right;
     padding: 0px 2.5%;
 }
 
-.col-sidebar div button{
+.col-sidebar div button {
     width: 180px;
     height: 30px;
     padding-left: 20px;
@@ -124,12 +136,12 @@ h2 {
     outline: none;
 }
 
-.col-sidebar div p{
+.col-sidebar div p {
     margin-top: 0px;
     margin-bottom: 5px;
 }
 
-.add-center{
+.add-center {
     width: 58%;
     float: left;
     margin-left: 5px;
@@ -137,18 +149,18 @@ h2 {
     text-align: center;
 }
 
-.field{
+.field {
     clear: both;
     text-align: right;
     line-height: 50px;
     margin: 0 10px;
 }
 
-.login-border{
+.login-border {
     margin: 0px 50px;
 }
 
-.login-border button{
+.login-border button {
     width: 100px;
     height: 30px;
     color: #004bff;
@@ -158,26 +170,27 @@ h2 {
     word-wrap: break-word;
 }
 
-.field label{
+.field label {
     float: left;
     text-transform: uppercase;
 }
 
-.field input{
+.field input {
     width: 250px;
     border-radius: 5px;
 }
-.field select, option{
+
+.field select, option {
     width: 255px;
 }
 
-.col-center{
+.col-center {
     width: 60%;
     float: left;
     text-align: center;
 }
 
-.col-center ul li{
+.col-center ul li {
     list-style-type: none;
     display: inline;
     margin-right: 10px;
@@ -185,7 +198,7 @@ h2 {
     text-transform: uppercase;
 }
 
-.col-center li button{
+.col-center li button {
     width: 180px;
     height: 30px;
     padding-left: 20px;
@@ -195,12 +208,12 @@ h2 {
     outline: none;
 }
 
-.col-center table tr{
+.col-center table tr {
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
-.wrapper-col{
+.wrapper-col {
     width: 98%;
     min-height: 560px;
     margin: auto;
@@ -208,55 +221,59 @@ h2 {
     padding-bottom: 10px;
 }
 
-.col-left{
+.col-left {
     width: 15%;
     float: left;
 }
 
-.col-left ul li a{
+.col-left ul li a {
     text-decoration: none;
-    color: #fffb42;
+    color: #4232ff;
 }
 
-.col-left ul{
+.col-left ul {
     margin-top: 0px;
 }
-.col-left ul li a:hover{
+
+.col-left ul li a:hover {
     color: #f05f40;
     cursor: pointer;
 }
-.col-left ul li{
+
+.col-left ul li {
     list-style: none;
     padding: 15px 0;
     text-transform: uppercase;
     font-weight: bold;
 }
 
-.search-menu input{
+.search-menu input {
     margin: 5px 0;
     width: 100%;
     text-align: left;
     border-radius: 5px;
 }
 
-.col-right{
+.col-right {
     width: 20%;
     float: left;
 }
 
-.col-right ul{
+.col-right ul {
     padding-left: 0px;
 }
-.col-right ul li a{
+
+.col-right ul li a {
     text-decoration: none;
-    color: #e9ff26;
+    color: #4232ff;
 }
 
-.col-right ul li a:hover{
+.col-right ul li a:hover {
     color: #f05f40;
     cursor: pointer;
 }
-.col-right ul li{
+
+.col-right ul li {
     list-style: none;
     padding: 10px 0;
     margin: 0px;
@@ -264,21 +281,22 @@ h2 {
     font-weight: bold;
 }
 
-.data-block ul li{
+.data-block ul li {
     text-transform: none;
     color: #0a0a0b;
 }
 
 .table-class {
     table-layout: fixed;
-    width:100%;
+    width: 100%;
     border: 1px;
 }
-.table-class th, tr{
-    word-wrap:break-word;
+
+.table-class th, tr {
+    word-wrap: break-word;
 }
 
-.table-class button{
+.table-class button {
     width: 100px;
     height: 50px;
     color: #004bff;
@@ -288,27 +306,27 @@ h2 {
     word-wrap: break-word;
 }
 
-.table-class select{
+.table-class select {
     width: 100px;
 }
 
-.buttons-paginated{
+.buttons-paginated {
     alignment: center;
 }
 
-.buttons-paginated form{
+.buttons-paginated form {
     float: left;
 }
 
-.buttons-paginated ul{
+.buttons-paginated ul {
     margin: 25px;
 }
 
-.buttons-paginated ul li{
+.buttons-paginated ul li {
     display: inline;
 }
 
-.buttons-paginated ul li button{
+.buttons-paginated ul li button {
     width: 140px;
     height: 30px;
     color: #ff5317;
@@ -319,16 +337,16 @@ h2 {
 }
 
 
-.functionality{
+.functionality {
     width: 60%;
     float: left;
 }
 
-.functionality h2{
+.functionality h2 {
     text-align: center;
 }
 
-.functionality ul li{
+.functionality ul li {
     margin-top: 15px;
     margin-bottom: 15px;
 }

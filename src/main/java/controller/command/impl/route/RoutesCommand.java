@@ -2,10 +2,10 @@ package controller.command.impl.route;
 
 import controller.command.Command;
 import controller.exception.ServiceLayerRuntimeException;
+import model.domain.Route;
 import model.service.RouteService;
 import model.service.pagination.Carriage;
 import model.service.pagination.PaginationManager;
-import model.domain.Route;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

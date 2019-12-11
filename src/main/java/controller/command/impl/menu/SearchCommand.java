@@ -2,8 +2,8 @@ package controller.command.impl.menu;
 
 import controller.command.Command;
 import controller.exception.ServiceLayerRuntimeException;
-import model.service.RouteService;
 import model.domain.Route;
+import model.service.RouteService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -1,8 +1,8 @@
 package model.service.validator.impl;
 
+import model.domain.Admin;
 import model.exception.InvalidDataRuntimeException;
 import model.service.validator.Validator;
-import model.domain.Admin;
 
 import java.util.regex.Pattern;
 

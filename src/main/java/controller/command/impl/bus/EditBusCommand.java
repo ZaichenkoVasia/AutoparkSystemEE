@@ -2,8 +2,8 @@ package controller.command.impl.bus;
 
 import controller.command.Command;
 import controller.exception.ServiceLayerRuntimeException;
-import model.service.BusService;
 import model.domain.Bus;
+import model.service.BusService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

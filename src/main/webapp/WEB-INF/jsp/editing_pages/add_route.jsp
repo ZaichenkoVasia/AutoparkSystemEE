@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="lang" value="${empty lang ? 'uk_UA' : sessionScope.lang}" scope="session"/>
 <fmt:setLocale value="${lang}"/>
@@ -13,23 +13,28 @@
             <input type="hidden" name="idRoute" value="${route.id}">
             <div class="field">
                 <label><fmt:message key="number"/></label>
-                <input type="text" name="number" value="${route.number}" placeholder="<fmt:message key="placeholder.route.number"/>"/>
+                <input type="text" name="number" value="${route.number}"
+                       placeholder="<fmt:message key="placeholder.route.number"/>"/>
             </div>
             <div class="field">
                 <label><fmt:message key="title"/></label>
-                <input type="text" name="title" value="${route.title}" placeholder="<fmt:message key="placeholder.route.title"/>"/>
+                <input type="text" name="title" value="${route.title}"
+                       placeholder="<fmt:message key="placeholder.route.title"/>"/>
             </div>
             <div class="field">
                 <label><fmt:message key="distance"/></label>
-                <input type="text" name="distance" value="${route.distance}" placeholder="<fmt:message key="placeholder.route.distance"/>"/>
+                <input type="text" name="distance" value="${route.distance}"
+                       placeholder="<fmt:message key="placeholder.route.distance"/>"/>
             </div>
             <div class="field">
                 <label><fmt:message key="departure.station"/></label>
-                <input type="text" name="departure" value="${route.departure}" placeholder="<fmt:message key="placeholder.route.city"/>"/>
+                <input type="text" name="departure" value="${route.departure}"
+                       placeholder="<fmt:message key="placeholder.route.city"/>"/>
             </div>
             <div class="field">
                 <label><fmt:message key="arrival.station"/></label>
-                <input type="text" name="arrival" value="${route.arrival}" placeholder="<fmt:message key="placeholder.route.city"/>"/>
+                <input type="text" name="arrival" value="${route.arrival}"
+                       placeholder="<fmt:message key="placeholder.route.city"/>"/>
             </div>
             <br>
             <hr>

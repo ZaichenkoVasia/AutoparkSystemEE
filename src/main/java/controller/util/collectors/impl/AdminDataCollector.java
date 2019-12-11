@@ -1,6 +1,5 @@
 package controller.util.collectors.impl;
 
-import controller.exception.WrongInputDataRuntimeException;
 import controller.util.collectors.DataCollector;
 import model.domain.Admin;
 import model.domain.User;

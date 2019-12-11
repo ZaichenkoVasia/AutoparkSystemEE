@@ -1,6 +1,6 @@
 package model.exception;
 
-public class EncodePasswordRuntimeException extends RuntimeException{
+public class EncodePasswordRuntimeException extends RuntimeException {
     public EncodePasswordRuntimeException() {
     }
 

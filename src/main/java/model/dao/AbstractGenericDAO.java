@@ -30,7 +30,7 @@ public abstract class AbstractGenericDAO<E> {
                 return resultSet.getInt(1);
             }
         } catch (SQLException e) {
-            LOGGER.error("Can not insert element", e);
+            LOGGER.warn("Can not insert element", e);
             throw new DatabaseRuntimeException("Can not insert element", e);
         }
         return null;

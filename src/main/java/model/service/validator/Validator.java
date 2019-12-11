@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class Validator<E> {
-    protected Logger LOGGER = Logger.getLogger(Validator.class);
+    protected static final Logger LOGGER = Logger.getLogger(Validator.class);
 
     public abstract void validate(E entity);
 

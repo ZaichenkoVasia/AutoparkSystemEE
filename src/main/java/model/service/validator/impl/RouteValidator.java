@@ -1,8 +1,8 @@
 package model.service.validator.impl;
 
+import model.domain.Route;
 import model.exception.InvalidDataRuntimeException;
 import model.service.validator.Validator;
-import model.domain.Route;
 
 import java.util.regex.Pattern;
 

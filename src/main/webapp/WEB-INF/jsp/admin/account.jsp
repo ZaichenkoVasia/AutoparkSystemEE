@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="lang" value="${empty lang ? 'uk_UA' : sessionScope.lang}" scope="session"/>
 <fmt:setLocale value="${lang}"/>
@@ -14,11 +14,13 @@
             <input type="hidden" name="idUser" value="${admin.user.id}">
             <div class="field">
                 <label><fmt:message key="name"/></label>
-                <input type="text" name="name" value="${admin.name}" placeholder="<fmt:message key="placeholder.name"/>"/>
+                <input type="text" name="name" value="${admin.name}"
+                       placeholder="<fmt:message key="placeholder.name"/>"/>
             </div>
             <div class="field">
                 <label><fmt:message key="surname"/></label>
-                <input type="text" name="surname" value="${admin.surname}" placeholder="<fmt:message key="placeholder.surname"/>"/>
+                <input type="text" name="surname" value="${admin.surname}"
+                       placeholder="<fmt:message key="placeholder.surname"/>"/>
             </div>
             <div class="field">
                 <label><fmt:message key="birth"/></label>
@@ -26,7 +28,8 @@
             </div>
             <div class="field">
                 <label><fmt:message key="degree"/></label>
-                <input type="text" name="degree" value="${admin.degree}" placeholder="<fmt:message key="placeholder.degree"/>"/>
+                <input type="text" name="degree" value="${admin.degree}"
+                       placeholder="<fmt:message key="placeholder.degree"/>"/>
             </div>
             <div class="field">
                 <label><fmt:message key="graduation"/></label>
@@ -34,11 +37,13 @@
             </div>
             <div class="field">
                 <label><fmt:message key="login"/></label>
-                <input type="text" name="login" value="${admin.user.login}" placeholder="<fmt:message key="placeholder.login"/>"/>
+                <input type="text" name="login" value="${admin.user.login}"
+                       placeholder="<fmt:message key="placeholder.login"/>"/>
             </div>
             <div class="field">
                 <label><fmt:message key="password"/></label>
-                <input type="password" name="password" value="${admin.user.password}" placeholder="<fmt:message key="placeholder.password"/>"/>
+                <input type="password" name="password" value="${admin.user.password}"
+                       placeholder="<fmt:message key="placeholder.password"/>"/>
             </div>
             <br>
             <hr>

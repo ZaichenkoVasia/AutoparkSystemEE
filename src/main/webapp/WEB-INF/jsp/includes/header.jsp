@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="lang" value="${empty lang ? 'uk_UA' : sessionScope.lang}" scope="session"/>
 <fmt:setLocale value="${lang}"/>
@@ -8,7 +8,6 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-<%--    <link rel="stylesheet" type="text/css" href="../../../style/main.css">--%>
     <style>
         <%@include file ="../../../style/main.css"%>
         .banner {
@@ -34,14 +33,14 @@
                 <a href="controller?command=contacts"><fmt:message key="contacts"/></a>
             </li>
             <li>
-            <c:choose>
-                <c:when test="${not empty user && not empty user.role}">
+                <c:choose>
+                    <c:when test="${not empty user && not empty user.role}">
                         <a href="controller?command=logout_page"><fmt:message key="logout"/></a>
-                </c:when>
-                <c:otherwise>
+                    </c:when>
+                    <c:otherwise>
                         <a href="controller?command=login_page"><fmt:message key="entry"/></a>
-                </c:otherwise>
-            </c:choose>
+                    </c:otherwise>
+                </c:choose>
             </li>
         </ul>
     </nav>
@@ -49,5 +48,5 @@
 
 <main>
     <div class="banner">
-    <div class="wrapper-col clearfix">
+        <div class="wrapper-col clearfix">
 

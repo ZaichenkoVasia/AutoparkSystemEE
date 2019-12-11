@@ -18,11 +18,11 @@ public class CancelDriverCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         Integer idBus = Integer.valueOf(request.getParameter("idBus"));
-            if (busStationService.cancelDriver(idBus)){
-                request.setAttribute("message", "driver.canceled");
-            }else {
-                request.setAttribute("message", "driver.not.assigned");
-            }
+        if (busStationService.cancelDriver(idBus)) {
+            request.setAttribute("message", "driver.canceled");
+        } else {
+            request.setAttribute("message", "driver.not.assigned");
+        }
         return "index.jsp";
     }
 }

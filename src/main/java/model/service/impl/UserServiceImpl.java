@@ -1,14 +1,14 @@
 package model.service.impl;
 
-import model.exception.InvalidDataRuntimeException;
 import controller.exception.ServiceLayerRuntimeException;
+import model.dao.UserDAO;
+import model.domain.User;
+import model.entity.UserEntity;
+import model.exception.InvalidDataRuntimeException;
 import model.exception.UserNotExistRuntimeException;
 import model.service.UserService;
 import model.service.encoder.EncoderPassword;
 import model.service.mapper.UserMapper;
-import model.domain.User;
-import model.dao.UserDAO;
-import model.entity.UserEntity;
 import model.service.validator.impl.UserValidator;
 import org.apache.log4j.Logger;
 

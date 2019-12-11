@@ -2,8 +2,12 @@ package controller.command.impl.bus;
 
 import controller.command.Command;
 import controller.exception.ServiceLayerRuntimeException;
-import model.service.*;
-import model.domain.*;
+import model.domain.Admin;
+import model.domain.Driver;
+import model.domain.User;
+import model.service.AdminService;
+import model.service.BusStationService;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,14 +26,14 @@ public class AccountCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        if (user == null){
+        if (user == null) {
             return "WEB-INF/jsp/login.jsp";
         }
-        if (user.getRole().equals("admin")){
+        if (user.getRole().equals("admin")) {
             Admin admin = adminService.findAdminByUserId(user.getId());
             request.setAttribute("admin", admin);
             return "WEB-INF/jsp/admin/account.jsp";
-        }else {
+        } else {
             Driver driver = busStationService.findDriverAccountDataByUserId(user.getId());
             request.setAttribute("driver", driver);
             return "WEB-INF/jsp/driver/account.jsp";

@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="lang" value="${empty lang ? 'uk_UA' : sessionScope.lang}" scope="session"/>
 <fmt:setLocale value="${lang}"/>
@@ -14,15 +14,18 @@
             <input type="hidden" name="idSchedule" value="${bus.schedule.id}">
             <div class="field">
                 <label><fmt:message key="plate"/></label>
-                <input type="text" name="plate" value="${bus.plate}" placeholder="<fmt:message key="placeholder.bus.plate"/>"/>
+                <input type="text" name="plate" value="${bus.plate}"
+                       placeholder="<fmt:message key="placeholder.bus.plate"/>"/>
             </div>
             <div class="field">
                 <label><fmt:message key="model"/></label>
-                <input type="text" name="model" value="${bus.model}" placeholder="<fmt:message key="placeholder.bus.model"/>"/>
+                <input type="text" name="model" value="${bus.model}"
+                       placeholder="<fmt:message key="placeholder.bus.model"/>"/>
             </div>
             <div class="field">
                 <label><fmt:message key="mileage"/></label>
-                <input type="text" name="mileage" value="${bus.mileage}" placeholder="<fmt:message key="placeholder.bus.mileage"/>"/>
+                <input type="text" name="mileage" value="${bus.mileage}"
+                       placeholder="<fmt:message key="placeholder.bus.mileage"/>"/>
             </div>
             <div class="field">
                 <label><fmt:message key="inspection"/></label>
@@ -30,7 +33,8 @@
             </div>
             <div class="field">
                 <label><fmt:message key="consumption"/></label>
-                <input type="text" name="consumption" value="${bus.consumption}" placeholder="<fmt:message key="placeholder.bus.consumption"/>"/>
+                <input type="text" name="consumption" value="${bus.consumption}"
+                       placeholder="<fmt:message key="placeholder.bus.consumption"/>"/>
             </div>
             <div class="field">
                 <label><fmt:message key="release"/></label>
@@ -38,7 +42,8 @@
             </div>
             <div class="field">
                 <label><fmt:message key="seats"/></label>
-                <input type="text" name="seats" value="${bus.seats}" placeholder="<fmt:message key="placeholder.bus.seats"/>"/>
+                <input type="text" name="seats" value="${bus.seats}"
+                       placeholder="<fmt:message key="placeholder.bus.seats"/>"/>
             </div>
             <div class="field">
                 <label><fmt:message key="departure.time"/></label>

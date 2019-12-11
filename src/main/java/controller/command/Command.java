@@ -8,8 +8,5 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface Command {
 
-    /**
-     * @return path to appropriate jsp page
-     * */
     String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceLayerRuntimeException;
 }

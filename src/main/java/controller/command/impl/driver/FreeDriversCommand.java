@@ -2,8 +2,8 @@ package controller.command.impl.driver;
 
 import controller.command.Command;
 import controller.exception.ServiceLayerRuntimeException;
-import model.service.DriverService;
 import model.domain.Driver;
+import model.service.DriverService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

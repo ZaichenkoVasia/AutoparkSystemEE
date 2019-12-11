@@ -9,15 +9,15 @@ import controller.command.impl.user.LogOutCommand;
 import controller.command.impl.user.LoginCommand;
 import controller.command.impl.user.LoginPageCommand;
 import controller.command.impl.user.SaveAdminCommand;
+import controller.util.collectors.impl.*;
+import model.dao.*;
+import model.dao.connection.PoolConnection;
+import model.dao.impl.*;
 import model.service.*;
 import model.service.encoder.EncoderPassword;
 import model.service.impl.*;
 import model.service.mapper.*;
 import model.service.validator.impl.*;
-import controller.util.collectors.impl.*;
-import model.dao.*;
-import model.dao.connection.PoolConnection;
-import model.dao.impl.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -91,7 +91,7 @@ public class ApplicationContextInjector {
         commandNameToCommand.put("FREE_DRIVERS", new FreeDriversCommand(DRIVER_SERVICE));
         commandNameToCommand.put("EDIT_BUS", new EditBusCommand(BUS_SERVICE));
         commandNameToCommand.put("DELETE_BUS", new DeleteBusCommand(BUS_STATION_SERVICE));
-        
+
         commandNameToCommand.put("APPOINT_DRIVER", new AppointDriverCommand(BUS_STATION_SERVICE));
         commandNameToCommand.put("EDIT_DRIVER", new EditDriverCommand(DRIVER_SERVICE));
         commandNameToCommand.put("EDIT_DRIVER_ACCOUNT", new EditDriverCommand(DRIVER_SERVICE));

@@ -2,10 +2,10 @@ package controller.command.impl.bus;
 
 import controller.command.Command;
 import controller.exception.ServiceLayerRuntimeException;
+import model.domain.Bus;
 import model.service.BusService;
 import model.service.pagination.Carriage;
 import model.service.pagination.PaginationManager;
-import model.domain.Bus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

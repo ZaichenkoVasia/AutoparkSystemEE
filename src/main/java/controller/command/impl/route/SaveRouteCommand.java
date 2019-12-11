@@ -3,9 +3,9 @@ package controller.command.impl.route;
 import controller.command.Command;
 import controller.exception.ServiceLayerRuntimeException;
 import controller.exception.WrongInputDataRuntimeException;
-import model.service.RouteService;
 import controller.util.collectors.impl.RouteDataCollector;
 import model.domain.Route;
+import model.service.RouteService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,11 +28,11 @@ public class SaveRouteCommand implements Command {
         String idRoute = request.getParameter("idRoute");
         try {
             Route route = routeDataCollector.retrieveData(request);
-            if (idRoute == null || idRoute.isEmpty()){
+            if (idRoute == null || idRoute.isEmpty()) {
                 routeService.insertElement(route);
                 request.setAttribute("message", "route.saved");
-            }else {
-                route = new Route(route,Integer.valueOf(idRoute));
+            } else {
+                route = new Route(route, Integer.valueOf(idRoute));
                 routeService.updateElement(route);
                 request.setAttribute("message", "route.updated");
             }

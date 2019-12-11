@@ -2,10 +2,11 @@ package controller.command.impl.user;
 
 import controller.command.Command;
 import controller.exception.ServiceLayerRuntimeException;
-import model.service.UserService;
-import model.service.encoder.EncoderPassword;
 import controller.util.collectors.impl.UserDataCollector;
 import model.domain.User;
+import model.service.UserService;
+import model.service.encoder.EncoderPassword;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

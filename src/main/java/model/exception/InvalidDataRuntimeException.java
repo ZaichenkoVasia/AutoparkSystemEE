@@ -1,6 +1,6 @@
 package model.exception;
 
-public class InvalidDataRuntimeException extends RuntimeException{
+public class InvalidDataRuntimeException extends RuntimeException {
     public InvalidDataRuntimeException() {
     }
 

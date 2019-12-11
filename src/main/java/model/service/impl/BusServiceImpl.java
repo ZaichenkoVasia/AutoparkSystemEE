@@ -1,12 +1,12 @@
 package model.service.impl;
 
+import model.dao.BusDAO;
+import model.domain.Bus;
+import model.entity.BusEntity;
 import model.exception.InvalidDataRuntimeException;
 import model.service.BusService;
 import model.service.mapper.BusMapper;
 import model.service.validator.impl.BusValidator;
-import model.domain.Bus;
-import model.dao.BusDAO;
-import model.entity.BusEntity;
 import org.apache.log4j.Logger;
 
 import java.util.Collections;

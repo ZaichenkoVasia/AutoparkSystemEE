@@ -3,9 +3,9 @@ package controller.command.impl.bus;
 import controller.command.Command;
 import controller.exception.ServiceLayerRuntimeException;
 import controller.exception.WrongInputDataRuntimeException;
-import model.service.BusStationService;
 import controller.util.collectors.impl.BusDataCollector;
 import model.domain.Bus;
+import model.service.BusStationService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +29,9 @@ public class SaveBusCommand implements Command {
         String idSchedule = request.getParameter("idSchedule");
         try {
             Bus bus = busDataCollector.retrieveData(request);
-            if (busStationService.saveBus(bus, bus.getSchedule(), idBus, idSchedule)){
+            if (busStationService.saveBus(bus, bus.getSchedule(), idBus, idSchedule)) {
                 request.setAttribute("message", "bus.saved");
-            }else {
+            } else {
                 request.setAttribute("message", "bus.updated");
             }
         } catch (WrongInputDataRuntimeException e) {

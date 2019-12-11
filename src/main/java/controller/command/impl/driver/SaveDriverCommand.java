@@ -3,9 +3,9 @@ package controller.command.impl.driver;
 import controller.command.Command;
 import controller.exception.ServiceLayerRuntimeException;
 import controller.exception.WrongInputDataRuntimeException;
-import model.service.BusStationService;
 import controller.util.collectors.impl.DriverDataCollector;
 import model.domain.Driver;
+import model.service.BusStationService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;

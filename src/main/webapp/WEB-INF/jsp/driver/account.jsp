@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="lang" value="${empty lang ? 'uk_UA' : sessionScope.lang}" scope="session"/>
 <fmt:setLocale value="${lang}"/>
@@ -44,7 +44,7 @@
     </table>
     <hr>
     <c:if test="${driver.bus.id != 0}">
-        <p><fmt:message key="bus.info"/> </p>
+        <p><fmt:message key="bus.info"/></p>
         <table class="table-class" border="3">
             <tr>
                 <th><fmt:message key="plate"/></th>
@@ -70,7 +70,7 @@
         <hr>
     </c:if>
     <c:if test="${driver.bus.status eq 'work'}">
-        <p><fmt:message key="route.info"/> </p>
+        <p><fmt:message key="route.info"/></p>
         <table class="table-class" border="3">
             <tr>
                 <th><fmt:message key="number"/></th>

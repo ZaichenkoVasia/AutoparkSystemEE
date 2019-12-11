@@ -1,6 +1,6 @@
 package model.exception;
 
-public class DatabaseRuntimeException extends RuntimeException{
+public class DatabaseRuntimeException extends RuntimeException {
 
     public DatabaseRuntimeException() {
         super();

@@ -1,13 +1,13 @@
 package model.service.impl;
 
-import model.exception.InvalidDataRuntimeException;
 import controller.exception.ServiceLayerRuntimeException;
+import model.dao.DriverDAO;
+import model.domain.Driver;
+import model.entity.DriverEntity;
+import model.exception.InvalidDataRuntimeException;
 import model.service.DriverService;
 import model.service.mapper.DriverMapper;
 import model.service.validator.impl.DriverValidator;
-import model.domain.Driver;
-import model.dao.DriverDAO;
-import model.entity.DriverEntity;
 import org.apache.log4j.Logger;
 
 import java.util.Collections;
