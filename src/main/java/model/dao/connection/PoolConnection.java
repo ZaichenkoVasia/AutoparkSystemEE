@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 
 public class PoolConnection {
 
-    private static final Logger logger = Logger.getLogger(PoolConnection.class);
+    private static final Logger LOGGER = Logger.getLogger(PoolConnection.class);
 
     private DataSource dataSource;
     private static BasicDataSource basicDataSource;
@@ -31,13 +31,13 @@ public class PoolConnection {
                 basicDataSource.setMaxOpenPreparedStatements(Integer.parseInt(dbConfig.getString("maxOpenPreparedStatements")));
                 dataSource = basicDataSource;
             } catch (Exception e) {
-                logger.warn("Can't create connection pool instance", e);
+                LOGGER.warn("Can't create connection pool instance", e);
             }
         }
     }
 
     public Connection getConnection() {
-        logger.info("Getting connection");
+        LOGGER.info("Getting connection");
         try {
             return dataSource.getConnection();
         } catch (SQLException e) {
